@@ -7,14 +7,19 @@
 class ListProduct
 {
 	vector<Product*> listProduct;
-	void loadData();
+	Product* searchProduct(int ID);
 public:
-	//ListProduct();
+	ListProduct() {};
 	~ListProduct();
-	Product& searchProduct(string ID);
-	int getTotalNumberOfProducts();
+	ListProduct(const ListProduct&);
+	ListProduct& operator=(ListProduct);
+	void addProduct(const Product&);
+	int totalProducts();
 	ListProduct getListOfExpiredProduct();
-	string showInfo();
+	void loadList(const string& sourceProducts);
+	void inputList();
+	void saveList(const string& sourceProducts);
+	void outputList();
 };
 
 #endif // !_LISTPRODUCT_H_

@@ -23,10 +23,13 @@ Date::Date() : Date(1900) {}
 
 Date::Date(int year, int month, int day) {
 	// if the date is not valid, make it in to default 
-	if (year <= 0) year = 1;
-	if (month <= 0 || month > 12) month = 1;
-	if (day <= 0 || day > getDaysInMonth(month, year)) day = 1;
-	this->day = day; this->month = month; this->year = year;
+	if (year == 0) { now(); } 
+	else {
+		if (year < 0) year = 1;
+		if (month <= 0 || month > 12) month = 1;
+		if (day <= 0 || day > getDaysInMonth(month, year)) day = 1;
+		this->day = day; this->month = month; this->year = year;
+	}
 }
 
 
@@ -123,7 +126,7 @@ int Date::timeInterval(const Date& dt) const {
 
 // type-cast operator
 Date::operator int() const {
-	Date dtNow; // get current date
+	Date dtNow(0); // get current date
 	Date startDt(dtNow.year); // make the date as the first date of the current year
 	return startDt.timeInterval(*this);
 }
@@ -139,7 +142,7 @@ std::ostream& operator<<(std::ostream& outDev, const Date& dt) {
 }
 std::istream& operator>>(std::istream& inDev, Date& dt) {
 	inDev >> dt.day >> dt.month >> dt.year;
-	if (dt.year <= 0)   dt.year = 1;
+	if (dt.year <= 0)   dt.year = 1900;
 	if (dt.month <= 0 || dt.month > 12) dt.month = 1;
 	if (dt.day <= 0 || dt.day > getDaysInMonth(dt.month, dt.year)) dt.day = 1;
 	return inDev;

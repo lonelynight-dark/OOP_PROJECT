@@ -11,8 +11,9 @@ struct Date
 public:
 	Date(); // default date is 1/1/1900
 	Date(int year, int month = 1, int day = 1);
+	// declare Date(0) to consruct the Date as the Current date.
 
-	Date& now();
+	Date& now();// get the current Date
 	Date Yesterday();
 	Date Tomorrow();
 	//compare operator
