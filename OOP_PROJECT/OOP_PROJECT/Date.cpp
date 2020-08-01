@@ -147,3 +147,10 @@ std::istream& operator>>(std::istream& inDev, Date& dt) {
 	if (dt.day <= 0 || dt.day > getDaysInMonth(dt.month, dt.year)) dt.day = 1;
 	return inDev;
 }
+
+void Date::setDate(int year, int month, int day)
+{
+	this->year = year;
+	this->month = month;
+	this->day = day;
+}

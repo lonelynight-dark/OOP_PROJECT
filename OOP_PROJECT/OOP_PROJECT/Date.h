@@ -16,6 +16,8 @@ public:
 	Date& now();// get the current Date
 	Date Yesterday();
 	Date Tomorrow();
+	void setDate(int year, int month, int day);
+
 	//compare operator
 	bool operator==(const Date& dt) const;
 	bool operator!=(const Date& dt) const;
