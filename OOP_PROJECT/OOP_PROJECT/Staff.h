@@ -3,10 +3,13 @@
 
 #include "Date.h"
 #include <string>
+#include <iostream>
+#include <fstream>
+using namespace std;
 
 class Staff
 {
-	std::string ID;
+	int ID;
 	std::string name;
 	bool gender;
 	std::string phoneNumber;
@@ -15,11 +18,17 @@ class Staff
 	int absentDay;
 public:
 	Staff();
+	Staff(int, string, bool, string, string, Date, int);
 	virtual ~Staff() {};
-	virtual void input();
 	virtual double viewSalary() = 0;
 	virtual void viewAllProducts() = 0;
-	std::string showInfo();
+	int getID();
+	string getName();
+	int getAbsentDays();
+	virtual void input();
+	virtual void output();
+	virtual void load(ifstream&);
+	virtual void save(ofstream&);
 };
 
 #endif // !_STAFF_H_

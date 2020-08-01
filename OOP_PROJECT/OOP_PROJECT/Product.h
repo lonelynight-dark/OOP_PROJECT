@@ -21,7 +21,7 @@ public:
 	Product& operator+= (const int _stock);
 	Product& operator-= (const int _stock);
 	// getter
-	int getID() const;
+	int getID();
 	string getName();
 	double getPrice();
 	int getStock();

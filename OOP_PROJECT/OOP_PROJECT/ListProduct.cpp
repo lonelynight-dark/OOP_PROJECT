@@ -4,17 +4,14 @@ ListProduct::~ListProduct()
 {
 	for (auto& x : listProduct) if (x) delete x;
 }
-
 ListProduct::ListProduct(const ListProduct& list) 
 {
 	for (Product* product : list.listProduct) addProduct(*product);
 }
-
 ListProduct& ListProduct::operator=(ListProduct list)
 {
 	swap(listProduct, list.listProduct);
 }
-
 int ListProduct::addProduct(Product& product)
 {
 	if (!searchProduct(product.getID())) {

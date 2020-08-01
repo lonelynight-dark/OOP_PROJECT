@@ -3,7 +3,7 @@
 */
 #ifndef _DATE_H_
 #define _DATE_H_
-
+#include <fstream>
 #include <iostream>
 
 struct Date
@@ -46,6 +46,7 @@ public:
 	// input - output operator
 	friend std::ostream& operator<<(std::ostream& outDev, const Date& dt);
 	friend std::istream& operator>>(std::istream& inDev, Date& dt);
+	friend std::ofstream& operator>>(std::ofstream& outDev,const Date& dt);
 
 private:
 	int day, month, year;

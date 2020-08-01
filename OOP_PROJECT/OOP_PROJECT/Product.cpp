@@ -23,7 +23,7 @@ Product& Product::operator-=(const int _stock)
 	return (*this);
 }
 
-int Product::getID() const
+int Product::getID() 
 {
 	return ID;
 }

@@ -31,8 +31,6 @@ Date::Date(int year, int month, int day) {
 		this->day = day; this->month = month; this->year = year;
 	}
 }
-
-
 Date Date::Tomorrow() {
 	Date dt(*this);
 	dt.day++;
@@ -146,6 +144,12 @@ std::istream& operator>>(std::istream& inDev, Date& dt) {
 	if (dt.month <= 0 || dt.month > 12) dt.month = 1;
 	if (dt.day <= 0 || dt.day > getDaysInMonth(dt.month, dt.year)) dt.day = 1;
 	return inDev;
+}
+
+std::ofstream& operator>>(std::ofstream& outDev,const Date& dt)
+{
+	outDev << dt.day << ' ' << dt.month << ' ' << dt.year;
+	return outDev;
 }
 
 void Date::setDate(int year, int month, int day)
