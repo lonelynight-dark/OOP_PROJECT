@@ -8,9 +8,11 @@ class ListSale
 private:
 	vector<Sale> SaleList;
 public:
+	ListSale(){}
+	~ListSale() {}
 	double SumRevenue();
-	double MonthlyRevenue();
-	double YearlyRevenue();
+	double MonthlyRevenue(const int&, const int&);
+	double YearlyRevenue(const int&);
 };
 
 #endif // !_LISTSALE_H_
