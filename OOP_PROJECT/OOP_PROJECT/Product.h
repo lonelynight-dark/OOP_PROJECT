@@ -18,9 +18,10 @@ class Product
 public: 
 	Product();
 	Product(int id, string name, double price, int stock, Date MFG, Date EXP);
-
+	Product& operator+= (const int _stock);
+	Product& operator-= (const int _stock);
 	// getter
-	int getID();
+	int getID() const;
 	string getName();
 	double getPrice();
 	int getStock();

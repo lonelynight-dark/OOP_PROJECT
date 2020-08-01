@@ -11,6 +11,23 @@ Product::Product() : ID(0), stock(0), price(0), name("Unknown"), MFG(), EXP() {}
 Product::Product(int id, string name, double price, int stock, Date MFG, Date EXP)
 	: ID(id), name(name), price(price), stock(stock), MFG(MFG), EXP(EXP) {}
 
+Product& Product::operator+=(const int _stock)
+{
+	if (stock > 0) stock += _stock;
+	return (*this);
+}
+
+Product& Product::operator-=(const int _stock)
+{
+	if (stock - _stock >= 0) stock -= _stock;
+	return (*this);
+}
+
+int Product::getID() const
+{
+	return ID;
+}
+
 string Product::getName()
 {
 	return name;
