@@ -21,6 +21,13 @@ public:
 		for (Staff* staff : listStaff) delete staff;
 	}
 	string getInfo();
+	// Calculate Salary
+	double ManagerSalary();
+	double EmployeeSalary();
+
+	// Count staffs
+	int Employees();
+	int Managers();
 };
 
 #endif // !_COMPANY_H_
