@@ -89,6 +89,11 @@ ListProduct ListProduct::getListOfExpiredProduct()
 		if (product->isExpired()) list.addProduct(*product);
 	return list;
 }
+double ListProduct::getPrice(int ID)
+{
+	Product* p = searchProduct(ID);
+	return (p) ? p->getPrice() : -1;
+}
 double ListProduct::totalPrice()
 {
 	double total = 0.0;

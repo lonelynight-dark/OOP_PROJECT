@@ -37,6 +37,7 @@ public:
 	int countProduct(int ID); // return stock of product
 	ListProduct getListOfExpiredProduct();
 	// calculate methods
+	double getPrice(int ID);
 	double totalPrice();
 	// input & output methods
 	void inputList();
