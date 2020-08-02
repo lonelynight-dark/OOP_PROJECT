@@ -14,12 +14,8 @@ class Company
 	vector<Staff*> listStaff;
 	ListProduct listProduct;
 public:
-	Company(){}
-	~Company()
-	{
-		int n = listStaff.size();
-		for (Staff* staff : listStaff) delete staff;
-	}
+	Company();
+	~Company();
 	string getInfo();
 };
 

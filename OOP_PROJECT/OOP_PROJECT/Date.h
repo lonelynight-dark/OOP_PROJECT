@@ -17,12 +17,7 @@ public:
 	Date Yesterday();
 	Date Tomorrow();
 	void setDate(int year, int month, int day);
-	static int getDaysInMonth(int month, int year);
 
-	//getter
-	int getDay();
-	int getMonth();
-	int getYear();
 	//compare operator
 	bool operator==(const Date& dt) const;
 	bool operator!=(const Date& dt) const;

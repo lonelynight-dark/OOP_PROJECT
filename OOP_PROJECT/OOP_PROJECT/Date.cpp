@@ -3,7 +3,7 @@
 bool isLeapYear(const int year) {
 	return (year % 400 == 0) || (year % 100 != 0 && year % 4 == 0);
 }
-int Date::getDaysInMonth(int month, int year) {
+int getDaysInMonth(int month, int year) {
 	const int days_in_month[] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	return ((month == 2 && isLeapYear(year)) ? 1 : 0) + days_in_month[month - 1];
 }
@@ -157,17 +157,4 @@ void Date::setDate(int year, int month, int day)
 	this->year = year;
 	this->month = month;
 	this->day = day;
-}
-
-int Date::getDay()
-{
-	return day;
-}
-int Date::getMonth()
-{
-	return month;
-}
-int Date::getYear()
-{
-	return year;
 }

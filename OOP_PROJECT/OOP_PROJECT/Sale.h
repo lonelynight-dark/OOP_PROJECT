@@ -11,25 +11,14 @@ private :
 public:
 	Sale(){}
 	~Sale(){}
-
-	// Calculate Summary of Product
-	double Summary(const int&);
-
-	// Calculate Total Revenue
-	double CalculateRevenue();
-
-	// Number of product
-	int numProduct();
-	int numProduct(const int&);
-
-	// Another method
+	double Summary(const string&);
+	bool stoDate(const string&, const string&, const char*);
 	void LoadSale(const string&);
+	double CalculateRevenue();
+	int numProduct();
+	int numProduct(const string&);
 	void OutputSale();
-	int month_sale_date();
-	int year_sale_date();
-private:
 	void OutputDate();
-	bool stoDate(const string&, const char*);
 };
 
 #endif // !_SALE_H_
