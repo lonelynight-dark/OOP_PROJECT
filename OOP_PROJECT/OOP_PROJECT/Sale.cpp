@@ -1,10 +1,12 @@
 #include "Sale.h"
-
-double Sale::Summary(const string& ID)
+double Sale::Summary(const int& ID)
 {
 	double sum = 0;
+	int count = Sale::numProduct(ID);
+	int price = listSoldProduct.getPrice(ID);
+	return count * price;
 }
-bool Sale::stoDate(const string& line, const string& source, const char* delimeter)
+bool Sale::stoDate(const string& line, const char* delimeter)
 {
 	int day, month, year;
 	char* chr = new char[line.length() + 1];
@@ -36,13 +38,13 @@ void Sale::LoadSale(const string& source)
 	string line;
 	getline(fin, line);
 	char delimeter[] = " ";
-	Sale::stoDate(line, source, delimeter);
+	Sale::stoDate(line, delimeter);
 	listSoldProduct.loadList(source);
 	fin.close();
 }
 double Sale::CalculateRevenue()
 {
-
+	return listSoldProduct.totalPrice();
 }
 int Sale::numProduct()
 {
@@ -58,7 +60,15 @@ void Sale::OutputDate()
 	cout << "Date : Day/Month/Year" << endl;
 	cout << saleDate;
 }
-int Sale::numProduct(const string& ID)
+int Sale::numProduct(const int& ID)
 {
-
+	return listSoldProduct.countProduct(ID);
+}
+int Sale::month_sale_date()
+{
+	return saleDate.getMonth();
+}
+int Sale::year_sale_date()
+{
+	return saleDate.getYear();
 }
