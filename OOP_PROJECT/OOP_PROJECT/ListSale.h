@@ -25,8 +25,8 @@ public:
 	double YearlyRevenue(const int&);
 
 	// Another method
-	void LoadDataSaleList();
-	void LoadDateSaleList(const string&);
+	bool LoadDataSaleList();
+	bool LoadDateSaleList(const string&);
 	void OutputSaleList();
 	Date stoDate(const string&, const char*);
 };

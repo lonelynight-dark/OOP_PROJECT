@@ -23,7 +23,7 @@ public:
 	int numProduct(const int&);
 
 	// Another method
-	void LoadSale(const string&);
+	bool LoadSale(const string&);
 	void OutputSale();
 	int month_sale_date();
 	int year_sale_date();

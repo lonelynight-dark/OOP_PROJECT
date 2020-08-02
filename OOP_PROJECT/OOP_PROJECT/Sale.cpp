@@ -31,16 +31,19 @@ bool Sale::stoDate(const string& line, const char* delimeter)
 	delete[] chr;
 	return true;
 }
-void Sale::LoadSale(const string& source)
+bool Sale::LoadSale(const string& source)
 {
 	ifstream fin(source);
-	if (!fin.is_open()) return;
+	if (!fin.is_open()) return false;
 	string line;
 	getline(fin, line);
 	char delimeter[] = " ";
+
 	Sale::stoDate(line, delimeter);
 	listSoldProduct.loadList(source);
+
 	fin.close();
+	return true;
 }
 double Sale::CalculateRevenue()
 {
