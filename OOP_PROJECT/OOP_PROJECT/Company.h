@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 
-class Company
+class Company final
 {
 	string name;
 	string address;
@@ -15,12 +15,10 @@ class Company
 	ListProduct listProduct;
 public:
 	Company(){}
-	~Company()
+	~Company()	
 	{
-		int n = listStaff.size();
 		for (Staff* staff : listStaff) delete staff;
 	}
-	string getInfo();
 	// Calculate Salary
 	double ManagerSalary();
 	double EmployeeSalary();
@@ -28,6 +26,13 @@ public:
 	// Count staffs
 	int Employees();
 	int Managers();
+
+	// Absent day
+
+	// Output Staff
+	void OutputStaff();
+	// Another method
+	string getInfo();
 };
 
 #endif // !_COMPANY_H_

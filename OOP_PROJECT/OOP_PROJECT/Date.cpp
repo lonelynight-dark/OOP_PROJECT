@@ -142,7 +142,7 @@ std::istream& operator>>(std::istream& inDev, Date& dt) {
 	inDev >> dt.day >> dt.month >> dt.year;
 	if (dt.year <= 0)   dt.year = 1900;
 	if (dt.month <= 0 || dt.month > 12) dt.month = 1;
-	if (dt.day <= 0 || dt.day > getDaysInMonth(dt.month, dt.year)) dt.day = 1;
+	if (dt.day <= 0 || dt.day > Date::getDaysInMonth(dt.month, dt.year)) dt.day = 1;
 	return inDev;
 }
 

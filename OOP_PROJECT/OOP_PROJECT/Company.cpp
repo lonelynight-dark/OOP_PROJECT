@@ -1,5 +1,4 @@
 #include "Company.h"
-
 string Company::getInfo()
 {
 	string info;

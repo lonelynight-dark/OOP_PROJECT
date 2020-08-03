@@ -11,6 +11,7 @@ ListProduct::ListProduct(const ListProduct& list)
 ListProduct& ListProduct::operator=(ListProduct list)
 {
 	swap(listProduct, list.listProduct);
+	return *this;
 }
 int ListProduct::addProduct(Product& product)
 {
