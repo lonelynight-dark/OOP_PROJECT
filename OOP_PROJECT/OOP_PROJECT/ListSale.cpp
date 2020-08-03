@@ -108,3 +108,27 @@ double ListSale::YearlyRevenue(const int& year)
 
 	return total;
 }
+Sale& ListSale::FindSale(const Date& arg)
+{
+	for (int i = 0; i < saleDate.size(); i++)
+	{
+		if (*saleDate[i] == arg)
+		{
+			return *SaleList[i];
+		}
+	}
+}
+bool ListSale::SaveDataSaleList()
+{
+	string source = "";
+	for (int i = 0; i < SaleList.size(); i++)
+	{
+		source = ListSale::Datetostr(*saleDate[i]);
+		if (SaleList[i]->SaveSale(source) == false) return false;
+	}
+	return true;
+}
+string ListSale::Datetostr(Date date)
+{
+	return to_string(date.getDay()) + "_" + to_string(date.getMonth()) + "_" + to_string(date.getYear());
+}

@@ -4,19 +4,24 @@
 #include "Sale.h"
 #include "Date.h"
 using namespace std;
-class ListSale
+class ListSale final
 {
 private:
 	vector<Sale*> SaleList;
 	vector<Date*> saleDate;
 public:
-	ListSale(){}
+	ListSale()
+	{
+	}
 	~ListSale() {
 		for (Sale* sale : SaleList)
 			delete sale;
 		for (Date* date : saleDate)
 			delete date;
 	}
+	// Single sale
+	Sale& FindSale(const Date& arg);
+
 	// Total Revenue
 	double SumRevenue();
 
@@ -27,8 +32,10 @@ public:
 	// Another method
 	bool LoadDataSaleList();
 	bool LoadDateSaleList(const string&);
+	bool SaveDataSaleList();
 	void OutputSaleList();
 	Date stoDate(const string&, const char*);
+	string Datetostr(Date);
 };
 
 #endif // !_LISTSALE_H_

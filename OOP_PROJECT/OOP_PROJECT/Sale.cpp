@@ -75,3 +75,21 @@ int Sale::year_sale_date()
 {
 	return saleDate.getYear();
 }
+bool Sale::SaveSale(const string& source)
+{
+	ofstream out(source);
+	if (!out.is_open()) return false;
+
+	out << saleDate.getDay() << " " << saleDate.getMonth() << " " << saleDate.getYear() << endl;
+	listSoldProduct.saveList(source);
+
+	out.close();
+	return true;
+}
+bool Sale::AddAtttributeSale()
+{
+	Product p;
+	p.input();
+	listSoldProduct.addProduct(p);
+	return true;
+}

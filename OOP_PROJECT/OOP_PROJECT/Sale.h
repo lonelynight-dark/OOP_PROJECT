@@ -3,7 +3,7 @@
 #include "Date.h"
 #include "ListProduct.h"
 using namespace std;
-class Sale
+class Sale final
 {
 private :
 	Date saleDate;
@@ -27,6 +27,8 @@ public:
 	void OutputSale();
 	int month_sale_date();
 	int year_sale_date();
+	bool SaveSale(const string&);
+	bool AddAtttributeSale();
 private:
 	void OutputDate();
 	bool stoDate(const string&, const char*);
