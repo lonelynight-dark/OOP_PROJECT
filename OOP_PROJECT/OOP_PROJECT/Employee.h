@@ -17,7 +17,7 @@ class Employee :public Staff,public ListProduct
 		Employee();
 		Employee(int _ID, string _name, bool _gender, string _phone, string _email, Date _yob, int _nDays);
 		double viewSalary();// inherited from class Staff
-		void viewAllProduct();// view all product in stock..
+		void viewAllProducts();// view all product in stock..
 		void EnterProductInfo();// Enter product to stock..
 		void exportInvoice();//export to text file(comming soon)
 		Product searchProduct();//(comming soon)
