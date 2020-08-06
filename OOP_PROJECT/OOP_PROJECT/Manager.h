@@ -2,6 +2,7 @@
 #define _MANGAGER_H_
 
 #include "Employee.h"
+#include <fstream>
 #include "Staff.h"
 #include <vector>
 
@@ -10,12 +11,22 @@ class Manager: public Staff
 public:
 	Manager() :Staff() { nEmp = 0; }
 	~Manager() { for (int i = 0; i < nEmp; i++) delete List[i]; }
+
+	void load(ifstream& fi) { Staff::load(fi); }
+	void save(ofstream& fo) { Staff::save(fo); }
+
+	void loadStaff(ifstream& fi);
+	void saveStaff(ofstream& fo);
+
 	void addStaff();
 	void deleteStaff();
 	void editStaff();
 	double viewSalary();
+	// keyboard input functions
 	void input();
 	void output();
+	void edit();
+
 	void viewProd();
 	void viewEmp();
 private:
