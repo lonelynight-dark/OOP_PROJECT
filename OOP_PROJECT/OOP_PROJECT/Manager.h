@@ -12,6 +12,8 @@ public:
 	~Manager() { for (int i = 0; i < nEmp; i++) delete List[i]; }
 	void addStaff();
 	void deleteStaff();
+	void editStaff();
+	double viewSalary();
 	void input();
 	void output();
 	void viewProd();
