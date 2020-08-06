@@ -11,6 +11,7 @@ public:
 	Manager() :Staff() { nEmp = 0; }
 	~Manager() { for (int i = 0; i < nEmp; i++) delete List[i]; }
 	void addStaff();
+	void deleteStaff();
 	void input();
 	void output();
 	void viewProd();
