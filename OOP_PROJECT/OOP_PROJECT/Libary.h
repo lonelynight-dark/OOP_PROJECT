@@ -5,4 +5,5 @@
 #include <vector>
 #include <conio.h>
 #include <fstream>
+#include<algorithm>
 #endif // !_LIBARY_H_

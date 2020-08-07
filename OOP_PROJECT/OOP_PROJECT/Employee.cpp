@@ -8,11 +8,12 @@ Employee::Employee(int _ID, string _name, bool _gender, string _phone, string _e
 }
 double Employee::viewSalary()
 {
-	// insert info about salary of employee
-	return 0;
+	double s = 5000000 - Staff::getAbsentDays() * 1000000;
+	return (s<0?0:s);
+	
 }
 
-void Employee::viewAllProduct()
+void Employee::viewAllProducts()
 {
 	stock.outputList();
 }
@@ -32,6 +33,22 @@ void Employee::exportInvoice()
 	
 }
 
+Product Employee::searchProductById(int _id)
+{
+	Product* result = stock.searchProductByID(_id);
+	if (result == nullptr)
+		cout << "Not Found!\n";
+	return *result;
+}
+
+Product Employee::searchProductByName(string _name)
+{
+	Product* result = stock.searchProductByName( _name);
+	if (result == nullptr)
+		cout << "Not Found!\n";
+	return *result;
+}
+
 void Employee::viewTradeHistory()
 {
 	listSale.OutputSaleList();
@@ -40,7 +57,7 @@ void Employee::viewTradeHistory()
 void Employee::sellProduct()
 {
 	cout << "**********SELL PRODUCT**********\n";
-	cout << "Enter product info:\n";
+	cout << "Enter product:\n";
 	cout << "ID:";
 	string tmpID;
 	getline(cin, tmpID);
@@ -52,8 +69,41 @@ void Employee::sellProduct()
 			getline(cin, tmpID);
 		} while (is_number(tmpID));
 	}
-	stock.deleteProduct(stoi(tmpID));
-	
+
+	cout << "Quantity:";
+	string tmpQuantity;
+	getline(cin, tmpQuantity);
+	if (!is_number(tmpQuantity))
+	{
+		do
+		{
+			cout << "Quantity must be a number!\n";
+			getline(cin, tmpQuantity);
+		} while (is_number(tmpQuantity));
+	}
+	Product* soldProducts = stock.searchProductByID(stoi(tmpID));
+	if (stock.searchProductByID(stoi(tmpID)) == nullptr)
+	{
+		cout << "Product:ID " << tmpID << " are out of Stock";
+		system("pause");
+		return;
+	}
+
+	soldProducts -= stoi(tmpQuantity);
+
+	//stock.deleteProduct(stoi(tmpID));
+
+	listSale.LoadDateSaleList("DateFile.txt");
+	listSale.LoadDataSaleList();
+	Date today;
+
+	Sale todaySale=listSale.FindSale(today.now());//if not exit create a new one
+
+	//Today.AddAtttributeSale(Product* soldProducts,int quantity);
+	//listSale.add(todaySale);
+
+	listSale.SaveDataSaleList();
+
 
 }
 
