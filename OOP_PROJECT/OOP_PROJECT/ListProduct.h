@@ -44,6 +44,10 @@ public:
 	void outputList();
 	void loadList(const string& sourceProducts);
 	void saveList(const string& sourceProducts);
+	// other search function
+	Product* searchProductByID(int _id);
+	Product* searchProductByName(string _name);
+	
 };
 
 #endif // !_LISTPRODUCT_H_

@@ -1,5 +1,5 @@
 #include "ListProduct.h"
-
+#include"Libary.h"
 ListProduct::~ListProduct()
 {
 	for (auto& x : listProduct) if (x) delete x;
@@ -135,4 +135,26 @@ void ListProduct::saveList(const string& sourceProducts) {
 	fout << listProduct.size();
 	for (Product*& product : listProduct) product->save(fout);
 	fout.close();
+}
+
+
+Product* ListProduct::searchProductByID(int _id)
+{
+	if (_id < 0) return nullptr;
+	if (int idx=binary_search(listProduct.begin(), listProduct.end(),_id, [](Product*& left, Product*& right)
+		{
+			return (left->getID() < right->getID() );
+		}))
+	return listProduct[idx];
+	return NULL;
+}
+
+Product* ListProduct::searchProductByName(string _name)
+{
+	if (int idx=binary_search(listProduct.begin(), listProduct.end(),_name, [](Product*& left, Product*& right)
+		{
+			return (left->getName() < right->getName() );
+		}))
+	return listProduct[idx];
+	return NULL;
 }
