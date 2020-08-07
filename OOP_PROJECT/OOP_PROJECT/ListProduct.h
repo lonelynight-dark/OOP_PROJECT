@@ -14,7 +14,6 @@ enum class ErrorCode {
 class ListProduct
 {
 	vector<Product*> listProduct;
-	Product* searchProduct(int ID);
 public:
 	// constructor & destructor
 	ListProduct() {};
@@ -35,7 +34,9 @@ public:
 	int size(); // return number of type of products 
 	int totalProducts();  // return sum of all stocks of products
 	int countProduct(int ID); // return stock of product
-	ListProduct getListOfExpiredProduct();
+	// get ListProduct 
+	ListProduct& getListOfExpiredProduct();
+	ListProduct& getListOfZeroStock();
 	// calculate methods
 	double getPrice(int ID);
 	double totalPrice();
@@ -45,9 +46,10 @@ public:
 	void loadList(const string& sourceProducts);
 	void saveList(const string& sourceProducts);
 	// other search function
-	Product* searchProductByID(int _id);
-	Product* searchProductByName(string _name);
-	
+	Product* searchProduct(int ID);
+	Product* searchProduct(string name);
+	//Product* searchProductByID(int _id);
+	//Product* searchProductByName(string _name);
 };
 
 #endif // !_LISTPRODUCT_H_

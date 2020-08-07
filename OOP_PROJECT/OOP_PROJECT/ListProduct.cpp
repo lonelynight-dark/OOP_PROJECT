@@ -63,11 +63,17 @@ int ListProduct::exportProduct(int ID, int stock)
 	return (int)ErrorCode::Unable_to_find;
 }
 
-Product* ListProduct::searchProduct(int ID) 
+Product* ListProduct::searchProduct(int ID)
 {
 	if (ID < 0) return nullptr;
-	for (Product*& product : listProduct) 
+	for (Product*& product : listProduct)
 		if (product->getID() == ID) return product;
+	return nullptr;
+}
+Product* ListProduct::searchProduct(string name)
+{
+	for (Product*& product : listProduct)
+		if (product->getName() == name) return product;
 	return nullptr;
 }
 int ListProduct::size()
@@ -83,12 +89,19 @@ int ListProduct::countProduct(int ID)
 {
 	return searchProduct(ID)->getStock();
 }
-ListProduct ListProduct::getListOfExpiredProduct()
+ListProduct& ListProduct::getListOfExpiredProduct()
 {
-	ListProduct list;
+	ListProduct* list = new ListProduct;
 	for (auto& product : listProduct) 
-		if (product->isExpired()) list.addProduct(*product);
-	return list;
+		if (product->isExpired()) list->addProduct(*product);
+	return *list;
+}
+ListProduct& ListProduct::getListOfZeroStock()
+{
+	ListProduct* list = new ListProduct;
+	for (auto& product : listProduct)
+		if (product->getStock() == 0) list->addProduct(*product);
+	return *list;
 }
 double ListProduct::getPrice(int ID)
 {
@@ -137,24 +150,23 @@ void ListProduct::saveList(const string& sourceProducts) {
 	fout.close();
 }
 
-
-Product* ListProduct::searchProductByID(int _id)
-{
-	if (_id < 0) return nullptr;
-	if (int idx=binary_search(listProduct.begin(), listProduct.end(),_id, [](Product*& left, Product*& right)
-		{
-			return (left->getID() < right->getID() );
-		}))
-	return listProduct[idx];
-	return NULL;
-}
-
-Product* ListProduct::searchProductByName(string _name)
-{
-	if (int idx=binary_search(listProduct.begin(), listProduct.end(),_name, [](Product*& left, Product*& right)
-		{
-			return (left->getName() < right->getName() );
-		}))
-	return listProduct[idx];
-	return NULL;
-}
+//Product* ListProduct::searchProductByID(int _id)
+//{
+//	if (_id < 0) return nullptr;
+//	if (int idx=binary_search(listProduct.begin(), listProduct.end(),_id, [](Product*& left, Product*& right)
+//		{
+//			return (left->getID() < right->getID() );
+//		}))
+//	return listProduct[idx];
+//	return NULL;
+//}
+//
+//Product* ListProduct::searchProductByName(string _name)
+//{
+//	if (int idx=binary_search(listProduct.begin(), listProduct.end(),_name, [](Product*& left, Product*& right)
+//		{
+//			return (left->getName() < right->getName() );
+//		}))
+//	return listProduct[idx];
+//	return NULL;
+//}
