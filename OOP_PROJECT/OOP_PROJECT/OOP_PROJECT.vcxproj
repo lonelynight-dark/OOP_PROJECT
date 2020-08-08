@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Account.cpp" />
     <ClCompile Include="Company.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Employee.cpp" />
@@ -133,9 +134,11 @@
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="Sale.cpp" />
+    <ClCompile Include="sha256.cpp" />
     <ClCompile Include="Staff.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Account.h" />
     <ClInclude Include="Company.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Employee.h" />
@@ -146,6 +149,7 @@
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Product.h" />
     <ClInclude Include="Sale.h" />
+    <ClInclude Include="sha256.h" />
     <ClInclude Include="Staff.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

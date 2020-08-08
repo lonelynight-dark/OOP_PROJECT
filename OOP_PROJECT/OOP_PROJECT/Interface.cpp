@@ -1,6 +1,6 @@
 #include "Interface.h"
 
-std::string InputPassword() {
+std::string Interface::InputPassword() {
 	std::string passWord = "";
 	char c = _getch();
 	while (c != '\n' && c != '\r')
@@ -39,7 +39,7 @@ std::string Interface::HashPassword(std::string passWord)
 void Interface::ShowTitle(std::string space)
 {
 	system("CLS");
-	std::cout << space << "Student Management System\n";
+	std::cout << space << "Selling Management System\n";
 	std::cout << "================================================================================\n";
 }
 void ShowMenu(std::string space)
@@ -97,3 +97,4 @@ void Interface::ShowMenu(std::string space)
 		std::cout << space << i + 1 << ". " << command[i] << std::endl;
 	}
 }
+
