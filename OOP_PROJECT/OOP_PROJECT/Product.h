@@ -5,7 +5,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
+#ifndef _STD_CALL_
 using namespace std;
+#endif
 
 class Product
 {

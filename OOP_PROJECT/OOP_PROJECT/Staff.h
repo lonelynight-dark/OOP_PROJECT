@@ -2,10 +2,12 @@
 #define _STAFF_H_
 
 #include "Date.h"
-#include <string>
-#include <iostream>
-#include <fstream>
+#include "Libary.h"
+
+#ifndef _STD_CALL_
 using namespace std;
+#endif // !_STD_CALL_
+
 
 class Staff
 {
@@ -29,6 +31,8 @@ public:
 	virtual void output();
 	virtual void load(ifstream&);
 	virtual void save(ofstream&);
+	virtual void edit();
+	virtual void change(int, string, bool, string, string, Date, int);
 };
 
 #endif // !_STAFF_H_

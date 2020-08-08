@@ -1,8 +1,12 @@
 #include "Staff.h"
 
+bool isAllNumber(string s);
+
 Staff::Staff() : ID(0), name("Unknown"), gender(true), phoneNumber("0"), 
 	emailAddress("Unknown"),yob(0), absentDay(0) {}
-Staff::Staff(int _ID, string _name, bool _gender, string _phone, string _email, Date _yob, int _nDays) {
+Staff::Staff(int _ID, string _name, bool _gender, 
+	string _phone, string _email, Date _yob, int _nDays) {
+
 	ID = (_ID > 0) ? _ID : 0;
 	name = (_name != "") ? _name : "Unknown";
 	gender = _gender;
@@ -12,8 +16,7 @@ Staff::Staff(int _ID, string _name, bool _gender, string _phone, string _email, 
 	yob = (_yob <= now) ? _yob : now;
 	absentDay = (_nDays >= 0) ? _nDays : 0;
 }
-Staff::~Staff() {};
-static bool isAllNumber(string s) {
+bool isAllNumber(string s) {
 	for (auto ch : s) if (!isdigit(ch)) return false;
 	return true;
 }
@@ -75,6 +78,28 @@ void Staff::save(ofstream& fout)
 	fout << emailAddress << endl;
 	fout << yob << endl;
 	fout << absentDay << endl;
+}
+
+void Staff::edit()
+{
+	cout << "Current Info:" << endl;
+	output();
+
+	cout << "New Info:" << endl;
+	input();
+}
+
+void Staff::change(int _ID, string _name, bool _gender, 
+	string _phone, string _email, Date _yob, int _nDays)
+{
+	ID = (_ID > 0) ? _ID : 0;
+	name = (_name != "") ? _name : "Unknown";
+	gender = _gender;
+	phoneNumber = (isAllNumber(_phone)) ? _phone : "0";
+	emailAddress = (_email != "") ? _email : "Unknown";
+	Date now(0);
+	yob = (_yob <= now) ? _yob : now;
+	absentDay = (_nDays >= 0) ? _nDays : 0;
 }
 
 int Staff::getID()
