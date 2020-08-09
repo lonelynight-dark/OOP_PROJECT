@@ -47,6 +47,7 @@ public:
 	*/
 	virtual string getType() = 0;
 	void createAccount();
+	bool isCorrectAccount(string _account);
 };
 
 #endif // !_STAFF_H_

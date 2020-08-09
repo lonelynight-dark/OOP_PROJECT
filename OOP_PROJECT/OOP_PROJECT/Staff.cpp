@@ -115,6 +115,11 @@ void Staff::createAccount()
 	account = ((getType() == "Manager") ? "M" : "E") + to_string(ID);
 }
 
+bool Staff::isCorrectAccount(string _account)
+{
+	return _account == account;
+}
+
 int Staff::getID()
 {
 	return ID;
