@@ -42,8 +42,11 @@ public:
 	virtual void change(int, string, bool, string, string, Date, int);
 	/*
 		overide function below
+		return "Manager" if staff is Manager
+		return "Employee" if staff is Employee
 	*/
-	virtual string createAccount() = 0;
+	virtual string getType() = 0;
+	void createAccount();
 };
 
 #endif // !_STAFF_H_

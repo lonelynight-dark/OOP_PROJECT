@@ -5,7 +5,7 @@ bool isAllNumber(string s);
 Staff::Staff() : ID(0), name("Unknown"), gender(true), phoneNumber("0"), 
 	emailAddress("Unknown"),yob(0), absentDay(0) 
 {
-	account = createAccount();
+	createAccount();
 }
 Staff::Staff(int _ID, string _name, bool _gender, 
 	string _phone, string _email, Date _yob, int _nDays) {
@@ -17,7 +17,7 @@ Staff::Staff(int _ID, string _name, bool _gender,
 	Date now(0);
 	yob = (_yob <= now) ? _yob : now;
 	absentDay = (_nDays >= 0) ? _nDays : 0;
-	account = createAccount();
+	createAccount();
 }
 bool isAllNumber(string s) {
 	for (auto ch : s) if (!isdigit(ch)) return false;
@@ -49,7 +49,7 @@ void Staff::input() {
 	do {
 		cout << "Absent day: "; cin >> absentDay;
 	} while (absentDay < 0);
-	account = createAccount();
+	createAccount();
 }
 void Staff::output() {
 	cout << "ID: " << ID << endl;
@@ -100,7 +100,7 @@ void Staff::change(int _ID, string _name, bool _gender,
 	string _phone, string _email, Date _yob, int _nDays)
 {
 	ID = (_ID > 0) ? _ID : 0;
-	account = createAccount();
+	createAccount();
 	name = (_name != "") ? _name : "Unknown";
 	gender = _gender;
 	phoneNumber = (isAllNumber(_phone)) ? _phone : "0";
@@ -108,6 +108,11 @@ void Staff::change(int _ID, string _name, bool _gender,
 	Date now(0);
 	yob = (_yob <= now) ? _yob : now;
 	absentDay = (_nDays >= 0) ? _nDays : 0;
+}
+
+void Staff::createAccount()
+{
+	account = ((getType() == "Manager") ? "M" : "E") + to_string(ID);
 }
 
 int Staff::getID()
