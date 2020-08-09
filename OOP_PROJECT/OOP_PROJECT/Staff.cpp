@@ -3,10 +3,12 @@
 bool isAllNumber(string s);
 
 Staff::Staff() : ID(0), name("Unknown"), gender(true), phoneNumber("0"), 
-	emailAddress("Unknown"),yob(0), absentDay(0) {}
+	emailAddress("Unknown"),yob(0), absentDay(0) 
+{
+	account = createAccount();
+}
 Staff::Staff(int _ID, string _name, bool _gender, 
 	string _phone, string _email, Date _yob, int _nDays) {
-
 	ID = (_ID > 0) ? _ID : 0;
 	name = (_name != "") ? _name : "Unknown";
 	gender = _gender;
@@ -15,6 +17,7 @@ Staff::Staff(int _ID, string _name, bool _gender,
 	Date now(0);
 	yob = (_yob <= now) ? _yob : now;
 	absentDay = (_nDays >= 0) ? _nDays : 0;
+	account = createAccount();
 }
 bool isAllNumber(string s) {
 	for (auto ch : s) if (!isdigit(ch)) return false;
@@ -46,6 +49,7 @@ void Staff::input() {
 	do {
 		cout << "Absent day: "; cin >> absentDay;
 	} while (absentDay < 0);
+	account = createAccount();
 }
 void Staff::output() {
 	cout << "ID: " << ID << endl;
@@ -59,8 +63,10 @@ void Staff::output() {
 
 void Staff::load(ifstream& fin)
 {
+	fin >> account;
 	fin >> ID; fin.ignore();
-	fin >> name >> gender; fin.ignore();
+	getline(fin,name);
+	fin >> gender;
 	fin >> phoneNumber >> emailAddress >> yob >> absentDay;
 	if (ID < 0) ID = 0;
 	Date now(0);
@@ -71,6 +77,7 @@ void Staff::load(ifstream& fin)
 
 void Staff::save(ofstream& fout)
 {
+	fout << account << endl;
 	fout << ID << endl;
 	fout << name << endl;
 	fout << ((gender) ? "Male" : "Female") << endl;
@@ -93,6 +100,7 @@ void Staff::change(int _ID, string _name, bool _gender,
 	string _phone, string _email, Date _yob, int _nDays)
 {
 	ID = (_ID > 0) ? _ID : 0;
+	account = createAccount();
 	name = (_name != "") ? _name : "Unknown";
 	gender = _gender;
 	phoneNumber = (isAllNumber(_phone)) ? _phone : "0";
@@ -115,4 +123,8 @@ string Staff::getName()
 int Staff::getAbsentDays()
 {
 	return absentDay;
+}
+
+string Staff::getAccount() {
+	return account;
 }

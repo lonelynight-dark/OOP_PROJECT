@@ -11,6 +11,7 @@ using namespace std;
 
 class Staff
 {
+	string account;
 	int ID;
 	std::string name;
 	bool gender;
@@ -19,20 +20,30 @@ class Staff
 	Date yob; // year of birth
 	int absentDay;
 public:
+	// constructor & destructor
 	Staff();
 	Staff(int, string, bool, string, string, Date, int);
 	virtual ~Staff() {};
+	// view
 	virtual double viewSalary() = 0;
 	virtual void viewAllProducts() = 0;
+	// getter
 	int getID();
 	string getName();
 	int getAbsentDays();
+	string getAccount();
+	// input & output
 	virtual void input();
 	virtual void output();
 	virtual void load(ifstream&);
 	virtual void save(ofstream&);
+	// edit
 	virtual void edit();
 	virtual void change(int, string, bool, string, string, Date, int);
+	/*
+		overide function below
+	*/
+	virtual string createAccount() = 0;
 };
 
 #endif // !_STAFF_H_
