@@ -40,6 +40,9 @@ class Employee :public Staff,public ListProduct
 
 		//(haven't managed trade history yet)
 		void sellProduct(); 
+
+	///	overide from class Staff
+		string getType(){ return "Employee";}
 };
 
 #endif
