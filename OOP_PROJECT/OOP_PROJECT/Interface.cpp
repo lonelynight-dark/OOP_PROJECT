@@ -57,31 +57,6 @@ void ShowMenu(std::string space)
 		std::cout << space << i + 1 << ". " << command[i] << std::endl;
 	}
 }
-bool Interface::InputChangePassword(std::string& passWord, std::string& newPassword, std::string& retypePassword, std::string space)
-{
-	ShowTitle(space);
-	std::cout << space << "Change Password\n";
-	std::cout << "--------------------------------------------------------------------------------\n";
-	std::cout << "ESC. Return\n";
-
-	std::cout << "Password > ";
-	passWord = InputPassword();
-	if (passWord == "")
-		return false;
-
-	std::cout << "New password > ";
-	newPassword = InputPassword();
-	if (newPassword == "")
-		return false;
-
-	std::cout << "Retype password > ";
-	retypePassword = InputPassword();
-	if (retypePassword == "")
-		return false;
-
-	passWord = HashPassword(passWord);
-	return true;
-}
 void Interface::ShowMenu(std::string space)
 {
 	std::string command[] =
@@ -128,4 +103,37 @@ int Interface::Login(string path, string userName, string password, vector<Accou
 		return 2;
 	}
 	return 0;
+}
+
+void Interface::ShowStaffMenu(string username, Company& company, string space) {
+	Staff* s = company.search(username);
+	if (s == nullptr) {
+		std::cout << space << "Student is not exist\nPress any key to try again";
+		_getch();
+		return;
+	}
+	while (true)
+	{
+		ShowTitle(space);
+		std::cout << space << "Hi " << s->getName() << "!" << endl;
+		std::cout << space << "------------------" << endl;
+		ShowMenu(space);
+
+		int choice;
+		std::cout << "Input choice: ";
+		std::cin >> choice;
+		if (choice == 1) {
+
+		}
+		else if (choice == 2) {
+			system("CLS");
+			ShowTitle(space);
+			std::cout << *s;
+			std::cout << "Press any key to return\n";
+			_getch();
+		}
+		else if (choice == 3) {
+
+		}
+	}
 }
