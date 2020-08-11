@@ -37,6 +37,10 @@ int main() {
 			}
 		}
 		else if (resultLogin == 1) {
+			int ID =  stoi(username.substr(2));
+
+		}
+		else if (resultLogin == 2) {
 
 		}
 
