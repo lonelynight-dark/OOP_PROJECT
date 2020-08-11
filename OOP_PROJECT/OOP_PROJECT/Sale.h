@@ -28,7 +28,7 @@ public:
 	int month_sale_date();
 	int year_sale_date();
 	bool SaveSale(const string&);
-	bool AddAtttributeSale();
+	bool AddAtttributeSale(Product*, int);
 private:
 	void OutputDate();
 	bool stoDate(const string&, const char*);
