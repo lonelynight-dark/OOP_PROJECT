@@ -138,3 +138,16 @@ int Staff::getAbsentDays()
 string Staff::getAccount() {
 	return account;
 }
+
+ostream& operator<<(ostream& out , const Staff& staff)
+{
+	out << staff.account << endl;
+	out << staff.ID << endl;
+	out << staff.name << endl;
+	out << ((staff.gender) ? "Male" : "Female") << endl;
+	out << staff.phoneNumber << endl;
+	out << staff.emailAddress << endl;
+	out << staff.yob << endl;
+	out << staff.absentDay << endl;
+	return out;
+}
