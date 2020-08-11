@@ -22,7 +22,8 @@ public:
 	void addStaff();
 	void deleteStaff();
 	void editStaff();
-	double viewSalary();
+	double viewSalary() { return 0.0; }
+
 	// keyboard input functions
 	void input();
 	void output();
@@ -33,6 +34,7 @@ public:
 private:
 	std::vector<Employee*> List;
 	ListProduct prodList;
+	ListSale sale;
 	int nEmp;
 };
 
