@@ -3,6 +3,7 @@
 
 #include "ListProduct.h"
 #include "Staff.h"
+#include "Manager.h"
 #include <string>
 #include <vector>
 using namespace std;
@@ -11,28 +12,31 @@ class Company final
 {
 	string name;
 	string address;
-	vector<Staff*> listStaff;
-	ListProduct listProduct;
+	vector<Manager*> listManager;
 public:
-	Company(){}
-	~Company()	
-	{
-		for (Staff* staff : listStaff) delete staff;
-	}
+	Company();
+	~Company();
+
+	void load(ifstream&);
+	void save(ofstream&);
 	// Calculate Salary
 	double ManagerSalary();
 	double EmployeeSalary();
 
 	// Count staffs
-	int Employees();
-	int Managers();
+	int countEmployees();
+	int countManagers();
 
 	// Absent day
 
 	// Output Staff
-	void OutputStaff();
-	// Another method
-	string getInfo();
+	void output();
+	
+	void addManager();
+	void deleteManager();
+	void editManager();
+
+	Staff* search(string username);
 };
 
 #endif // !_COMPANY_H_

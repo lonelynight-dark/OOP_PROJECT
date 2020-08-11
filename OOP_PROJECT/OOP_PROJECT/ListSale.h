@@ -20,7 +20,7 @@ public:
 			delete date;
 	}
 	// Single sale
-	Sale& FindSale(const Date& arg);
+	Sale* FindSale(const Date&);
 
 	// Total Revenue
 	double SumRevenue();
@@ -30,6 +30,8 @@ public:
 	double YearlyRevenue(const int&);
 
 	// Another method
+	bool AddSaleDate(Date*);
+	bool AddSaleData(Sale*);
 	bool LoadDataSaleList();
 	bool LoadDateSaleList(const string&);
 	bool SaveDataSaleList();

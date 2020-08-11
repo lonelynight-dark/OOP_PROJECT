@@ -14,6 +14,7 @@ public:
 
 	void load(ifstream& fi) { Staff::load(fi); }
 	void save(ofstream& fo) { Staff::save(fo); }
+	string getType() { return "Manager"; }
 
 	void loadStaff(ifstream& fi);
 	void saveStaff(ofstream& fo);
@@ -21,7 +22,8 @@ public:
 	void addStaff();
 	void deleteStaff();
 	void editStaff();
-	double viewSalary();
+	double viewSalary() { return 0.0; }
+
 	// keyboard input functions
 	void input();
 	void output();
@@ -32,6 +34,7 @@ public:
 private:
 	std::vector<Employee*> List;
 	ListProduct prodList;
+	ListSale sale;
 	int nEmp;
 };
 

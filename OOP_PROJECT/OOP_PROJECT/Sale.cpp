@@ -86,10 +86,12 @@ bool Sale::SaveSale(const string& source)
 	out.close();
 	return true;
 }
-bool Sale::AddAtttributeSale()
+bool Sale::AddAtttributeSale(Product* product, int quantity)
 {
-	Product p;
-	p.input();
-	listSoldProduct.addProduct(p);
+	if (quantity <= 0) return false;
+	for (int i = 0; i < quantity; i++)
+	{
+		listSoldProduct.addProduct(product[i]);
+	}
 	return true;
 }

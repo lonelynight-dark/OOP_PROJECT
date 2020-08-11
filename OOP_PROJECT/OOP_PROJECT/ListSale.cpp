@@ -50,6 +50,22 @@ bool ListSale::LoadDateSaleList(const string& source)
 	fin.close();
 	return true;
 }
+bool ListSale::AddSaleDate(Date* arg)
+{
+	for (Date* date : saleDate)
+		if (date == arg)
+			return false;
+	saleDate.push_back(arg);
+	return true;
+}
+bool ListSale::AddSaleData(Sale* sale)
+{
+	for (Sale* saleDate : SaleList)
+		if (saleDate == sale)
+			return false;
+	SaleList.push_back(sale);
+	return true;
+}
 bool ListSale::LoadDataSaleList()
 {
 	Sale* tmp;
@@ -108,15 +124,16 @@ double ListSale::YearlyRevenue(const int& year)
 
 	return total;
 }
-Sale& ListSale::FindSale(const Date& arg)
+Sale* ListSale::FindSale(const Date& arg)
 {
 	for (int i = 0; i < saleDate.size(); i++)
 	{
 		if (*saleDate[i] == arg)
 		{
-			return *SaleList[i];
+			return SaleList[i];
 		}
 	}
+	return NULL;
 }
 bool ListSale::SaveDataSaleList()
 {
