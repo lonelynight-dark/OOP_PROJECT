@@ -48,6 +48,8 @@ public:
 	virtual string getType() = 0;
 	void createAccount();
 	bool isCorrectAccount(string _account);
+
+	friend ostream& operator<<(ostream&, const Staff&);
 };
 
 #endif // !_STAFF_H_
