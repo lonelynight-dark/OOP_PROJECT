@@ -14,6 +14,7 @@ public:
 
 	void load(ifstream& fi) { Staff::load(fi); }
 	void save(ofstream& fo) { Staff::save(fo); }
+	string getType() { return "Manager"; }
 
 	void loadStaff(ifstream& fi);
 	void saveStaff(ofstream& fo);
