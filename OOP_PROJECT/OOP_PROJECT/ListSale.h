@@ -30,7 +30,7 @@ public:
 	double YearlyRevenue(const int&);
 
 	// Another method
-	void AddSaleDate(Date*);
+	bool AddSaleDate(Date*);
 	bool AddSaleData(Sale*);
 	bool LoadDataSaleList();
 	bool LoadDateSaleList(const string&);

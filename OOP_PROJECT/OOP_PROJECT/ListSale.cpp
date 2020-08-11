@@ -50,9 +50,13 @@ bool ListSale::LoadDateSaleList(const string& source)
 	fin.close();
 	return true;
 }
-void ListSale::AddSaleDate(Date* date)
+bool ListSale::AddSaleDate(Date* arg)
 {
-	saleDate.push_back(date);
+	for (Date* date : saleDate)
+		if (date == arg)
+			return false;
+	saleDate.push_back(arg);
+	return true;
 }
 bool ListSale::AddSaleData(Sale* sale)
 {
