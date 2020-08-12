@@ -66,6 +66,15 @@ void Manager::editStaff()
 	}
 }
 
+double Manager::profit()
+{
+	double prof = 0.0;
+	for (int i = 0; i < nEmp; i++) {
+		//prof += List[i]->profit();
+	}
+	return prof;
+}
+
 void Manager::input()
 {
 	Staff::input();
@@ -89,4 +98,22 @@ void Manager::viewProd()
 void Manager::viewEmp()
 {
 	for (int i = 0; i < nEmp; i++) List[i]->output();
+}
+
+void Manager::viewEmpSalary()
+{
+	for (Staff* s : List) {
+		cout << "ID: " << s->getID() << endl;
+		cout << "Name: " << s->getName() << endl;
+		cout << "Salary: " << s->viewSalary() << endl << endl;
+	}
+}
+
+Staff* Manager::search(string user)
+{
+	Staff* em = nullptr;
+	for (int i = 0; i < nEmp; i++)
+		if (List[i]->isCorrectAccount(user))
+			return List[i];
+	return em;
 }

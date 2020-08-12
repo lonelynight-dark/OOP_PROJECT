@@ -24,6 +24,8 @@ public:
 	void editStaff();
 	double viewSalary() { return 0.0; }
 
+	double profit();
+
 	// keyboard input functions
 	void input();
 	void output();
@@ -31,10 +33,12 @@ public:
 
 	void viewProd();
 	void viewEmp();
+	void viewEmpSalary();
+
+	Staff* search(string user);
 private:
 	std::vector<Employee*> List;
 	ListProduct prodList;
-	ListSale sale;
 	int nEmp;
 };
 
