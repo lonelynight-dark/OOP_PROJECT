@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <conio.h>
+#include <iomanip>
 #include <fstream>
 #include <algorithm>
 
