@@ -4,7 +4,7 @@
 #include "Libary.h"
 
 #include "Employee.h"
-#include "Manager.h"
+//#include "Manager.h"
 #include "Account.h"
 #include "Company.h"
 class Interface

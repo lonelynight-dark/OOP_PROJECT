@@ -45,7 +45,7 @@ void Employee::exportInvoice()
 
 Product Employee::searchProductById(int _id)
 {
-	Product* result = stock.searchProductByID(_id);
+	Product* result = stock.searchProduct(_id);
 	if (result == nullptr)
 		cout << "Not Found!\n";
 	return *result;
@@ -53,7 +53,7 @@ Product Employee::searchProductById(int _id)
 
 Product Employee::searchProductByName(string _name)
 {
-	Product* result = stock.searchProductByName( _name);
+	Product* result = stock.searchProduct( _name);
 	if (result == nullptr)
 		cout << "Not Found!\n";
 	return *result;
@@ -93,8 +93,8 @@ void Employee::sellProduct()
 			getline(cin, tmpQuantity);
 		} while (is_number(tmpQuantity));
 	}
-	Product* soldProducts = stock.searchProductByID(stoi(tmpID));
-	if (stock.searchProductByID(stoi(tmpID)) == nullptr)
+	Product* soldProducts = stock.searchProduct(stoi(tmpID));
+	if (stock.searchProduct(stoi(tmpID)) == nullptr)
 	{
 		cout << "Product:ID " << tmpID << " are out of Stock";
 		system("pause");
