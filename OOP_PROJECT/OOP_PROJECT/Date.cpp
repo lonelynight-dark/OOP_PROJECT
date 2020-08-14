@@ -146,11 +146,17 @@ std::istream& operator>>(std::istream& inDev, Date& dt) {
 	return inDev;
 }
 
-std::ofstream& operator>>(std::ofstream& outDev,const Date& dt)
+void Date::save(std::ofstream& fout)
 {
-	outDev << dt.day << ' ' << dt.month << ' ' << dt.year;
-	return outDev;
+	fout << day << ' ' << month << ' ' << year;
 }
+
+
+//std::ofstream& operator>>(std::ofstream& outDev,const Date& dt)
+//{
+//	outDev << dt.day << ' ' << dt.month << ' ' << dt.year;
+//	return outDev;
+//}
 
 void Date::setDate(int year, int month, int day)
 {
