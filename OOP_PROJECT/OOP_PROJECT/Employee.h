@@ -18,22 +18,22 @@ class Employee :public Staff,public ListProduct
 		Employee();
 		Employee(int _ID, string _name, bool _gender, string _phone, string _email, Date _yob, int _nDays);
 		// inherited from class Staff..
-		double viewSalary();
+		double viewSalary(); //check
 
 		// view all product in stock..
-		void viewAllProducts();
+		void viewAllProducts();//check
 
 		// Enter product to stock..
-		void EnterProductInfo();
+		void EnterProductInfo();//check
 
 		//export to text file(comming soon)
 		void exportInvoice();
 
 		//(haven't tested)
-		Product searchProductById(int _id);
+		Product searchProductById(int _id);//check
 
 		//(haven't tested)
-		Product searchProductByName(string _name);
+		Product searchProductByName(string _name);//check
 
 		
 		void viewTradeHistory(); 

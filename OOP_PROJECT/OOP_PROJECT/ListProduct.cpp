@@ -175,7 +175,7 @@ void ListProduct::inputList()
 void ListProduct::saveList(const string &sourceProducts)
 {
 	ofstream fout(sourceProducts);
-	fout << listProduct.size();
+	fout << listProduct.size()<<endl;
 	for (Product *&product : listProduct)
 		product->save(fout);
 	fout.close();
@@ -183,43 +183,41 @@ void ListProduct::saveList(const string &sourceProducts)
 
 Product *ListProduct::searchProductByID(int _id)
 {
+	// if (_id < 0)
+	// 	return nullptr;
+	// sort(listProduct.begin(), listProduct.end(), [](Product *&left, Product *&right) {
+	// 	return (left->getID() < right->getID());
+	// });
+
+	// vector<Product*>::iterator it = lower_bound(listProduct.begin(), listProduct.end(),_id, [](Product *&left, Product *&right) {
+	// 	return (left->getID() > right->getID());
+	// });
+	// if (it == listProduct.end() || (*it)->getID() != _id)
+	// {
+	// 	return nullptr;
+	// }
+	// else
+	// {
+	// 	std::size_t idx = std::distance(listProduct.begin(), it);
+	// 	return listProduct[idx];
+		
+	// }
 	if (_id < 0)
 		return nullptr;
-	sort(listProduct.begin(), listProduct.end(), [](Product *&left, Product *&right) {
-		return (left->getID() < right->getID());
-	});
-
-	vector<Product*>::iterator it = lower_bound(listProduct.begin(), listProduct.end(),_id, [](Product *&left, Product *&right) {
-		return (left->getID() > right->getID());
-	});
-	if (it == listProduct.end() || (*it)->getID() != _id)
+	for (int i = 0; i < listProduct.size(); i++)
 	{
-		return nullptr;
+		if (listProduct[i]->getID() == _id)
+			return listProduct[i];
 	}
-	else
-	{
-		std::size_t idx = std::distance(listProduct.begin(), it);
-		return listProduct[idx];
-		
-	}
+	return nullptr;
 }
 	Product *ListProduct::searchProductByName(string _name)
 	{
-		sort(listProduct.begin(), listProduct.end(), [](Product *&left, Product *&right) {
-		return (left->getName() > right->getName());
-	});
-
-	vector<Product*>::iterator it = lower_bound(listProduct.begin(), listProduct.end(),_name, [](Product *&left, Product *&right) {
-		return (left->getID() < right->getID());
-	});
-	if (it == listProduct.end() || (*it)->getName() != _name)
-	{
+	// 
+	for (int i = 0; i < listProduct.size(); i++)
+		{
+			if (listProduct[i]->getName() == _name)
+				return listProduct[i];
+		}
 		return nullptr;
-	}
-	else
-	{
-		std::size_t idx = std::distance(listProduct.begin(), it);
-		return listProduct[idx];
-		
-	}
 	}
