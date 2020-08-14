@@ -11,7 +11,7 @@ using namespace std;
 
 class Staff
 {
-	string account;
+private:
 	int ID;
 	std::string name;
 	bool gender;
@@ -31,7 +31,6 @@ public:
 	int getID();
 	string getName();
 	int getAbsentDays();
-	string getAccount();
 	// input & output
 	virtual void input();
 	virtual void output();
@@ -46,10 +45,8 @@ public:
 		return "Employee" if staff is Employee
 	*/
 	virtual string getType() = 0;
-	void createAccount();
-	bool isCorrectAccount(string _account);
 
-	friend ostream& operator<<(ostream&, const Staff&);
+	friend ostream& operator<<(ostream&,const Staff&) ;
 };
 
 #endif // !_STAFF_H_

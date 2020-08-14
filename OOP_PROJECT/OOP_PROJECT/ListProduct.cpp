@@ -156,7 +156,7 @@ void ListProduct::loadList(ifstream& fin)
 		try {
 			this->addProduct(p);
 		}
-		catch (ErrorCode& err) {
+		catch (ErrorCode) {
 			cout << "ID (" << p.getID() << ") existed..." << endl;
 		}
 	}
@@ -175,7 +175,7 @@ void ListProduct::inputList()
 		try {
 			this->addProduct(p);
 		}
-		catch (ErrorCode& err) {
+		catch (ErrorCode) {
 			cout << "ID (" << p.getID() << ") existed..." << endl;
 		}
 	}

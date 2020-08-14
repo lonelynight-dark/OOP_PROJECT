@@ -7,7 +7,7 @@
 enum class ErrorCode {
 	Unable_to_find = -200,
 	Not_enough_stock,
-	Invalid_parameter,
+	Wrong_format,
 	ID_existed
 };
 

@@ -154,25 +154,36 @@ void Company::editManager()
 
 Staff* Company::search(string username)
 {
-	Staff* staff = nullptr;
+	int ID = 0;
+	try {
+		ID = stoi(username.substr(1));
+	}
+	catch (...)
+	{
+		throw ErrorCode::Wrong_format;
+	}
+	cout << ID << endl;
 	if (username.size() > 0) 
 	{
 		if (username[0] == 'M')
 		{
-			for (Staff* manager : listManager) 
+			for (Staff* manager : listManager)
 			{
-				if (manager->isCorrectAccount(username))
+				if (manager->getID() == ID)
 					return manager;
 			}
 		}
-		else if (username[0] == 'E') 
+		else if (username[0] == 'E')
 		{
-			for (Staff* manager : listManager) 
+			for (Manager* manager : listManager)
 			{
-				//staff = manager->search(username);
-				if (staff != nullptr) break;
+				Staff* employee = manager->search(ID);
+				if (employee != nullptr)
+					return employee;
 			}
 		}
+		else
+			throw ErrorCode::Wrong_format;
 	}
-	return staff;
+	return nullptr;
 }

@@ -36,7 +36,7 @@ public:
 	void deleteManager();
 	void editManager();
 
-	Staff* search(string username);
+	Staff* search(string username); // might throw ErrorCode::Wrong_format
 };
 
 #endif // !_COMPANY_H_
