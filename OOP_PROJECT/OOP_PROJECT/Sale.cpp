@@ -3,7 +3,7 @@ double Sale::Summary(const int& ID)
 {
 	double sum = 0;
 	int count = Sale::numProduct(ID);
-	int price = listSoldProduct.getPrice(ID);
+	double price = listSoldProduct.getPrice(ID);
 	return count * price;
 }
 bool Sale::stoDate(const string& line, const char* delimeter)
@@ -40,7 +40,7 @@ bool Sale::LoadSale(const string& source)
 	char delimeter[] = " ";
 
 	Sale::stoDate(line, delimeter);
-	listSoldProduct.loadList(source);
+	listSoldProduct.loadList(fin);
 
 	fin.close();
 	return true;
@@ -81,7 +81,7 @@ bool Sale::SaveSale(const string& source)
 	if (!out.is_open()) return false;
 
 	out << saleDate.getDay() << " " << saleDate.getMonth() << " " << saleDate.getYear() << endl;
-	listSoldProduct.saveList(source);
+	listSoldProduct.saveList(out);
 
 	out.close();
 	return true;
