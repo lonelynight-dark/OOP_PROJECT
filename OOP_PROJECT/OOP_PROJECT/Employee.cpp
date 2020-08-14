@@ -1,11 +1,14 @@
 #include "Employee.h"
 Employee::Employee() :Staff()
 {
-	stock.loadList("Stock.txt");
+
+	ifstream fin("Stock.txt");
+	stock.loadList(fin);
 }
 Employee::Employee(int _ID, string _name, bool _gender, string _phone, string _email, Date _yob, int _nDays):Staff( _ID,  _name,  _gender,  _phone,  _email,  _yob,  _nDays)
 {
-	stock.loadList("Stock.txt");
+	ifstream fin("Stock.txt");
+	stock.loadList(fin);
 }
 double Employee::viewSalary()
 {
@@ -30,7 +33,8 @@ void Employee::EnterProductInfo()
 	Product tmp;
 	tmp.input();
 	stock.addProduct(tmp);
-	stock.saveList("Stock.txt");
+	ofstream fout("Stock.txt");
+	stock.saveList(fout);
 	
 }
 
@@ -57,7 +61,7 @@ Product Employee::searchProductByName(string _name)
 
 void Employee::viewTradeHistory()
 {
-	listSale.s;
+	//listSale.s;
 }
 
 void Employee::sellProduct()
