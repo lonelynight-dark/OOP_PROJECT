@@ -156,7 +156,7 @@ void ListProduct::loadList(ifstream& fin)
 		try {
 			this->addProduct(p);
 		}
-		catch (ErrorCode err) {
+		catch (ErrorCode& err) {
 			cout << "ID (" << p.getID() << ") existed..." << endl;
 		}
 	}
@@ -175,7 +175,7 @@ void ListProduct::inputList()
 		try {
 			this->addProduct(p);
 		}
-		catch (ErrorCode err) {
+		catch (ErrorCode& err) {
 			cout << "ID (" << p.getID() << ") existed..." << endl;
 		}
 	}
@@ -187,45 +187,3 @@ void ListProduct::saveList(ofstream& fout)
 	for (Product*& product : listProduct)
 		product->save(fout);
 }
-
-Product* ListProduct::searchProductByID(int _id)
-{
-	// if (_id < 0)
-	// 	return nullptr;
-	// sort(listProduct.begin(), listProduct.end(), [](Product *&left, Product *&right) {
-	// 	return (left->getID() < right->getID());
-	// });
-
-	// vector<Product*>::iterator it = lower_bound(listProduct.begin(), listProduct.end(),_id, [](Product *&left, Product *&right) {
-	// 	return (left->getID() > right->getID());
-	// });
-	// if (it == listProduct.end() || (*it)->getID() != _id)
-	// {
-	// 	return nullptr;
-	// }
-	// else
-	// {
-	// 	std::size_t idx = std::distance(listProduct.begin(), it);
-	// 	return listProduct[idx];
-
-	// }
-	if (_id < 0)
-		return nullptr;
-	for (int i = 0; i < listProduct.size(); i++)
-	{
-		if (listProduct[i]->getID() == _id)
-			return listProduct[i];
-	}
-	return nullptr;
-}
-
-Product* ListProduct::searchProductByName(string _name)
-{
-	for (int i = 0; i < listProduct.size(); i++)
-	{
-		if (listProduct[i]->getName() == _name)
-			return listProduct[i];
-	}
-	return nullptr;
-}
-
