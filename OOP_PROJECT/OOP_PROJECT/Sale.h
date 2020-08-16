@@ -10,6 +10,7 @@ private :
 	ListProduct listSoldProduct;
 public:
 	Sale(){}
+	Sale(Date a) { saleDate = a; }
 	~Sale(){}
 
 	// Calculate Summary of Product
@@ -29,6 +30,7 @@ public:
 	int year_sale_date();
 	bool SaveSale(const string&);
 	bool AddAtttributeSale(Product*, int);
+	bool AddAtttributeSale(vector<Product*> products);
 private:
 	void OutputDate();
 	bool stoDate(const string&, const char*);
