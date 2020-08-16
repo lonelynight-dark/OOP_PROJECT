@@ -109,11 +109,11 @@ void Manager::viewEmpSalary()
 	}
 }
 
-Staff* Manager::search(string user)
+Staff* Manager::search(int ID)
 {
 	Staff* em = nullptr;
 	for (int i = 0; i < nEmp; i++)
-		if (List[i]->isCorrectAccount(user))
+		if (List[i]->getID() == ID)
 			return List[i];
 	return em;
 }

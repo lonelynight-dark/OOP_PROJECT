@@ -35,7 +35,7 @@ public:
 	void viewEmp();
 	void viewEmpSalary();
 
-	Staff* search(string user);
+	Staff* search(int ID);
 private:
 	std::vector<Employee*> List;
 	ListProduct prodList;
