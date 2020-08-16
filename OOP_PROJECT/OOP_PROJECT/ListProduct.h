@@ -5,14 +5,15 @@
 #include <vector>
 
 enum class ErrorCode {
-	OK = 0,
-	Unable_to_find,
+	Unable_to_find = -200,
 	Not_enough_stock,
-	Invalid_parameter
+	Wrong_format,
+	ID_existed
 };
 
 class ListProduct
 {
+private:
 	vector<Product*> listProduct;
 public:
 	// constructor & destructor
@@ -21,15 +22,11 @@ public:
 	~ListProduct();
 	// operator
 	ListProduct& operator=(ListProduct);
-	// add & delete products /* be carefull here */	
-	/*
-		BEWARE OF INT (ERROR CODE) RETURN
-		YOU SHOULD PUT "==0" IF THE FUNCTIONS BELOW IS IN THE IF CONDITION
-	*/
-	int addProduct(Product&) ;
-	int deleteProduct(int ID); 
-	int importProduct(int ID, int stock);
-	int exportProduct(int ID, int stock);
+	// add & delete products 
+	void addProduct(Product&) ; // throw ErrorCode::ID_existed if ID already existed
+	void deleteProduct(int ID); 
+	void importProduct(int ID, int stock);
+	void exportProduct(int ID, int stock); // might throw ErrorCode::Not_enough_stock 
 	// count methods
 	int size(); // return number of type of products 
 	int totalProducts();  // return sum of all stocks of products
@@ -43,13 +40,11 @@ public:
 	// input & output methods
 	void inputList();
 	void outputList();
-	void loadList(const string& sourceProducts);
-	void saveList(const string& sourceProducts);
+	void loadList(ifstream&);
+	void saveList(ofstream&);
 	// other search function
 	Product* searchProduct(int ID);
 	Product* searchProduct(string name);
-	Product* searchProductByID(int _id);
-	Product* searchProductByName(string _name);
 };
 
 #endif // !_LISTPRODUCT_H_

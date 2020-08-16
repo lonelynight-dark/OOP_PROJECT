@@ -2,13 +2,22 @@
 Employee::Employee() :Staff()
 {
 
+	ifstream fin("Stock.txt");
+	stock.loadList(fin);
 }
-Employee::Employee(int _ID, string _name, bool _gender, string _phone, string _email, Date _yob, int _nDays):Employee( _ID,  _name,  _gender,  _phone,  _email,  _yob,  _nDays)
+Employee::Employee(int _ID, string _name, bool _gender, string _phone, string _email, Date _yob, int _nDays):Staff( _ID,  _name,  _gender,  _phone,  _email,  _yob,  _nDays)
 {
+	ifstream fin("Stock.txt");
+	stock.loadList(fin);
 }
 double Employee::viewSalary()
 {
+	cout << "Name:" << Staff::getName() << endl;
+	cout << "ID:" << Staff::getID() << endl;
+	
 	double s = 5000000 - Staff::getAbsentDays() * 1000000;
+	cout << std::setprecision(3) << std::showpoint << std::fixed;
+	cout << "Salary:" << (s < 0 ? 0 : s) << endl;
 	return (s<0?0:s);
 	
 }
@@ -24,7 +33,8 @@ void Employee::EnterProductInfo()
 	Product tmp;
 	tmp.input();
 	stock.addProduct(tmp);
-
+	ofstream fout("Stock.txt");
+	stock.saveList(fout);
 	
 }
 
@@ -35,7 +45,7 @@ void Employee::exportInvoice()
 
 Product Employee::searchProductById(int _id)
 {
-	Product* result = stock.searchProductByID(_id);
+	Product* result = stock.searchProduct(_id);
 	if (result == nullptr)
 		cout << "Not Found!\n";
 	return *result;
@@ -43,7 +53,7 @@ Product Employee::searchProductById(int _id)
 
 Product Employee::searchProductByName(string _name)
 {
-	Product* result = stock.searchProductByName( _name);
+	Product* result = stock.searchProduct( _name);
 	if (result == nullptr)
 		cout << "Not Found!\n";
 	return *result;
@@ -51,7 +61,7 @@ Product Employee::searchProductByName(string _name)
 
 void Employee::viewTradeHistory()
 {
-	listSale.OutputSaleList();
+	//listSale.s;
 }
 
 void Employee::sellProduct()
@@ -60,6 +70,8 @@ void Employee::sellProduct()
 	cout << "Enter product:\n";
 	cout << "ID:";
 	string tmpID;
+	cin.clear();
+	cin.ignore(INT_MAX, '\n');
 	getline(cin, tmpID);
 	if (!is_number(tmpID))
 	{
@@ -81,8 +93,8 @@ void Employee::sellProduct()
 			getline(cin, tmpQuantity);
 		} while (is_number(tmpQuantity));
 	}
-	Product* soldProducts = stock.searchProductByID(stoi(tmpID));
-	if (stock.searchProductByID(stoi(tmpID)) == nullptr)
+	Product* soldProducts = stock.searchProduct(stoi(tmpID));
+	if (stock.searchProduct(stoi(tmpID)) == nullptr)
 	{
 		cout << "Product:ID " << tmpID << " are out of Stock";
 		system("pause");
@@ -91,17 +103,23 @@ void Employee::sellProduct()
 
 	soldProducts -= stoi(tmpQuantity);
 
-	//stock.deleteProduct(stoi(tmpID));
+	
 
-	listSale.LoadDateSaleList("DateFile.txt");
+	listSale.LoadDateSaleList("ID_1.txt");
 	listSale.LoadDataSaleList();
-	Date today;
+	Date* today=new Date;
+	Sale* todaySale = nullptr;
+	
+	todaySale = listSale.FindSale(today->now());
 
-	Sale todaySale=listSale.FindSale(today.now());//if not exit create a new one
-
-	//Today.AddAtttributeSale(Product* soldProducts,int quantity);
-	//listSale.add(todaySale);
-
+	//if not exit create a new one
+	if (todaySale == nullptr)
+	{
+		listSale.AddSaleDate(today);
+		todaySale = new Sale;
+	}
+	todaySale->AddAtttributeSale(soldProducts, stoi(tmpQuantity));
+	listSale.AddSaleData(todaySale);
 	listSale.SaveDataSaleList();
 
 

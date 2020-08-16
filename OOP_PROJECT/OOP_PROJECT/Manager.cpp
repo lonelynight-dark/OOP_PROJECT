@@ -59,11 +59,20 @@ void Manager::editStaff()
 			cout << "Do you want to edit this employee (0:NO / 1:YES): ";
 			cin >> opt;
 			if (opt == 1) {
-				//List[i].edit();
+				List[i]->edit();
 			}
 			found = true;
 		}
 	}
+}
+
+double Manager::profit()
+{
+	double prof = 0.0;
+	for (int i = 0; i < nEmp; i++) {
+		//prof += List[i]->profit();
+	}
+	return prof;
 }
 
 void Manager::input()
@@ -89,4 +98,22 @@ void Manager::viewProd()
 void Manager::viewEmp()
 {
 	for (int i = 0; i < nEmp; i++) List[i]->output();
+}
+
+void Manager::viewEmpSalary()
+{
+	for (Staff* s : List) {
+		cout << "ID: " << s->getID() << endl;
+		cout << "Name: " << s->getName() << endl;
+		cout << "Salary: " << s->viewSalary() << endl << endl;
+	}
+}
+
+Staff* Manager::search(int ID)
+{
+	Staff* em = nullptr;
+	for (int i = 0; i < nEmp; i++)
+		if (List[i]->getID() == ID)
+			return List[i];
+	return em;
 }

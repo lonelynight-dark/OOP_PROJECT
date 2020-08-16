@@ -2,7 +2,7 @@
 Date ListSale::stoDate(const string& line, const char* delimeter)
 {
 	Date date;
-	int day, month, year, i;
+	int day, month, year, i=0;
 	char* next_token = nullptr;
 	char* chr = new char[line.length() + 1];
 	char* token = strtok_s(chr, delimeter, &next_token);

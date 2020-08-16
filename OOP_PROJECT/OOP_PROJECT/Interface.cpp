@@ -82,6 +82,7 @@ std::vector<Account> Interface::ImportFromFile(std::string path, std::string fil
 		acc.push_back(Account(u, p));
 	}
 	filein.close();
+	return acc;
 }
 int Interface::Login(string path, string userName, string password, vector<Account>& acc, int& index) {
 	string fileName[] = { "Employee.txt" , "Manager.txt" };

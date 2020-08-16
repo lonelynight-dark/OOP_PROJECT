@@ -23,7 +23,7 @@ Product& Product::operator-=(const int _stock)
 	return (*this);
 }
 
-int Product::getID() 
+int Product::getID()
 {
 	return ID;
 }
@@ -41,14 +41,14 @@ int Product::getStock() {
 
 void Product::load(ifstream& fin) {
 	fin >> ID;
-	fin.ignore();
+	fin.ignore(100, '\n');
 	getline(fin, name);
 	fin >> price >> stock >> MFG >> EXP;
 	if (price < 0) price = 0;
 	if (stock < 0) stock = 0;
 	if (ID < 0) ID = 0;
 	if (name == "") name = "Unknown";
-	if (MFG < EXP) swap(MFG, EXP);
+	if (MFG > EXP) swap(MFG, EXP);
 }
 
 void Product::input()
@@ -56,7 +56,7 @@ void Product::input()
 	do {
 		cout << "ID:    "; cin >> ID;
 	} while (ID < 0);
-	cin.ignore();
+	cin.ignore(100, '\n');
 	do {
 		cout << "Name:  ";  getline(cin, name);
 	} while (name == "");
@@ -77,15 +77,15 @@ void Product::save(ofstream& fout) {
 	fout << name << endl;
 	fout << price << endl;
 	fout << stock << endl;
-	fout << MFG << endl;
-	fout << EXP << endl;
+	MFG.save(fout); fout << endl;
+	EXP.save(fout); fout << endl;
 }
 void Product::output()
 {
-	cout << "ID:    " << ID    << endl;
-	cout << "Name:  " << name  << endl;
+	cout << "ID:    " << ID << endl;
+	cout << "Name:  " << name << endl;
 	cout << "Price: " << price << endl;
 	cout << "Stock: " << stock << endl;
-	cout << "MFG:   " << MFG   << endl;
-	cout << "EXP:   " << EXP   << endl;
+	cout << "MFG:   " << MFG << endl;
+	cout << "EXP:   " << EXP << endl;
 }

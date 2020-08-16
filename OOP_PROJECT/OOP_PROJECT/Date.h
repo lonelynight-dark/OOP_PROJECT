@@ -51,8 +51,8 @@ public:
 	// input - output operator
 	friend std::ostream& operator<<(std::ostream& outDev, const Date& dt);
 	friend std::istream& operator>>(std::istream& inDev, Date& dt);
-	friend std::ofstream& operator>>(std::ofstream& outDev,const Date& dt);
-
+	//friend std::ofstream& operator>>(std::ofstream& outDev,const Date& dt);
+	void save(std::ofstream&);
 private:
 	int day, month, year;
 };
