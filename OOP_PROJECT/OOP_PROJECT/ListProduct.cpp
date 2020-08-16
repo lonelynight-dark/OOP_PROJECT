@@ -187,3 +187,15 @@ void ListProduct::saveList(ofstream& fout)
 	for (Product*& product : listProduct)
 		product->save(fout);
 }
+
+void ListProduct::concat(const ListProduct& list)
+{
+	for (auto& product : list.listProduct) {
+		try {
+			addProduct(*product);
+		}
+		catch (ErrorCode) {
+			cout << "ID (" << product->getID() << ") existed..." << endl;
+		}
+	}
+}

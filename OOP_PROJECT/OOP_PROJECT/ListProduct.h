@@ -45,6 +45,8 @@ public:
 	// other search function
 	Product* searchProduct(int ID);
 	Product* searchProduct(string name);
+	// concat 2 List Product
+	void concat(const ListProduct&);
 };
 
 #endif // !_LISTPRODUCT_H_
