@@ -59,7 +59,7 @@ void Manager::editStaff()
 			cout << "Do you want to edit this employee (0:NO / 1:YES): ";
 			cin >> opt;
 			if (opt == 1) {
-				//List[i].edit();
+				List[i]->edit();
 			}
 			found = true;
 		}
