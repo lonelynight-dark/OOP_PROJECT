@@ -14,5 +14,6 @@ public:
 	bool isCorrect(std::string, std::string);
 	bool isCorrectPass(std::string);
 	void ChangePassword(std::string space);
+
 };
 #endif // !_account_h_

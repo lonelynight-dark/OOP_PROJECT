@@ -105,10 +105,10 @@ int Interface::Login(string path, string userName, string password, vector<Accou
 	return 0;
 }
 
-void Interface::ShowStaffMenu(string username, Company& company, string space) {
+void Interface::ShowStaffMenu(Account& acc, Company& company, string space, string username) {
 	Staff* s = company.search(username);
 	if (s == nullptr) {
-		std::cout << space << "Student is not exist\nPress any key to try again";
+		std::cout << space << "Staff is not exist\nPress any key to try again";
 		_getch();
 		return;
 	}
@@ -123,7 +123,12 @@ void Interface::ShowStaffMenu(string username, Company& company, string space) {
 		std::cout << "Input choice: ";
 		std::cin >> choice;
 		if (choice == 1) {
+			if (username[0] == 'E') {
 
+			}
+			else {
+
+			}
 		}
 		else if (choice == 2) {
 			system("CLS");
@@ -133,7 +138,105 @@ void Interface::ShowStaffMenu(string username, Company& company, string space) {
 			_getch();
 		}
 		else if (choice == 3) {
+			acc.ChangePassword(space);
+		}
+	}
+}
+void Interface::ShowEmployeeMenu(Employee emp, string space) {
+	string command[] =
+	{
+		//write command here
+	};
+	int nCommand = 4; // idk
+	while (true)
+	{
+		system("CLS");
+		ShowTitle(space);
+		std::cout << space << "        Employee Window\n";
+		std::cout << "================================================================================\n";
+		for (int i = 0; i < nCommand; i++)
+		{
+			std::cout << i + 1 << ". " << command[i] << endl;
+		}
 
+		std::cout << "0. Return\n";
+		std::cout << "----------------------------------------\n";
+
+		int choice;
+		std::cout << "Input choice: ";
+		std::cin >> choice;
+
+		if (choice == 1)
+		{
+			
+		}
+		else if (choice == 2)
+		{
+			
+		}
+		else if (choice == 3)
+		{
+			
+		}
+		else if (choice == 4)
+		{
+			
+		}
+		else if (choice == 0)
+			return;
+		else
+		{
+			std::cout << "Bad choice\nPress any key to try again";
+			_getch();
+		}
+	}
+}
+void Interface::ShowManagerMenu(Manager man, string space) {
+	string command[] =
+	{
+		//write command here
+	};
+	int nCommand = 4; // idk
+	while (true)
+	{
+		system("CLS");
+		ShowTitle(space);
+		std::cout << space << "        Staff Window\n";
+		std::cout << "================================================================================\n";
+		for (int i = 0; i < nCommand; i++)
+		{
+			std::cout << i + 1 << ". " << command[i] << endl;
+		}
+
+		std::cout << "0. Return\n";
+		std::cout << "----------------------------------------\n";
+
+		int choice;
+		std::cout << "Input choice: ";
+		std::cin >> choice;
+
+		if (choice == 1)
+		{
+
+		}
+		else if (choice == 2)
+		{
+
+		}
+		else if (choice == 3)
+		{
+
+		}
+		else if (choice == 4)
+		{
+
+		}
+		else if (choice == 0)
+			return;
+		else
+		{
+			std::cout << "Bad choice\nPress any key to try again";
+			_getch();
 		}
 	}
 }
