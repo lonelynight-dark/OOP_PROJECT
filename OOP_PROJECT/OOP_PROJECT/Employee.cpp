@@ -24,6 +24,8 @@ double Employee::viewSalary()
 
 void Employee::viewAllProducts()
 {
+	ifstream fin("Stock.txt");
+	stock.loadList(fin);
 	stock.outputList();
 }
 
@@ -38,9 +40,16 @@ void Employee::EnterProductInfo()
 	
 }
 
-void Employee::exportInvoice()
+void Employee::exportInvoice(ListProduct soldProduct)
 {
-	
+	cout << "***STAFF INFO***\n";
+	Staff::output();
+	cout << endl;
+	cout << "***BILL***\n";
+	soldProduct.outputList();
+	cout << "================================\n";
+	cout << "TOTAL:" << soldProduct.totalPrice();
+
 }
 
 Product Employee::searchProductById(int _id)
@@ -61,49 +70,66 @@ Product Employee::searchProductByName(string _name)
 
 void Employee::viewTradeHistory()
 {
-	//listSale.s;
+	listSale.LoadDateSaleList("ID_1.txt");
+	listSale.LoadDataSaleList();
+	listSale.OutputSaleList();
 }
 
 void Employee::sellProduct()
 {
+	//system("CLS");
+	char ch;
+	ListProduct soldProducts;
 	cout << "**********SELL PRODUCT**********\n";
-	cout << "Enter product:\n";
-	cout << "ID:";
-	string tmpID;
-	cin.clear();
-	cin.ignore(INT_MAX, '\n');
-	getline(cin, tmpID);
-	if (!is_number(tmpID))
+	do
 	{
-		do
+		
+		cout << "Enter product:\n";
+		cout << "ID:";
+		string tmpID;
+		getline(cin, tmpID);
+		
+		if (!is_number(tmpID))
 		{
-			cout << "ID must be a number!\n";
-			getline(cin, tmpID);
-		} while (is_number(tmpID));
-	}
+			do
+			{
+				cout << "ID must be a number!\n";
+				getline(cin, tmpID);
+			} while (is_number(tmpID));
+		}
 
-	cout << "Quantity:";
-	string tmpQuantity;
-	getline(cin, tmpQuantity);
-	if (!is_number(tmpQuantity))
-	{
-		do
+		cout << "Quantity:";
+		string tmpQuantity;
+		getline(cin, tmpQuantity);
+		if (!is_number(tmpQuantity))
 		{
-			cout << "Quantity must be a number!\n";
-			getline(cin, tmpQuantity);
-		} while (is_number(tmpQuantity));
-	}
-	Product* soldProducts = stock.searchProduct(stoi(tmpID));
-	if (stock.searchProduct(stoi(tmpID)) == nullptr)
-	{
-		cout << "Product:ID " << tmpID << " are out of Stock";
-		system("pause");
-		return;
-	}
+			do
+			{
+				cout << "Quantity must be a number!\n";
+				getline(cin, tmpQuantity);
+			} 
+			while (is_number(tmpQuantity));
+		}
+		
+		Product* soldProduct = stock.searchProduct(stoi(tmpID));
+		if (stock.searchProduct(stoi(tmpID)) == nullptr)
+		{
+			cout << "Product:ID " << tmpID << " are out of Stock";
+			system("pause");
+			continue;
+		}
+		Product* tmpProduct =new Product(*soldProduct);
+		(*tmpProduct) -= ((*soldProduct).getStock() - stoi(tmpQuantity));
+		soldProducts.addProduct(*tmpProduct);
 
-	soldProducts -= stoi(tmpQuantity);
+		*soldProduct -= stoi(tmpQuantity);
 
-	
+		cout << "More product ?\nPress y - Yes \nPress any else key - No\n";
+		
+		cin >> ch;
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+	} while (ch == 'y');
 
 	listSale.LoadDateSaleList("ID_1.txt");
 	listSale.LoadDataSaleList();
@@ -116,12 +142,16 @@ void Employee::sellProduct()
 	if (todaySale == nullptr)
 	{
 		listSale.AddSaleDate(today);
-		todaySale = new Sale;
+		todaySale = new Sale(*today);
 	}
-	todaySale->AddAtttributeSale(soldProducts, stoi(tmpQuantity));
+	todaySale->AddAtttributeSale(soldProducts);
 	listSale.AddSaleData(todaySale);
 	listSale.SaveDataSaleList();
 
+	ofstream fout("Stock.txt");
+	stock.saveList(fout);
+
+	exportInvoice(soldProducts);
 
 }
 
