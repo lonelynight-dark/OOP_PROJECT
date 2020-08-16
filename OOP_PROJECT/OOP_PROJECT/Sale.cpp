@@ -96,12 +96,10 @@ bool Sale::AddAtttributeSale(Product* product, int quantity)
 	return true;
 }
 
-bool Sale::AddAtttributeSale(vector<Product*> products)
+void Sale::AddAtttributeSale(ListProduct products)
 {
 	
-	for (int i = 0; i < products.size(); i++)
-	{
-		listSoldProduct.addProduct(*products[i]);
-	}
-	return true;
+	// if(listSoldProduct = products)
+	// return true;
+
 }
