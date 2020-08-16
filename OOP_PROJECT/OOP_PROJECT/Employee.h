@@ -27,12 +27,12 @@ class Employee :public Staff,public ListProduct
 		void EnterProductInfo();//check
 
 		//export to text file(comming soon)
-		void exportInvoice();
+		void exportInvoice(ListProduct soldProduct);
 
-		//(haven't tested)
+	
 		Product searchProductById(int _id);//check
 
-		//(haven't tested)
+		
 		Product searchProductByName(string _name);//check
 
 		
@@ -42,7 +42,7 @@ class Employee :public Staff,public ListProduct
 		void sellProduct(); 
 
 	///	overide from class Staff
-		string getType(){ return "Employee";}
+		string getType(){ return "Employee";}//check
 };
 
 #endif

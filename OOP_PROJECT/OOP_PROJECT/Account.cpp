@@ -96,15 +96,10 @@ void Account::ChangePassword(std::string space) {
 			}
 			else
 			{
-				/*password = HashPassword(newPassword);
-				string fileName = "Staff.txt";
-				bool isSuccess = ExportStaff(pathAccount, fileName, listStaff);
-				if (isSuccess)
-					std::cout << "Success to change password\nPress any key to return";
-				else
-					std::cout << "Unable to open file, please check the directory\nPress any key to return";
+				password = HashPassword(newPassword);
+				std::cout << "Changed password successfully" << std::endl;
 				_getch();
-				return;*/
+				return;
 			}
 		}
 	}
