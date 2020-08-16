@@ -146,9 +146,14 @@ void Interface::ShowStaffMenu(Account& acc, Company& company, string space, stri
 void Interface::ShowEmployeeMenu(Employee emp, string space) {
 	string command[] =
 	{
-		//write command here
+		"View Salary",
+		"View items in stock",
+		"Add products to stock",
+		"Search product",
+		"View trade history",
+		"Sell product"
 	};
-	int nCommand = 4; // idk
+	int nCommand = 6; // idk
 	while (true)
 	{
 		system("CLS");
@@ -169,19 +174,45 @@ void Interface::ShowEmployeeMenu(Employee emp, string space) {
 
 		if (choice == 1)
 		{
-			
+			emp.viewSalary();
 		}
 		else if (choice == 2)
 		{
-			
+			emp.viewAllProducts();
 		}
 		else if (choice == 3)
 		{
-			
+			emp.EnterProductInfo();
 		}
 		else if (choice == 4)
 		{
-			
+			cout << "Press 1 - Search by ID\n";
+			cout << "Press any else key - Search by product name\n";
+			int n;
+			cin >> n;
+			if (n == 1)
+			{
+				cout << "Enter ID:";
+				int id=0;
+				cin >> id;
+				emp.searchProductById(id);
+			}
+			else
+			{
+				cout << "Enter product name:";
+				string name;
+				getline(cin, name);
+				emp.searchProductByName(name);
+			}
+
+		}
+		else if (choice == 5)
+		{
+			emp.viewTradeHistory();
+		}
+		else if (choice == 6)
+		{
+			emp.sellProduct();
 		}
 		else if (choice == 0)
 			return;
@@ -195,7 +226,7 @@ void Interface::ShowEmployeeMenu(Employee emp, string space) {
 void Interface::ShowManagerMenu(Manager man, string space) {
 	string command[] =
 	{
-		//write command here
+		"123"
 	};
 	int nCommand = 4; // idk
 	while (true)
