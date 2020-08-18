@@ -131,7 +131,7 @@ void Employee::sellProduct()
 		cin.ignore(INT_MAX, '\n');
 	} while (ch == 'y');
 
-	listSale.LoadDateSaleList("ID_1.txt");
+	listSale.LoadDateSaleList("Data\Sale\ID_1.txt");
 	listSale.LoadDataSaleList();
 	Date* today=new Date;
 	Sale* todaySale = nullptr;
