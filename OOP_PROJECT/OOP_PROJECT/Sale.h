@@ -30,7 +30,7 @@ public:
 	int year_sale_date();
 	bool SaveSale(const string&);
 	bool AddAtttributeSale(Product*, int);
-	bool AddAtttributeSale(ListProduct products);
+	void AddAtttributeSale(ListProduct products);
 private:
 	void OutputDate();
 	bool stoDate(const string&, const char*);

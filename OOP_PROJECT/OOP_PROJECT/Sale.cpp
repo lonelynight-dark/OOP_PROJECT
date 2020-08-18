@@ -99,7 +99,6 @@ bool Sale::AddAtttributeSale(Product* product, int quantity)
 void Sale::AddAtttributeSale(ListProduct products)
 {
 	
-	// if(listSoldProduct = products)
-	// return true;
+	listSoldProduct.concat(products);
 
 }
