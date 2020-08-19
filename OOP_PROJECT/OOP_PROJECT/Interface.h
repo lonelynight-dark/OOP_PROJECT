@@ -13,7 +13,6 @@ public:
 	std::string InputPassword();
 	std::vector<Account> ImportFromFile(std::string path, std::string fileName);
 	int Login(string path, string userName, string password, vector<Account>& acc, int& index);
-	std::string HashPassword(std::string passWord);
 	void ShowTitle(std::string space);
 	void ShowMenu(std::string space);
 	void ShowStaffMenu(Account& acc, Company& company, string space, string username);

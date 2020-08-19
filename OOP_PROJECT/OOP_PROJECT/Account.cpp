@@ -1,16 +1,16 @@
 #include "Account.h"
 
 bool Account::isCorrect(std::string u, std::string p) {
-	return username == u && password == p;
+	return username == u && password == HashPassword(p);
 }
 
 Account::Account(std::string u, std::string p) {
 	username = u;
-	password = p;
+	password = HashPassword(p);
 }
 
 bool Account::isCorrectPass(std::string pwd) {
-	return password == pwd;
+	return password == HashPassword(pwd);
 }
 
 std::string Account::HashPassword(std::string passWord)

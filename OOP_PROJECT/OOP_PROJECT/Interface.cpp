@@ -29,12 +29,6 @@ std::string Interface::InputPassword() {
 	std::cout << "\n";
 	return passWord;
 }
-std::string Interface::HashPassword(std::string passWord)
-{
-	SHA256 sha256;
-	std::string hashPass = sha256(passWord);
-	return hashPass;
-}
 
 void Interface::ShowTitle(std::string space)
 {
@@ -86,7 +80,6 @@ std::vector<Account> Interface::ImportFromFile(std::string path, std::string fil
 }
 int Interface::Login(string path, string userName, string password, vector<Account>& acc, int& index) {
 	string fileName[] = { "Employee.txt" , "Manager.txt" };
-	password = HashPassword(password);
 	acc = ImportFromFile(path, fileName[0]);
 	int n = acc.size();
 	bool log = false;
