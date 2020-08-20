@@ -1,12 +1,25 @@
 #include "Company.h"
 
+const string source_Staff = "D:\\OOP\\ProjectOOP\\OOP_PROJECT\\OOP_PROJECT\\Data\\Staff\\";
+
 void Company::output()
 {
 	int n = listManager.size();
+	cout << "Number of staff: " << n << endl;
 	for (int i = 0; i < n; ++i) 
 	{
+		cout << "------------------" << endl;
+		cout << "Staff " << i + 1 << ":\n";
+		cout << "------------------" << endl;
 		listManager[i]->output();
+		cout << "------------------\n" << endl;
 	}
+}
+
+void Company::output(int ID)
+{
+	Staff* staff = search("M" + to_string(ID));
+	staff->output();
 }
 
 Company::Company()
@@ -14,14 +27,19 @@ Company::Company()
 	string s;
 	ifstream fin;
 
-	s = "_Manager.txt";
+	s = source_Staff +"Manager.txt";
 	fin.open(s);
+	if (fin.is_open()) cout << "Ready..." << endl;
+	else {
+		cout << "Can't open..." << endl;
+		exit(-100);
+	}
 	load(fin);
 	int n = listManager.size();
 	fin.close();
 
 	for (int i = 0; i < n; ++i) {
-		s = to_string(listManager[i]->getID()) + "_Staff.txt";
+		s = source_Staff + to_string(listManager[i]->getID()) + "_Staff.txt";
 		fin.open(s);
 		listManager[i]->loadStaff(fin);
 		fin.close();
@@ -30,11 +48,11 @@ Company::Company()
 
 Company::~Company()
 {
-	//string s = "_Manager.txt";
-	//ofstream fout;
-	//fout.open(s);
-	//save(fout);
-	//fout.close();
+	string s =source_Staff + "Manager.txt";
+	ofstream fout;
+	fout.open(s);
+	save(fout);
+	fout.close();
 	for (Manager* staff : listManager) delete staff;
 }
 
@@ -45,7 +63,7 @@ void Company::load(ifstream& fin)
 	fin >> n;
 
 	for (int i = 0; i < n; ++i) {
-		//listManager.push_back(new Manager);
+		listManager.push_back(new Manager);
 		listManager[i]->load(fin);
 	}
 }
@@ -53,7 +71,7 @@ void Company::load(ifstream& fin)
 void Company::save(ofstream& fout)
 {
 	int n = listManager.size();
-	fout << n;
+	fout << n << endl;
 
 	for (int i = 0; i < n; ++i) {
 		listManager[i]->save(fout);

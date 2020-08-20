@@ -3,14 +3,14 @@
 bool isAllNumber(string s);
 
 Staff::Staff() : ID(0), name("Unknown"), gender(true), phoneNumber("0"),
-	emailAddress("Unknown"), yob(0), absentDay(0) {}
+	address("Unknown"), yob(0), absentDay(0) {}
 Staff::Staff(int _ID, string _name, bool _gender, 
-	string _phone, string _email, Date _yob, int _nDays) {
+	string _phone, string _address, Date _yob, int _nDays) {
 	ID = (_ID > 0) ? _ID : 0;
 	name = (_name != "") ? _name : "Unknown";
 	gender = _gender;
 	phoneNumber = (isAllNumber(_phone)) ? _phone : "0";
-	emailAddress = (_email != "") ? _email : "Unknown";
+	address = (_address != "") ? _address : "Unknown";
 	Date now(0);
 	yob = (_yob <= now) ? _yob : now;
 	absentDay = (_nDays >= 0) ? _nDays : 0;
@@ -23,7 +23,7 @@ void Staff::input() {
 	do {
 		cout << "ID: "; cin >> ID;
 	} while (ID < 0);
-	cin.ignore();
+	cin.ignore(100,'\n');
 	do {
 		cout << "Name: "; getline(cin, name);
 	} while (name == "");
@@ -36,32 +36,35 @@ void Staff::input() {
 		cout << "PhoneNumber: "; getline(cin, phoneNumber);
 	} while (!isAllNumber(phoneNumber));
 	do {
-		cout << "Email Address: "; getline(cin, name);
-	} while (emailAddress == "");
+		cout << "Address: "; getline(cin, address);
+	} while (address == "");
 	Date now(0);
 	do {
 		cout << "Year of Birth: "; cin >> yob;
 	} while (yob > now);
-	do {
+	/*do {
 		cout << "Absent day: "; cin >> absentDay;
-	} while (absentDay < 0);
+	} while (absentDay < 0);*/
 }
 void Staff::output() {
 	cout << "ID: " << ID << endl;
 	cout << "Name: " << name << endl;
 	cout << "Gender: " << ((gender) ? "Male" : "Female") << endl;
 	cout << "PhoneNumber: " << phoneNumber << endl;
-	cout << "Email Address: " <<  emailAddress << endl;
+	cout << "Address: " <<  address << endl;
 	cout << "Year of Birth: " << yob << endl;
 	cout << "Absent day: " << absentDay << endl;
 }
 
 void Staff::load(ifstream& fin)
 {
-	fin >> ID; fin.ignore();
+	fin >> ID; fin.ignore(100,'\n');
 	getline(fin,name);
 	fin >> gender;
-	fin >> phoneNumber >> emailAddress >> yob >> absentDay;
+	fin >> phoneNumber;
+	fin.ignore(100, '\n');
+	getline(fin, address);
+	fin >> yob >> absentDay;
 	if (ID < 0) ID = 0;
 	Date now(0);
 	if (yob > now) yob = now;
@@ -73,9 +76,9 @@ void Staff::save(ofstream& fout)
 {
 	fout << ID << endl;
 	fout << name << endl;
-	fout << ((gender) ? "Male" : "Female") << endl;
+	fout << gender << endl;
 	fout << phoneNumber << endl;
-	fout << emailAddress << endl;
+	fout << address << endl;
 	yob.save(fout); fout << endl;
 	fout << absentDay << endl;
 }
@@ -90,13 +93,13 @@ void Staff::edit()
 }
 
 void Staff::change(int _ID, string _name, bool _gender, 
-	string _phone, string _email, Date _yob, int _nDays)
+	string _phone, string _address, Date _yob, int _nDays)
 {
 	ID = (_ID > 0) ? _ID : 0;
 	name = (_name != "") ? _name : "Unknown";
 	gender = _gender;
 	phoneNumber = (isAllNumber(_phone)) ? _phone : "0";
-	emailAddress = (_email != "") ? _email : "Unknown";
+	address = (_address != "") ? _address : "Unknown";
 	Date now(0);
 	yob = (_yob <= now) ? _yob : now;
 	absentDay = (_nDays >= 0) ? _nDays : 0;
@@ -123,7 +126,7 @@ ostream& operator<<(ostream& out ,const Staff& staff)
 	out << "Name: " << staff.name << endl;
 	out << "Gender: " << ((staff.gender) ? "Male" : "Female") << endl;
 	out << "PhoneNumber: " << staff.phoneNumber << endl;
-	out << "Email Address: " << staff.emailAddress << endl;
+	out << "Address: " << staff.address << endl;
 	out << "Year of Birth: " << staff.yob << endl;
 	out << "Absent day: " << staff.absentDay << endl;
 	return out;

@@ -19,6 +19,9 @@ public:
 
 	void load(ifstream&);
 	void save(ofstream&);
+	//void output();
+	void output(int ID);
+	//void input();
 	// Calculate Salary
 	double ManagerSalary();
 	double EmployeeSalary();

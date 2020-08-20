@@ -1,0 +1,98 @@
+10044
+Moc Cao Viet Tang
+1
+0921298007
+9518/32 Tran Quoc Thao,Phuong 14,Quan 11,Bac Lieu
+23 12 1989
+0
+10045
+Chuong Quach Dinh Kha
+0
+0848640142
+5002/36 Vuon Lai,Phuong 16,Quan 12,Thai Nguyen
+8 4 1986
+0
+10046
+Lanh Dieu Sam
+1
+0569295436
+3607/46 Pham Ngu Lao,Phuong Linh Tay,Quan Go Vap,Son La
+29 1 1984
+0
+10047
+Thieu Van Khoa
+0
+0970982297
+6573/76 Thao Dien,Phuong Tan Thoi Hiep,Quan Phu Nhuan,Hoa Binh
+24 10 1981
+0
+10048
+Mac Nguyet Thieu
+0
+0582868106
+7148/85 Tran Hung Ðao,Phuong 10,Quan Binh Tan,Binh Duong
+6 12 1999
+0
+10049
+Vien Vi Deo
+1
+0337894150
+3359/27 Nguyen Thi Minh Khai,Phuong 02,Quan 8,Quang Tri
+29 1 1977
+0
+10050
+Au Tuan Tang
+0
+0835668654
+7277/75 Nam Ky Khoi Nghia,Phuong An Phu Dong,Quan 5,Binh Thuan
+10 6 1988
+0
+10051
+Uong Van Tan Don
+1
+0391528801
+1256/82 Hai Ba Trung,Phuong 01,Quan 11,Lam Dong
+6 10 1996
+0
+10052
+Xung Nguyen Ong
+0
+0781139236
+5631/59 Nguyen Van Qua,Phuong 04,Huyen Hoc Mon,Thanh Hoa
+29 10 1979
+0
+10053
+Tra Quach Ngay Thoi
+0
+0368807638
+2135/67 Phan Xich Long,Phuong 27,Quan 12,Lai Chau
+28 5 1997
+0
+10054
+Lac Do Vi
+0
+0796505504
+858/49 Nam Ky Khoi Nghia,Phuong 22,Quan Go Vap,Hau Giang
+23 8 1995
+0
+10055
+Cong Do Tron Lang
+1
+0768601005
+2298/59 Vo Thi Sau,Phuong 08,Quan Tan Phu,Quang Binh	
+16 10 1997
+0
+10056
+Dan Mai Nguy
+1
+0973989203
+7607/8 Tran Hung Ðao,Phuong Binh Trung Dong,Quan 12,Soc Trang
+14 4 1983
+0
+10057
+Bang Do Quang Hung
+1
+0891270878
+2027/12 Le Duan,Phuong Tam Binh,Quan 10,Quang Ninh
+8 6 1987
+0
