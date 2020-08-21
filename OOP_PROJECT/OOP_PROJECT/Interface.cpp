@@ -167,18 +167,22 @@ void Interface::ShowEmployeeMenu(Employee emp, string space) {
 
 		if (choice == 1)
 		{
+			system("CLS");
 			emp.viewSalary();
 		}
 		else if (choice == 2)
 		{
+			system("CLS");
 			emp.viewAllProducts();
 		}
 		else if (choice == 3)
 		{
+			system("CLS");
 			emp.EnterProductInfo();
 		}
 		else if (choice == 4)
 		{
+			system("CLS");
 			cout << "Press 1 - Search by ID\n";
 			cout << "Press any else key - Search by product name\n";
 			int n;
@@ -201,10 +205,12 @@ void Interface::ShowEmployeeMenu(Employee emp, string space) {
 		}
 		else if (choice == 5)
 		{
+			system("CLS");
 			emp.viewTradeHistory();
 		}
 		else if (choice == 6)
 		{
+			system("CLS");
 			emp.sellProduct();
 		}
 		else if (choice == 0)

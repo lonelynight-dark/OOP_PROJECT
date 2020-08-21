@@ -48,7 +48,7 @@ void Employee::exportInvoice(ListProduct soldProduct)
 	cout << "***BILL***\n";
 	soldProduct.outputList();
 	cout << "================================\n";
-	cout << "TOTAL:" << soldProduct.totalPrice();
+	cout << "TOTAL:" << soldProduct.totalPrice()<<endl;
 
 }
 
@@ -70,6 +70,7 @@ Product Employee::searchProductByName(string _name)
 
 void Employee::viewTradeHistory()
 {
+	cout << "**********TRADE HISTORY**********\n";
 	listSale.LoadDateSaleList("ID_1.txt");
 	listSale.LoadDataSaleList();
 	listSale.OutputSaleList();
