@@ -16,7 +16,7 @@ private:
 	std::string name;
 	bool gender;
 	std::string phoneNumber;
-	std::string emailAddress;
+	std::string address;
 	Date yob; // year of birth
 	int absentDay;
 public:

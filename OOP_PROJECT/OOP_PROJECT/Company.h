@@ -19,6 +19,9 @@ public:
 
 	void load(ifstream&);
 	void save(ofstream&);
+	//void output();
+	void output(int ID);
+	//void input();
 	// Calculate Salary
 	double ManagerSalary();
 	double EmployeeSalary();
@@ -36,6 +39,7 @@ public:
 	void deleteManager();
 	void editManager();
 
+	Staff* search(int ID, string TYPE);
 	Staff* search(string username); // might throw ErrorCode::Wrong_format
 };
 
