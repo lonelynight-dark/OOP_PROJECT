@@ -16,8 +16,8 @@ public:
 	void ShowTitle(std::string space);
 	void ShowMenu(std::string space);
 	void ShowStaffMenu(Account& acc, Company& company, string space, string username);
-	void ShowEmployeeMenu(Employee emp, string space);
-	void ShowManagerMenu(Manager man, string space);
+	void ShowEmployeeMenu(Employee& emp, string space);
+	void ShowManagerMenu(Manager& man, string space);
 };
 
 #endif // !_INTERFACE_H_

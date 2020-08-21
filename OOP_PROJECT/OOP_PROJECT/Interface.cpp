@@ -1,4 +1,4 @@
-#include "Interface.h"
+﻿#include "Interface.h"
 
 std::string Interface::InputPassword() {
 	std::string passWord = "";
@@ -117,11 +117,13 @@ void Interface::ShowStaffMenu(Account& acc, Company& company, string space, stri
 		std::cout << "Input choice: ";
 		std::cin >> choice;
 		if (choice == 1) {
-			if (username[0] == 'E') {
-
+			if (s->getType() == "Employee") {
+				Employee* e = (Employee*)s;
+				ShowEmployeeMenu(*e, space);
 			}
 			else {
-
+				Manager* m = (Manager*)s;
+				ShowManagerMenu(*m, space);
 			}
 		}
 		else if (choice == 2) {
@@ -133,10 +135,11 @@ void Interface::ShowStaffMenu(Account& acc, Company& company, string space, stri
 		}
 		else if (choice == 3) {
 			acc.ChangePassword(space);
+			// xuất ra file
 		}
 	}
 }
-void Interface::ShowEmployeeMenu(Employee emp, string space) {
+void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 	string command[] =
 	{
 		"View Salary",
@@ -216,7 +219,7 @@ void Interface::ShowEmployeeMenu(Employee emp, string space) {
 		}
 	}
 }
-void Interface::ShowManagerMenu(Manager man, string space) {
+void Interface::ShowManagerMenu(Manager& man, string space) {
 	string command[] =
 	{
 		"123"

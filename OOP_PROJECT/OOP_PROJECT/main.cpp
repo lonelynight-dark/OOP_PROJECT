@@ -39,6 +39,7 @@ int main() {
 		else {
 			// login success
 			Company company;
+			i.ShowStaffMenu(acc[index], company, space, username);
 
 		}
 
