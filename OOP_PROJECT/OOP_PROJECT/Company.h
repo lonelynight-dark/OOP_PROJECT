@@ -39,6 +39,7 @@ public:
 	void deleteManager();
 	void editManager();
 
+	Staff* search(int ID, string TYPE);
 	Staff* search(string username); // might throw ErrorCode::Wrong_format
 };
 

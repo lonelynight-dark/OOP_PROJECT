@@ -39,6 +39,7 @@ Company::Company()
 	fin.close();
 
 	for (int i = 0; i < n; ++i) {
+		cout << "Employee Loading ..." << endl;
 		s = source_Staff + to_string(listManager[i]->getID()) + "_Staff.txt";
 		fin.open(s);
 		listManager[i]->loadStaff(fin);
@@ -64,6 +65,7 @@ void Company::load(ifstream& fin)
 
 	for (int i = 0; i < n; ++i) {
 		listManager.push_back(new Manager);
+		cout << "Manager Loading..." << endl;
 		listManager[i]->load(fin);
 	}
 }
@@ -170,38 +172,48 @@ void Company::editManager()
 	if (!found) cout << "No manager with that ID!\n";
 }
 
+Staff* Company::search(int ID, string TYPE)
+{
+	if (TYPE == "Manager")
+	{
+		for (Staff* manager : listManager)
+		{
+			if (manager->getID() == ID)
+				return manager;
+		}
+	}
+	else if (TYPE == "Employee")
+	{
+		for (Manager* manager : listManager)
+		{
+			Staff* employee = manager->search(ID);
+			if (employee != nullptr)
+				return employee;
+		}
+	}
+	return NULL;
+}
+
 Staff* Company::search(string username)
 {
-	int ID = 0;
+	int ID = 0; string TYPE;
 	try {
 		ID = stoi(username.substr(1));
+		
+		if (username[0] == 'M')
+		{
+			TYPE = "Manager";
+		}
+		else if (username[0] == 'E')
+		{
+			TYPE = "Employee";
+		}
+		else
+			throw ErrorCode::Wrong_format;
 	}
 	catch (...)
 	{
 		throw ErrorCode::Wrong_format;
 	}
-	cout << ID << endl;
-	if (username.size() > 0) 
-	{
-		if (username[0] == 'M')
-		{
-			for (Staff* manager : listManager)
-			{
-				if (manager->getID() == ID)
-					return manager;
-			}
-		}
-		else if (username[0] == 'E')
-		{
-			for (Manager* manager : listManager)
-			{
-				Staff* employee = manager->search(ID);
-				if (employee != nullptr)
-					return employee;
-			}
-		}
-		else
-			throw ErrorCode::Wrong_format;
-	}
-	return nullptr;
+	return search(ID, TYPE);
 }
