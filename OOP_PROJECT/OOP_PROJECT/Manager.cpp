@@ -87,7 +87,7 @@ void Manager::output()
 
 void Manager::edit()
 {
-	//Staff::edit(); <- 
+	Staff::edit();  
 }
 
 void Manager::viewProd()
