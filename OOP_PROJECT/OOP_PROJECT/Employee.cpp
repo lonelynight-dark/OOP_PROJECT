@@ -24,8 +24,8 @@ double Employee::viewSalary()
 
 void Employee::viewAllProducts()
 {
-	ifstream fin("Stock.txt");
-	stock.loadList(fin);
+	/*ifstream fin("Stock.txt");*/
+	/*stock.loadList(fin);*/
 	stock.outputList();
 }
 
