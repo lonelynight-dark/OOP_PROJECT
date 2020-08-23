@@ -24,7 +24,7 @@ public:
 	void editStaff();
 	double viewSalary() { return 0.0; }
 
-	double profit();
+	double profit(const int month, const int year);
 
 	// keyboard input functions
 	void input();
