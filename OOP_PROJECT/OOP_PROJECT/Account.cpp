@@ -6,7 +6,7 @@ bool Account::isCorrect(std::string u, std::string p) {
 
 Account::Account(std::string u, std::string p) {
 	username = u;
-	password = HashPassword(p);
+	password = p;
 }
 
 bool Account::isCorrectPass(std::string pwd) {
@@ -103,4 +103,9 @@ void Account::ChangePassword(std::string space) {
 			}
 		}
 	}
+}
+
+void Account::savetoFile(std::ofstream& out) {
+	out << username << std::endl;
+	out << HashPassword(password) << std::endl;
 }

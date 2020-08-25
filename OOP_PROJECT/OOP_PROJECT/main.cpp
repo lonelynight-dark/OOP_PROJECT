@@ -1,13 +1,13 @@
 #include "Interface.h"
 using namespace std;
 int main() {
-	std::string pathAccount = "data/Account/";
+	std::string pathAccount = "Data/Account/";
 	std::string space = "                            ";
 	int nCommand = 5;
 	Interface i;
 	while (true)
 	{
-		vector<Account> acc;
+		vector<Account*> acc;
 		int index;
 
 		i.ShowTitle(space);
@@ -18,7 +18,8 @@ int main() {
 		if (username == "")
 			return 0;
 		cout << "                 Password > ";
-		int resultLogin = i.Login(pathAccount, username, password, acc, index);
+		password = i.InputPassword();
+		int resultLogin = i.Login(pathAccount, username, password, index);
 		if (resultLogin == 0) {
 			cout << "Wrong username or password\nDo you want to try again?(Y/N) ";
 			while (true)
@@ -39,7 +40,7 @@ int main() {
 		else {
 			// login success
 			Company company;
-			i.ShowStaffMenu(acc[index], company, space, username);
+			i.ShowStaffMenu(*acc[index], company, space, username, pathAccount);
 
 		}
 

@@ -66,25 +66,28 @@ void Interface::ShowMenu(std::string space)
 		std::cout << space << i + 1 << ". " << command[i] << std::endl;
 	}
 }
-std::vector<Account> Interface::ImportFromFile(std::string path, std::string fileName) {
-	std::vector<Account> acc;
+void Interface::ImportFromFile(std::string path, std::string fileName) {
 	std::ifstream filein(path + fileName);
+	if (!filein.is_open()) {
+		cout << "cannot open file !" << endl;
+		exit(0);
+	}
 	std::string line, u, p;
-	while (std::getline(filein, line)) {
+	while (!filein.eof()) {
 		std::getline(filein, u);
 		std::getline(filein, p);
-		acc.push_back(Account(u, p));
+		if (u == "" || u == "") break;
+		acc.push_back(new Account(u, p));
 	}
 	filein.close();
-	return acc;
 }
-int Interface::Login(string path, string userName, string password, vector<Account>& acc, int& index) {
+int Interface::Login(string path, string userName, string password, int& index) {
 	string fileName[] = { "Employee.txt" , "Manager.txt" };
-	acc = ImportFromFile(path, fileName[0]);
+	ImportFromFile(path, fileName[0]);
 	int n = acc.size();
 	bool log = false;
 	for (int i = 0; i < n; i++) {
-		if (acc[i].isCorrect(userName, password)) {
+		if (acc[i]->isCorrect(userName, password)) {
 			index = i;
 			log = true;
 			break;
@@ -99,7 +102,7 @@ int Interface::Login(string path, string userName, string password, vector<Accou
 	return 0;
 }
 
-void Interface::ShowStaffMenu(Account& acc, Company& company, string space, string username) {
+void Interface::ShowStaffMenu(Account& acc, Company& company, string space, string username, string path) {
 	Staff* s = company.search(username);
 	if (s == nullptr) {
 		std::cout << space << "Staff is not exist\nPress any key to try again";
@@ -136,6 +139,15 @@ void Interface::ShowStaffMenu(Account& acc, Company& company, string space, stri
 		else if (choice == 3) {
 			acc.ChangePassword(space);
 			// xuất ra file
+			ofstream outfile;
+			if (s->getType() == "Employee") {
+				outfile.open(path + "Employee.txt");
+				ExportToFile(outfile);
+			}
+			else {
+				outfile.open(path + "Manager.txt");
+				ExportToFile(outfile);
+			}
 		}
 	}
 }
@@ -272,5 +284,11 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 			std::cout << "Bad choice\nPress any key to try again";
 			_getch();
 		}
+	}
+}
+
+void Interface::ExportToFile(ofstream& out) {
+	for (int i = 0; i < acc.size(); ++i) {
+		acc[i]->savetoFile(out);
 	}
 }

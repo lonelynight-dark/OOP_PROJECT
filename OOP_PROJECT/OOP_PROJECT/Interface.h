@@ -9,15 +9,18 @@
 #include "Company.h"
 class Interface
 {
+private:
+	vector<Account*> acc;
 public:
 	std::string InputPassword();
-	std::vector<Account> ImportFromFile(std::string path, std::string fileName);
-	int Login(string path, string userName, string password, vector<Account>& acc, int& index);
+	void ImportFromFile(std::string path, std::string fileName);
+	int Login(string path, string userName, string password, int& index);
 	void ShowTitle(std::string space);
 	void ShowMenu(std::string space);
-	void ShowStaffMenu(Account& acc, Company& company, string space, string username);
+	void ShowStaffMenu(Account& acc, Company& company, string space, string username, string path);
 	void ShowEmployeeMenu(Employee& emp, string space);
 	void ShowManagerMenu(Manager& man, string space);
+	void ExportToFile(ofstream& out);
 };
 
 #endif // !_INTERFACE_H_
