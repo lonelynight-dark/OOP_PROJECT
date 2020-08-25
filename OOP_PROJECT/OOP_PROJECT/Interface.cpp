@@ -76,7 +76,7 @@ void Interface::ImportFromFile(std::string path, std::string fileName) {
 	while (!filein.eof()) {
 		std::getline(filein, u);
 		std::getline(filein, p);
-		if (u == "" || u == "") break;
+		if (u == "" || p == "") break;
 		acc.push_back(new Account(u, p));
 	}
 	filein.close();
@@ -297,4 +297,16 @@ void Interface::ExportToFile(ofstream& out) {
 	for (int i = 0; i < acc.size(); ++i) {
 		acc[i]->savetoFile(out);
 	}
+}
+
+void Interface::AddAccount(string path, string filename, string username) {
+	ImportFromFile(path, filename);
+	//check if existed
+	for (int i = 0; i < acc.size(); ++i) {
+		if (acc[i]->isCorrectUser(username)) {
+			cout << "Username has already existed !" << endl;
+		}
+	}
+	acc.push_back(new Account(username, "1"));
+	
 }

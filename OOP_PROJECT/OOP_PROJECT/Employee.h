@@ -51,7 +51,7 @@ class Employee :public Staff,public ListProduct
 		}
 
 		//check expired product
-		void displayExpiredProduct()
+		void displayExpiredProduct();
 		
 };
 
