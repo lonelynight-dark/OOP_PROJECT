@@ -43,6 +43,16 @@ class Employee :public Staff,public ListProduct
 
 	///	overide from class Staff
 		string getType(){ return "Employee";}//check
+
+		//revenue by month
+		double calculateRevenueByMonth(const int& _month, const int&_year)
+		{
+			return listSale.MonthlyRevenue(_month, _year);
+		}
+
+		//check expired product
+		void displayExpiredProduct()
+		
 };
 
 #endif

@@ -164,3 +164,9 @@ bool Employee::is_number(const string& s)
 	++it;
 	return !s.empty() && it == s.end();
 }
+
+void Employee::displayExpiredProduct()
+{
+	ListProduct listExpiredProduct=stock.getListOfExpiredProduct();
+	listExpiredProduct.outputList();
+}
