@@ -109,3 +109,7 @@ void Account::savetoFile(std::ofstream& out) {
 	out << username << std::endl;
 	out << HashPassword(password) << std::endl;
 }
+
+bool Account::isCorrectUser(std::string u) {
+	return (u == username);
+}

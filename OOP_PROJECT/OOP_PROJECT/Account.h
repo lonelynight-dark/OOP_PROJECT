@@ -13,6 +13,7 @@ public:
 	Account(std::string, std::string);
 	bool isCorrect(std::string, std::string);
 	bool isCorrectPass(std::string);
+	bool isCorrectUser(std::string);
 	void ChangePassword(std::string space);
 	void savetoFile(std::ofstream& out);
 };

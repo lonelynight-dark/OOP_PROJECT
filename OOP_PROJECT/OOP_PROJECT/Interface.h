@@ -12,6 +12,7 @@ class Interface
 private:
 	vector<Account*> acc;
 public:
+	void AddAccount(string path, string filename, string username);
 	std::string InputPassword();
 	void ImportFromFile(std::string path, std::string fileName);
 	int Login(string path, string userName, string password, int& index);
