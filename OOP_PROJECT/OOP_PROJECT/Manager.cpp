@@ -66,11 +66,11 @@ void Manager::editStaff()
 	}
 }
 
-double Manager::profit()
+double Manager::profit(const int month, const int year)
 {
 	double prof = 0.0;
 	for (int i = 0; i < nEmp; i++) {
-		//prof += List[i]->profit();
+		
 	}
 	return prof;
 }
@@ -87,7 +87,7 @@ void Manager::output()
 
 void Manager::edit()
 {
-	//Staff::edit(); <- 
+	Staff::edit();  
 }
 
 void Manager::viewProd()

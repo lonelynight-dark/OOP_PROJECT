@@ -156,12 +156,13 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 	{
 		"View Salary",
 		"View items in stock",
+		"View expired items in stock"
 		"Add products to stock",
 		"Search product",
 		"View trade history",
 		"Sell product"
 	};
-	int nCommand = 6; // idk
+	int nCommand =7; // idk
 	while (true)
 	{
 		system("CLS");
@@ -190,12 +191,17 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 			system("CLS");
 			emp.viewAllProducts();
 		}
-		else if (choice == 3)
+		else if (choice == 2)
+		{
+			system("CLS");
+			emp.displayExpiredProduct();
+		}
+		else if (choice == 4)
 		{
 			system("CLS");
 			emp.EnterProductInfo();
 		}
-		else if (choice == 4)
+		else if (choice == 5)
 		{
 			system("CLS");
 			cout << "Press 1 - Search by ID\n";
@@ -218,12 +224,12 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 			}
 
 		}
-		else if (choice == 5)
+		else if (choice == 6)
 		{
 			system("CLS");
 			emp.viewTradeHistory();
 		}
-		else if (choice == 6)
+		else if (choice == 7)
 		{
 			system("CLS");
 			emp.sellProduct();

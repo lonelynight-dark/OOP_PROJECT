@@ -24,8 +24,8 @@ double Employee::viewSalary()
 
 void Employee::viewAllProducts()
 {
-	ifstream fin("Stock.txt");
-	stock.loadList(fin);
+	/*ifstream fin("Stock.txt");*/
+	/*stock.loadList(fin);*/
 	stock.outputList();
 }
 
@@ -163,4 +163,10 @@ bool Employee::is_number(const string& s)
 	while (it != s.end() && isdigit(*it))
 	++it;
 	return !s.empty() && it == s.end();
+}
+
+void Employee::displayExpiredProduct()
+{
+	ListProduct listExpiredProduct=stock.getListOfExpiredProduct();
+	listExpiredProduct.outputList();
 }
