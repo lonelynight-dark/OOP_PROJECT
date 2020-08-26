@@ -84,12 +84,14 @@ void Interface::ImportFromFile(std::string path, std::string fileName) {
 }
 int Interface::Login(string path, string userName, string password, Company& com, string space) {
 	string fileName[] = { "Employee.txt" , "Manager.txt" };
-	ImportFromFile(path, fileName[0]);
+	if (userName[0] == 'E' || userName[0] == 'M')
+		ImportFromFile(path, fileName[userName[0] == 'M']);
+	else return 0;
 	int n = acc.size();
-	bool log = false;
+	int log = 0;
 	for (int i = 0; i < n; i++) {
 		if (acc[i]->isCorrect(userName, password)) {
-			log = true;
+			log = 1;
 			ShowStaffMenu(com, space, userName, path, i);
 			break;
 		}
@@ -143,9 +145,9 @@ void Interface::ShowStaffMenu(Company& company, string space, string username, s
 				outfile.open(path + "Manager.txt");
 				ExportToFile(outfile);
 			}
+			outfile.close();
 		}
 		else if (choice == 4) {
-			_getch();
 			return;
 		}
 	}
@@ -155,7 +157,7 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 	{
 		"View Salary",
 		"View items in stock",
-		"View expired items in stock"
+		"View expired items in stock",
 		"Add products to stock",
 		"Search product",
 		"View trade history",
@@ -179,30 +181,25 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		int choice;
 		std::cout << "Input choice: ";
 		std::cin >> choice;
-
+		system("CLS");
 		if (choice == 1)
 		{
-			system("CLS");
 			emp.viewSalary();
 		}
 		else if (choice == 2)
 		{
-			system("CLS");
 			emp.viewAllProducts();
 		}
 		else if (choice == 2)
 		{
-			system("CLS");
 			emp.displayExpiredProduct();
 		}
 		else if (choice == 4)
 		{
-			system("CLS");
 			emp.EnterProductInfo();
 		}
 		else if (choice == 5)
 		{
-			system("CLS");
 			cout << "Press 1 - Search by ID\n";
 			cout << "Press any else key - Search by product name\n";
 			int n;
@@ -225,12 +222,10 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		}
 		else if (choice == 6)
 		{
-			system("CLS");
 			emp.viewTradeHistory();
 		}
 		else if (choice == 7)
 		{
-			system("CLS");
 			emp.sellProduct();
 		}
 		else if (choice == 0)
@@ -238,8 +233,8 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		else
 		{
 			std::cout << "Bad choice\nPress any key to try again";
-			_getch();
 		}
+			_getch();
 	}
 }
 void Interface::ShowManagerMenu(Manager& man, string space) {

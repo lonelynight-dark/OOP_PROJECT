@@ -36,8 +36,12 @@ int main() {
 					cout << "Bad choice, try again\n";
 			}
 		}
+		else {
+			cin.ignore();
+		}
 
 	}
 	// write something here...
+	delete company;
 	return 0;
 }

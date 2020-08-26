@@ -1,6 +1,6 @@
 #include "Company.h"
 
-const string source_Staff = "C:\\Users\\USER\\Documents\\GitHub\\OOP_PROJECT\\OOP_PROJECT\\Data\\Staff\\";
+const string source_Staff = "Data\\Staff\\";
 
 void Company::output()
 {
