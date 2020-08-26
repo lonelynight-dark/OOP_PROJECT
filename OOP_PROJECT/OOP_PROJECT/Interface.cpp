@@ -82,28 +82,22 @@ void Interface::ImportFromFile(std::string path, std::string fileName) {
 	}
 	filein.close();
 }
-int Interface::Login(string path, string userName, string password, int& index) {
+int Interface::Login(string path, string userName, string password, Company& com, string space) {
 	string fileName[] = { "Employee.txt" , "Manager.txt" };
 	ImportFromFile(path, fileName[0]);
 	int n = acc.size();
 	bool log = false;
 	for (int i = 0; i < n; i++) {
 		if (acc[i]->isCorrect(userName, password)) {
-			index = i;
 			log = true;
+			ShowStaffMenu(com, space, userName, path, i);
 			break;
 		}
 	}
-	if (userName[0] == 'E' && log) {
-		return 1;
-	}
-	else if (userName[0] == 'M' && log) {
-		return 2;
-	}
-	return 0;
+	return log;
 }
 
-void Interface::ShowStaffMenu(Account& acc, Company& company, string space, string username, string path) {
+void Interface::ShowStaffMenu(Company& company, string space, string username, string path, int index) {
 	Staff* s = company.search(username);
 	if (s == nullptr) {
 		std::cout << space << "Staff is not exist\nPress any key to try again";
@@ -138,7 +132,7 @@ void Interface::ShowStaffMenu(Account& acc, Company& company, string space, stri
 			_getch();
 		}
 		else if (choice == 3) {
-			acc.ChangePassword(space);
+			acc[index]->ChangePassword(space);
 			// xuất ra file
 			ofstream outfile;
 			if (s->getType() == "Employee") {
@@ -149,6 +143,10 @@ void Interface::ShowStaffMenu(Account& acc, Company& company, string space, stri
 				outfile.open(path + "Manager.txt");
 				ExportToFile(outfile);
 			}
+		}
+		else if (choice == 4) {
+			_getch();
+			return;
 		}
 	}
 }

@@ -1,14 +1,13 @@
 #include "Interface.h"
 using namespace std;
 int main() {
+	Company* company = new Company();
 	std::string pathAccount = "Data/Account/";
 	std::string space = "                            ";
 	int nCommand = 5;
 	Interface i;
 	while (true)
 	{
-		vector<Account*> acc;
-		int index;
 
 		i.ShowTitle(space);
 		cout << "             Leave Empty Username And Press Enter To Get Out Of Program\n\n";
@@ -19,7 +18,7 @@ int main() {
 			return 0;
 		cout << "                 Password > ";
 		password = i.InputPassword();
-		int resultLogin = i.Login(pathAccount, username, password, index);
+		int resultLogin = i.Login(pathAccount, username, password, *company, space);
 		if (resultLogin == 0) {
 			cout << "Wrong username or password\nDo you want to try again?(Y/N) ";
 			while (true)
@@ -36,12 +35,6 @@ int main() {
 				else
 					cout << "Bad choice, try again\n";
 			}
-		}
-		else {
-			// login success
-			Company company;
-			i.ShowStaffMenu(*acc[index], company, space, username, pathAccount);
-
 		}
 
 	}

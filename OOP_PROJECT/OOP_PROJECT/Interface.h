@@ -15,10 +15,10 @@ public:
 	void AddAccount(string path, string filename, string username);
 	std::string InputPassword();
 	void ImportFromFile(std::string path, std::string fileName);
-	int Login(string path, string userName, string password, int& index);
+	int Login(string path, string userName, string password, Company& com, string space);
 	void ShowTitle(std::string space);
 	void ShowMenu(std::string space);
-	void ShowStaffMenu(Account& acc, Company& company, string space, string username, string path);
+	void ShowStaffMenu(Company& company, string space, string username, string path, int index);
 	void ShowEmployeeMenu(Employee& emp, string space);
 	void ShowManagerMenu(Manager& man, string space);
 	void ExportToFile(ofstream& out);
