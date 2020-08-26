@@ -67,6 +67,7 @@ void Interface::ShowMenu(std::string space)
 	}
 }
 void Interface::ImportFromFile(std::string path, std::string fileName) {
+	acc.clear();
 	std::ifstream filein(path + fileName);
 	if (!filein.is_open()) {
 		cout << "cannot open file !" << endl;
