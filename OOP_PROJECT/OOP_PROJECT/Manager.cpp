@@ -66,12 +66,20 @@ void Manager::editStaff()
 	}
 }
 
-double Manager::profit(const int month, const int year)
+double Manager::calculateRevenueByMonth(const int month, const int year)
 {
 	double prof = 0.0;
-	for (int i = 0; i < nEmp; i++) {
-		
+	for (Employee* s : List) {
+		prof += s->calculateRevenueByMonth(month, year);
 	}
+	return prof;
+}
+
+double Manager::calculateRevenueByMonth(const int year)
+{
+	double prof = 0.0;
+	for (int i = 1; i < 13; i++)
+		prof += calculateRevenueByMonth(i, year);
 	return prof;
 }
 
