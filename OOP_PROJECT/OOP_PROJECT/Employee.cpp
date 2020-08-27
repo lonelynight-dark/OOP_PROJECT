@@ -52,20 +52,20 @@ void Employee::exportInvoice(ListProduct soldProduct)
 
 }
 
-Product Employee::searchProductById(int _id)
+Product* Employee::searchProductById(int _id)
 {
 	Product* result = stock.searchProduct(_id);
 	if (result == nullptr)
-		cout << "Not Found!\n";
-	return *result;
+		return nullptr;
+	return result;
 }
 
-Product Employee::searchProductByName(string _name)
+Product* Employee::searchProductByName(string _name)
 {
 	Product* result = stock.searchProduct( _name);
 	if (result == nullptr)
-		cout << "Not Found!\n";
-	return *result;
+		return nullptr;
+	return result;
 }
 
 void Employee::viewTradeHistory()
@@ -79,6 +79,8 @@ void Employee::viewTradeHistory()
 void Employee::sellProduct()
 {
 	//system("CLS");
+	cin.clear();
+	cin.ignore(1);
 	char ch;
 	ListProduct soldProducts;
 	cout << "**********SELL PRODUCT**********\n";

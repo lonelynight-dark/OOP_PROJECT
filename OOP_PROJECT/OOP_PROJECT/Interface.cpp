@@ -190,7 +190,7 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		{
 			emp.viewAllProducts();
 		}
-		else if (choice == 2)
+		else if (choice == 3)
 		{
 			emp.displayExpiredProduct();
 		}
@@ -201,7 +201,7 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		else if (choice == 5)
 		{
 			cout << "Press 1 - Search by ID\n";
-			cout << "Press any else key - Search by product name\n";
+			cout << "Press 2 - Search by product name\n";
 			int n;
 			cin >> n;
 			if (n == 1)
@@ -209,14 +209,20 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 				cout << "Enter ID:";
 				int id=0;
 				cin >> id;
-				emp.searchProductById(id);
+				if(emp.searchProductById(id)!=nullptr)
+				emp.searchProductById(id)->output();
+				else cout << "Not found!\n";
 			}
 			else
 			{
+				cin.clear();
+				cin.ignore(1);
 				cout << "Enter product name:";
 				string name;
 				getline(cin, name);
-				emp.searchProductByName(name);
+				if (emp.searchProductByName(name) != nullptr)
+					emp.searchProductByName(name)->output();
+				else cout << "Not found!\n";
 			}
 
 		}

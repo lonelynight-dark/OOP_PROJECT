@@ -30,10 +30,10 @@ class Employee :public Staff,public ListProduct
 		void exportInvoice(ListProduct soldProduct);
 
 	
-		Product searchProductById(int _id);//check
+		Product* searchProductById(int _id);//check
 
 		
-		Product searchProductByName(string _name);//check
+		Product* searchProductByName(string _name);//check
 
 		
 		void viewTradeHistory(); 
