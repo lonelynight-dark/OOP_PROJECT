@@ -158,12 +158,14 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		"View Salary",
 		"View items in stock",
 		"View expired items in stock",
+		"View empty items in stock",
 		"Add products to stock",
+		"Delete products",
 		"Search product",
 		"View trade history",
 		"Sell product"
 	};
-	int nCommand =7; // idk
+	int nCommand =9; // idk
 	while (true)
 	{
 		system("CLS");
@@ -184,28 +186,85 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		system("CLS");
 		if (choice == 1)
 		{
+			cout << "********** SALARY **********\n\n";
 			emp.viewSalary();
 		}
 		else if (choice == 2)
 		{
+			cout << "********** VIEW ALL PRODUCT **********\n\n";
 			emp.viewAllProducts();
 		}
 		else if (choice == 3)
 		{
+			cout << "********** VIEW EXPIRED PRODUCT **********\n\n";
+
 			emp.displayExpiredProduct();
 		}
 		else if (choice == 4)
 		{
-			emp.EnterProductInfo();
+			cout << "********** VIEW EMPTY PRODUCT **********\n\n";
+
+			emp.displayEmptyProduct();
 		}
 		else if (choice == 5)
 		{
+			
+			char ch;
+			do
+
+			{
+				system("CLS");
+
+				cout << "********** INSERT PRODUCT **********\n\n";
+				emp.EnterProductInfo();
+
+				cout << "Insert sucessfully!\n";
+				
+
+				cout << "Continue to insert ?\n y/n > ";
+				cin >> ch;
+			} 
+			while (ch == 'y');
+		}
+		else if (choice == 6)
+		{
+			char ch;
+			do
+
+			{
+				system("CLS");
+				cout << "********** DELETE PRODUCT **********\n\n";
+
+				cout << "Enter ID:";
+				int id = 0;
+				cin >> id;
+				if (emp.searchProductById(id) == nullptr)
+
+					cout << "Not found!\n";
+				else
+				{
+					emp.DeleteProduct(id);
+
+
+					cout << "Delete sucessfully!\n";
+				}
+
+
+				cout << "Continue to insert ?\n y/n > ";
+				cin >> ch;
+			} while (ch == 'y');
+		}
+		else if (choice == 7)
+		{
+			cout << "********** SEARCH **********\n\n";
 			cout << "Press 1 - Search by ID\n";
 			cout << "Press 2 - Search by product name\n";
 			int n;
 			cin >> n;
 			if (n == 1)
 			{
+				system("CLS");
+				cout << "********** SEARCH BY ID **********\n\n";
 				cout << "Enter ID:";
 				int id=0;
 				cin >> id;
@@ -215,6 +274,8 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 			}
 			else
 			{
+				system("CLS");
+				cout << "********** SEARCH BY NAME **********\n\n";
 				cin.clear();
 				cin.ignore(1);
 				cout << "Enter product name:";
@@ -226,11 +287,11 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 			}
 
 		}
-		else if (choice == 6)
+		else if (choice == 8)
 		{
 			emp.viewTradeHistory();
 		}
-		else if (choice == 7)
+		else if (choice == 9)
 		{
 			emp.sellProduct();
 		}
