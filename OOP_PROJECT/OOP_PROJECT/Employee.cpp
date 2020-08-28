@@ -16,7 +16,7 @@ double Employee::viewSalary()
 	cout << "ID:" << Staff::getID() << endl;
 	
 	double s = 5000000 - Staff::getAbsentDays() * 1000000;
-	cout << std::setprecision(3) << std::showpoint << std::fixed;
+	cout << std::setprecision(0) << std::showpoint << std::fixed;
 	cout << "Salary:" << (s < 0 ? 0 : s) << endl;
 	return (s<0?0:s);
 	
@@ -40,6 +40,11 @@ void Employee::EnterProductInfo()
 	
 }
 
+void Employee::DeleteProduct(int _id)
+{
+	stock.deleteProduct(_id);
+}
+
 void Employee::exportInvoice(ListProduct soldProduct)
 {
 	cout << "***STAFF INFO***\n";
@@ -52,26 +57,27 @@ void Employee::exportInvoice(ListProduct soldProduct)
 
 }
 
-Product Employee::searchProductById(int _id)
+Product* Employee::searchProductById(int _id)
 {
 	Product* result = stock.searchProduct(_id);
 	if (result == nullptr)
-		cout << "Not Found!\n";
-	return *result;
+		return nullptr;
+	return result;
 }
 
-Product Employee::searchProductByName(string _name)
+Product* Employee::searchProductByName(string _name)
 {
 	Product* result = stock.searchProduct( _name);
 	if (result == nullptr)
-		cout << "Not Found!\n";
-	return *result;
+		return nullptr;
+	return result;
 }
 
 void Employee::viewTradeHistory()
 {
-	cout << "**********TRADE HISTORY**********\n";
-	listSale.LoadDateSaleList("ID_1.txt");
+	cout << "**********TRADE HISTORY**********\n\n";
+
+	listSale.LoadDateSaleList("Data\\Sale\\" +to_string(this->getID()) + ".txt");
 	listSale.LoadDataSaleList();
 	listSale.OutputSaleList();
 }
@@ -79,9 +85,11 @@ void Employee::viewTradeHistory()
 void Employee::sellProduct()
 {
 	//system("CLS");
-	char ch;
+	cin.clear();
+	cin.ignore(1);
+	char ch='y';
 	ListProduct soldProducts;
-	cout << "**********SELL PRODUCT**********\n";
+	cout << "**********SELL PRODUCT**********\n\n";
 	do
 	{
 		
@@ -112,18 +120,20 @@ void Employee::sellProduct()
 			while (is_number(tmpQuantity));
 		}
 		
-		Product* soldProduct = stock.searchProduct(stoi(tmpID));
-		if (stock.searchProduct(stoi(tmpID)) == nullptr)
+
+		Product* ProductInStock = stock.searchProduct(stoi(tmpID));
+		if (ProductInStock == nullptr)
 		{
-			cout << "Product:ID " << tmpID << " are out of Stock";
+			cout << "Product:ID " << tmpID << " are out of Stock\n";
 			system("pause");
 			continue;
 		}
-		Product* tmpProduct =new Product(*soldProduct);
-		(*tmpProduct) -= ((*soldProduct).getStock() - stoi(tmpQuantity));
+		Product* tmpProduct =new Product(*ProductInStock);
+		(*tmpProduct) -= ((*ProductInStock).getStock() - stoi(tmpQuantity));
+		
 		soldProducts.addProduct(*tmpProduct);
 
-		*soldProduct -= stoi(tmpQuantity);
+		*ProductInStock -= stoi(tmpQuantity);
 
 		cout << "More product ?\nPress y - Yes \nPress any else key - No\n";
 		
@@ -132,7 +142,7 @@ void Employee::sellProduct()
 		cin.ignore(INT_MAX, '\n');
 	} while (ch == 'y');
 
-	listSale.LoadDateSaleList("Data\Sale\ID_1.txt");
+	listSale.LoadDateSaleList("Data\\Sale\\" + to_string(this->getID()) + ".txt");
 	listSale.LoadDataSaleList();
 	Date* today=new Date;
 	Sale* todaySale = nullptr;
@@ -152,6 +162,10 @@ void Employee::sellProduct()
 	ofstream fout("Stock.txt");
 	stock.saveList(fout);
 
+	
+	system("CLS");
+	cout << "********** INVOICE **********\n\n";
+	
 	exportInvoice(soldProducts);
 
 }
@@ -169,4 +183,10 @@ void Employee::displayExpiredProduct()
 {
 	ListProduct listExpiredProduct=stock.getListOfExpiredProduct();
 	listExpiredProduct.outputList();
+}
+
+void Employee::displayEmptyProduct()
+{
+	ListProduct listEmptyProduct = stock.getListOfZeroStock();
+	listEmptyProduct.outputList();
 }
