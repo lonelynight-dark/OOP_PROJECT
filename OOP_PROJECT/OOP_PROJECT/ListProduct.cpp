@@ -195,7 +195,8 @@ void ListProduct::concat(const ListProduct& list)
 			addProduct(*product);
 		}
 		catch (ErrorCode) {
-			cout << "ID (" << product->getID() << ") existed..." << endl;
+		//	cout << "ID (" << product->getID() << ") existed..." << endl;
+			*(searchProduct(product->getID())) += product->getStock();
 		}
 	}
 }

@@ -61,7 +61,7 @@ void Sale::OutputSale()
 void Sale::OutputDate()
 {
 	cout << "Date : Day/Month/Year" << endl;
-	cout << saleDate;
+	cout << saleDate<<endl;
 }
 int Sale::numProduct(const int& ID)
 {
@@ -99,6 +99,6 @@ bool Sale::AddAtttributeSale(Product* product, int quantity)
 void Sale::AddAtttributeSale(ListProduct products)
 {
 	
-	listSoldProduct.concat(products);
-
+		listSoldProduct.concat(products);
+	
 }
