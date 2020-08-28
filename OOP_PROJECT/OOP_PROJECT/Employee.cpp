@@ -34,7 +34,11 @@ void Employee::EnterProductInfo()
 	cout << "Enter product info :\n";
 	Product tmp;
 	tmp.input();
-	stock.addProduct(tmp);
+	ListProduct tmpList;
+	tmpList.addProduct(tmp);
+
+	stock.concat(tmpList);
+
 	ofstream fout("Stock.txt");
 	stock.saveList(fout);
 	
@@ -47,10 +51,10 @@ void Employee::DeleteProduct(int _id)
 
 void Employee::exportInvoice(ListProduct soldProduct)
 {
-	cout << "***STAFF INFO***\n";
+	cout << "*** STAFF INFO ***\n";
 	Staff::output();
 	cout << endl;
-	cout << "***BILL***\n";
+	cout << "*** BILL ***\n";
 	soldProduct.outputList();
 	cout << "================================\n";
 	cout << "TOTAL:" << soldProduct.totalPrice()<<endl;
@@ -77,21 +81,21 @@ void Employee::viewTradeHistory()
 {
 	cout << "**********TRADE HISTORY**********\n\n";
 
-	listSale.LoadDateSaleList("Data\\Sale\\" +to_string(this->getID()) + ".txt");
-	listSale.LoadDataSaleList();
+	listSale.LoadDateSaleList(".\\Data\\Sale\\" +to_string(this->getID()) + ".txt");
+	listSale.LoadDataSaleList(this->getID(),".\\Data\\Sale\\");
 	listSale.OutputSaleList();
 }
 
 void Employee::sellProduct()
 {
-	//system("CLS");
 	cin.clear();
 	cin.ignore(1);
 	char ch='y';
 	ListProduct soldProducts;
-	cout << "**********SELL PRODUCT**********\n\n";
 	do
 	{
+	system("CLS");
+	cout << "**********SELL PRODUCT**********\n\n";
 		
 		cout << "Enter product:\n";
 		cout << "ID:";
@@ -124,7 +128,8 @@ void Employee::sellProduct()
 		Product* ProductInStock = stock.searchProduct(stoi(tmpID));
 		if (ProductInStock == nullptr||ProductInStock->getStock()<stoi(tmpQuantity))
 		{
-			cout << "Product:ID " << tmpID << " are out of Stock\n";
+			cout << "Product " << tmpID << " are out of Stock\n";
+			cout << "Please enter again!\n";
 			system("pause");
 			continue;
 		}
@@ -142,8 +147,8 @@ void Employee::sellProduct()
 		cin.ignore(INT_MAX, '\n');
 	} while (ch == 'y');
 
-	listSale.LoadDateSaleList("Data\\Sale\\" + to_string(this->getID()) + ".txt");
-	listSale.LoadDataSaleList();
+	listSale.LoadDateSaleList(".\\Data\\Sale\\" + to_string(this->getID()) + ".txt");
+	listSale.LoadDataSaleList(this->getID(),".\\Data\\Sale\\");
 	Date* today=new Date;
 	Sale* todaySale = nullptr;
 	
@@ -157,7 +162,7 @@ void Employee::sellProduct()
 	}
 	todaySale->AddAtttributeSale(soldProducts);
 	listSale.AddSaleData(todaySale);
-	listSale.SaveDataSaleList();
+	listSale.SaveDataSaleList(this->getID(), ".\\Data\\Sale\\");
 
 	ofstream fout("Stock.txt");
 	stock.saveList(fout);
