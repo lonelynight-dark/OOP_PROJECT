@@ -5,8 +5,8 @@ Date ListSale::stoDate(const string& line, const char* delimeter)
 	int day, month, year, i=0;
 	char* next_token = nullptr;
 	char* chr = new char[line.length() + 1];
-	char* token = strtok_s(chr, delimeter, &next_token);
 	strcpy_s(chr, line.length() + 1, line.c_str());
+	char* token = strtok_s(chr, delimeter, &next_token);
 
 	if (token == NULL || token == " ")
 	{
@@ -21,7 +21,6 @@ Date ListSale::stoDate(const string& line, const char* delimeter)
 		++i;
 		token = strtok_s(NULL, delimeter, &next_token);
 	}
-
 	date.setDate(year, month, day);
 	delete[] chr;
 	return date;
@@ -30,15 +29,14 @@ bool ListSale::LoadDateSaleList(const string& source)
 {
 	ifstream fin(source);
 	if (!fin.is_open()) return false;
-	Date* date;
+	Date date;
 	string strDate;
 
 	while (getline(fin, strDate))
 	{
 		try
 		{
-			date = nullptr;
-			date = &ListSale::stoDate(strDate, " ");
+			date = ListSale::stoDate(strDate, " ");
 			saleDate.push_back(date);
 		}
 		catch (int)
@@ -46,16 +44,15 @@ bool ListSale::LoadDateSaleList(const string& source)
 			return false;
 		}
 	}
-
 	fin.close();
 	return true;
 }
 bool ListSale::AddSaleDate(Date* arg)
 {
-	for (Date* date : saleDate)
-		if (date == arg)
+	for (Date date : saleDate)
+		if (date == *arg)
 			return false;
-	saleDate.push_back(arg);
+	saleDate.push_back(*arg);
 	return true;
 }
 bool ListSale::AddSaleData(Sale* sale)
@@ -66,15 +63,16 @@ bool ListSale::AddSaleData(Sale* sale)
 	SaleList.push_back(sale);
 	return true;
 }
-bool ListSale::LoadDataSaleList()
+bool ListSale::LoadDataSaleList(const int& ID)
 {
 	Sale* tmp;
 	string strFile = "";
 
-	for(Date* date : saleDate)
+	for(Date date : saleDate)
 	{
 		tmp = nullptr;
-		strFile = to_string(date->getDay()) + to_string(date->getMonth()) + to_string(date->getYear());
+		tmp = new Sale;
+		strFile = to_string(ID) + "_" + to_string(date.getDay()) + "-" + to_string(date.getMonth()) + "-" + to_string(date.getYear()) + ".txt";
 		if (tmp->LoadSale(strFile) == false) return false;
 		SaleList.push_back(tmp);
 	}
@@ -128,7 +126,7 @@ Sale* ListSale::FindSale(const Date& arg)
 {
 	for (int i = 0; i < saleDate.size(); i++)
 	{
-		if (*saleDate[i] == arg)
+		if (saleDate[i] == arg)
 		{
 			return SaleList[i];
 		}
@@ -140,7 +138,7 @@ bool ListSale::SaveDataSaleList()
 	string source = "";
 	for (int i = 0; i < SaleList.size(); i++)
 	{
-		source = ListSale::Datetostr(*saleDate[i]);
+		source = ListSale::Datetostr(saleDate[i]);
 		if (SaleList[i]->SaveSale(source) == false) return false;
 	}
 	return true;

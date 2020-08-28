@@ -33,7 +33,9 @@ bool Sale::stoDate(const string& line, const char* delimeter)
 }
 bool Sale::LoadSale(const string& source)
 {
-	ifstream fin(source);
+	ifstream fin;
+	string path = "D:/CV/code/github/OOP_PROJECT/OOP_PROJECT/OOP_PROJECT/Data/Sale/" + source;
+	fin.open(path);
 	if (!fin.is_open()) return false;
 	string line;
 	getline(fin, line);

@@ -13,15 +13,15 @@ public:
 	Sale(Date a) { saleDate = a; }
 	~Sale(){}
 
-	// Calculate Summary of Product
+	// Calculate Money of chosen Product
 	double Summary(const int&);
 
-	// Calculate Total Revenue
+	// Calculate Sum all Revenue
 	double CalculateRevenue();
 
 	// Number of product
-	int numProduct();
-	int numProduct(const int&);
+	int numProduct(); // Total Product
+	int numProduct(const int&); // Num of chosen Product
 
 	// Another method
 	bool LoadSale(const string&);
