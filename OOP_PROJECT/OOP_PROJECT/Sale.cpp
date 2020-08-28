@@ -31,9 +31,11 @@ bool Sale::stoDate(const string& line, const char* delimeter)
 	delete[] chr;
 	return true;
 }
-bool Sale::LoadSale(const string& source)
+bool Sale::LoadSale(const string& source, const string& path)
 {
-	ifstream fin(source);
+	ifstream fin;
+	fin.open(path + "/" + source);
+
 	if (!fin.is_open()) return false;
 	string line;
 	getline(fin, line);
@@ -75,16 +77,10 @@ int Sale::year_sale_date()
 {
 	return saleDate.getYear();
 }
-bool Sale::SaveSale(const string& source)
+void Sale::SaveSale(ofstream& out)
 {
-	ofstream out(source);
-	if (!out.is_open()) return false;
-
 	out << saleDate.getDay() << " " << saleDate.getMonth() << " " << saleDate.getYear() << endl;
 	listSoldProduct.saveList(out);
-
-	out.close();
-	return true;
 }
 bool Sale::AddAtttributeSale(Product* product, int quantity)
 {
@@ -95,10 +91,7 @@ bool Sale::AddAtttributeSale(Product* product, int quantity)
 	}
 	return true;
 }
-
 void Sale::AddAtttributeSale(ListProduct products)
 {
-	
-		listSoldProduct.concat(products);
-	
+	listSoldProduct.concat(products);
 }
