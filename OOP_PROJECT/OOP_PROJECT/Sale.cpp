@@ -77,16 +77,10 @@ int Sale::year_sale_date()
 {
 	return saleDate.getYear();
 }
-bool Sale::SaveSale(const string& source)
+void Sale::SaveSale(ofstream& out)
 {
-	ofstream out(source);
-	if (!out.is_open()) return false;
-
 	out << saleDate.getDay() << " " << saleDate.getMonth() << " " << saleDate.getYear() << endl;
 	listSoldProduct.saveList(out);
-
-	out.close();
-	return true;
 }
 bool Sale::AddAtttributeSale(Product* product, int quantity)
 {
@@ -100,9 +94,4 @@ bool Sale::AddAtttributeSale(Product* product, int quantity)
 void Sale::AddAtttributeSale(ListProduct products)
 {
 	listSoldProduct.concat(products);
-
-	
-		listSoldProduct.concat(products);
-	
-
 }

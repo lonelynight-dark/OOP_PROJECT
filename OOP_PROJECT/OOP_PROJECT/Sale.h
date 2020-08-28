@@ -28,7 +28,7 @@ public:
 	void OutputSale();
 	int month_sale_date();
 	int year_sale_date();
-	bool SaveSale(const string&);
+	void SaveSale(ofstream&);
 	bool AddAtttributeSale(Product*, int);
 	void AddAtttributeSale(ListProduct products);
 private:

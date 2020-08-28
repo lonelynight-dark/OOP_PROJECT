@@ -44,6 +44,7 @@ bool ListSale::LoadDateSaleList(const string& source)
 			return false;
 		}
 	}
+
 	fin.close();
 	return true;
 }
@@ -133,17 +134,44 @@ Sale* ListSale::FindSale(const Date& arg)
 	}
 	return NULL;
 }
-bool ListSale::SaveDataSaleList()
+bool ListSale::SaveDataSaleList(const int& ID, const string& base)
 {
 	string source = "";
+	ofstream out;
+
 	for (int i = 0; i < SaleList.size(); i++)
 	{
-		source = ListSale::Datetostr(saleDate[i]);
-		if (SaleList[i]->SaveSale(source) == false) return false;
+		source = Datetostr1(saleDate[i]);
+		out.open(base + to_string(ID) + "_" + source + ".txt");
+		SaleList[i]->SaveSale(out);
+		out.close();
 	}
+
 	return true;
 }
-string ListSale::Datetostr(Date date)
+bool ListSale::SaveDateSaleList(const int& ID, const string& base)
 {
-	return to_string(date.getDay()) + "_" + to_string(date.getMonth()) + "_" + to_string(date.getYear());
+	ofstream out;
+	string path = base + to_string(ID) + ".txt";
+	out.open(path);
+	if (!out.is_open()) return false;
+	string date;
+	
+	for (int i = 0; i < saleDate.size(); i++)
+	{
+		date = Datetostr2(saleDate[i]);
+		out << date << endl;
+	}
+
+	out.close();
+	return true;
+}
+string ListSale::Datetostr1(Date date)
+{
+	return to_string(date.getDay()) + "-" + to_string(date.getMonth()) + "-" + to_string(date.getYear());
+}
+
+string ListSale::Datetostr2(Date date)
+{
+	return to_string(date.getDay()) + " " + to_string(date.getMonth()) + " " + to_string(date.getYear());
 }

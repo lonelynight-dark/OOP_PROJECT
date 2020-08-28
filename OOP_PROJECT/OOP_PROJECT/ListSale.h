@@ -30,10 +30,12 @@ public:
 	bool AddSaleData(Sale*);
 	bool LoadDataSaleList(const int&, const string&);
 	bool LoadDateSaleList(const string&);
-	bool SaveDataSaleList();
+	bool SaveDataSaleList(const int&, const string&);
+	bool SaveDateSaleList(const int&, const string&);
 	void OutputSaleList();
 	Date stoDate(const string&, const char*);
-	string Datetostr(Date);
+	string Datetostr1(Date);
+	string Datetostr2(Date);
 };
 
 #endif // !_LISTSALE_H_
