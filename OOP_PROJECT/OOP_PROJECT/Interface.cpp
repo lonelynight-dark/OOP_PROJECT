@@ -165,7 +165,7 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		"View trade history",
 		"Sell product"
 	};
-	int nCommand =9; // idk
+	int nCommand = 9; // idk
 	while (true)
 	{
 		system("CLS");
@@ -314,7 +314,7 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 		"Watch revenue by month",		//5
 		"Watch revenue by year",		//6
 		"View employee",				//7
-		"View employee's salary"		//8
+		"View employee's salary",		//8
 		"View product"					//9
 	};
 	int nCommand = 9;
@@ -346,6 +346,7 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 		case 3: 
 			man.editStaff(); break;
 		case 4:
+			cout << std::setprecision(0) << std::showpoint << std::fixed;
 			cout << "Salary: " << man.viewSalary() << endl; break;
 		case 5: {
 			int month, year;
@@ -367,10 +368,10 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 			break;
 		case 9: 
 			man.viewProd();
+			break;
 		default:
 		{
-			std::cout << "Bad choice\nPress any key to try again";
-			_getch();
+			std::cout << "Bad choice";
 		}
 		}
 		char k;

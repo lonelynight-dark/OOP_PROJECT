@@ -22,7 +22,7 @@ public:
 	void addStaff();
 	void deleteStaff();
 	void editStaff();
-	double viewSalary() { return 0.0; }
+	double viewSalary();
 
 	double calculateRevenueByMonth(const int month, const int year);
 	double calculateRevenueByMonth(const int year);
@@ -39,7 +39,6 @@ public:
 	Staff* search(int ID);
 private:
 	std::vector<Employee*> List;
-	ListProduct prodList;
 	int nEmp;
 };
 

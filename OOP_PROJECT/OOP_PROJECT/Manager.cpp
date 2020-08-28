@@ -66,6 +66,15 @@ void Manager::editStaff()
 	}
 }
 
+double Manager::viewSalary()
+{
+	double s = Staff::getAbsentDays();
+	s *= 1000000;
+	s = 5000000 - s;
+	return ((s > 0) ? s : 0);
+	//double s = 5000000 - Staff::getAbsentDays() * 1000000;
+}
+
 double Manager::calculateRevenueByMonth(const int month, const int year)
 {
 	double prof = 0.0;
@@ -100,9 +109,7 @@ void Manager::edit()
 
 void Manager::viewProd()
 {
-	for (Employee* e : List) {
-		e->viewAllProducts();
-	}
+	List[0]->viewAllProducts();
 }
 
 void Manager::viewEmp()
@@ -114,7 +121,7 @@ void Manager::viewEmpSalary()
 {
 	for (Staff* s : List) {
 		s->viewSalary(); 
-		cout << endl << endl;
+		cout << endl;
 	}
 }
 
