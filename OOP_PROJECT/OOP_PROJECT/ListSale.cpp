@@ -63,7 +63,7 @@ bool ListSale::AddSaleData(Sale* sale)
 	SaleList.push_back(sale);
 	return true;
 }
-bool ListSale::LoadDataSaleList(const int& ID)
+bool ListSale::LoadDataSaleList(const int& ID, const string& path)
 {
 	Sale* tmp;
 	string strFile = "";
@@ -73,7 +73,7 @@ bool ListSale::LoadDataSaleList(const int& ID)
 		tmp = nullptr;
 		tmp = new Sale;
 		strFile = to_string(ID) + "_" + to_string(date.getDay()) + "-" + to_string(date.getMonth()) + "-" + to_string(date.getYear()) + ".txt";
-		if (tmp->LoadSale(strFile) == false) return false;
+		if (tmp->LoadSale(strFile, path) == false) return false;
 		SaleList.push_back(tmp);
 	}
 

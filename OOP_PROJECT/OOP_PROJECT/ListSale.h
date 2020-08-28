@@ -28,7 +28,7 @@ public:
 	// Another method
 	bool AddSaleDate(Date*);
 	bool AddSaleData(Sale*);
-	bool LoadDataSaleList(const int&);
+	bool LoadDataSaleList(const int&, const string&);
 	bool LoadDateSaleList(const string&);
 	bool SaveDataSaleList();
 	void OutputSaleList();

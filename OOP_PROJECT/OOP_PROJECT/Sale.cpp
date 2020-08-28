@@ -31,11 +31,11 @@ bool Sale::stoDate(const string& line, const char* delimeter)
 	delete[] chr;
 	return true;
 }
-bool Sale::LoadSale(const string& source)
+bool Sale::LoadSale(const string& source, const string& path)
 {
 	ifstream fin;
-	string path = "D:/CV/code/github/OOP_PROJECT/OOP_PROJECT/OOP_PROJECT/Data/Sale/" + source;
-	fin.open(path);
+	fin.open(path + "/" + source);
+
 	if (!fin.is_open()) return false;
 	string line;
 	getline(fin, line);

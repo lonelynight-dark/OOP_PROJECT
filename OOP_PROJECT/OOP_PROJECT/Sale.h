@@ -24,7 +24,7 @@ public:
 	int numProduct(const int&); // Num of chosen Product
 
 	// Another method
-	bool LoadSale(const string&);
+	bool LoadSale(const string&, const string&);
 	void OutputSale();
 	int month_sale_date();
 	int year_sale_date();
