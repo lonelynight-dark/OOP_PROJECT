@@ -307,50 +307,75 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 void Interface::ShowManagerMenu(Manager& man, string space) {
 	string command[] =
 	{
-		"123"
+		"Add Staff",					//1
+		"Delete Staff",					//2
+		"Edit Staff",					//3
+		"See salary",					//4
+		"Watch revenue by month",		//5
+		"Watch revenue by year",		//6
+		"View employee",				//7
+		"View employee's salary"		//8
+		"View product"					//9
 	};
-	int nCommand = 4; // idk
+	int nCommand = 9;
 	while (true)
 	{
 		system("CLS");
 		ShowTitle(space);
 		std::cout << space << "        Staff Window\n";
 		std::cout << "================================================================================\n";
+		std::cout << "0. Return\n";
 		for (int i = 0; i < nCommand; i++)
 		{
 			std::cout << i + 1 << ". " << command[i] << endl;
 		}
 
-		std::cout << "0. Return\n";
 		std::cout << "----------------------------------------\n";
 
 		int choice;
 		std::cout << "Input choice: ";
 		std::cin >> choice;
 
-		if (choice == 1)
-		{
-
-		}
-		else if (choice == 2)
-		{
-
-		}
-		else if (choice == 3)
-		{
-
-		}
-		else if (choice == 4)
-		{
-
-		}
-		else if (choice == 0)
+		switch (choice) {
+		case 0:
 			return;
-		else
+		case 1:
+			man.addStaff(); break;
+		case 2:
+			man.deleteStaff(); break;
+		case 3: 
+			man.editStaff(); break;
+		case 4:
+			cout << "Salary: " << man.viewSalary() << endl; break;
+		case 5: {
+			int month, year;
+			cout << "Month: "; cin >> month;
+			cout << "Year: "; cin >> year;
+			cout << "Revenue in " << month << " of " << year << ": " << man.calculateRevenueByMonth(month, year) << endl;
+			break;
+		}
+		case 6:
+			int year;
+			cout << "Year: "; cin >> year;
+			cout << "Revenue in " << year << ": " << man.calculateRevenueByMonth(year) << endl;
+			break;
+		case 7:
+			man.viewEmp();
+			break;
+		case 8:
+			man.viewEmpSalary();
+			break;
+		case 9: 
+			man.viewProd();
+		default:
 		{
 			std::cout << "Bad choice\nPress any key to try again";
 			_getch();
 		}
+		}
+		char k;
+		cout << "\nPress any key to continue!";
+		k = _getch();
 	}
 }
 

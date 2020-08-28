@@ -100,7 +100,9 @@ void Manager::edit()
 
 void Manager::viewProd()
 {
-	prodList.outputList();
+	for (Employee* e : List) {
+		e->viewAllProducts();
+	}
 }
 
 void Manager::viewEmp()
@@ -111,9 +113,8 @@ void Manager::viewEmp()
 void Manager::viewEmpSalary()
 {
 	for (Staff* s : List) {
-		cout << "ID: " << s->getID() << endl;
-		cout << "Name: " << s->getName() << endl;
-		cout << "Salary: " << s->viewSalary() << endl << endl;
+		s->viewSalary(); 
+		cout << endl << endl;
 	}
 }
 
