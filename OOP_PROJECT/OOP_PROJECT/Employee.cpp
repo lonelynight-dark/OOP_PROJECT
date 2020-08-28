@@ -77,7 +77,7 @@ void Employee::viewTradeHistory()
 {
 	cout << "**********TRADE HISTORY**********\n\n";
 
-	listSale.LoadDateSaleList("Data\Sale\\" +to_string(this->getID()) + ".txt");
+	listSale.LoadDateSaleList("Data\\Sale\\" +to_string(this->getID()) + ".txt");
 	listSale.LoadDataSaleList();
 	listSale.OutputSaleList();
 }
@@ -120,18 +120,20 @@ void Employee::sellProduct()
 			while (is_number(tmpQuantity));
 		}
 		
-		Product* soldProduct = stock.searchProduct(stoi(tmpID));
-		if (stock.searchProduct(stoi(tmpID)) == nullptr)
+
+		Product* ProductInStock = stock.searchProduct(stoi(tmpID));
+		if (ProductInStock == nullptr)
 		{
 			cout << "Product:ID " << tmpID << " are out of Stock\n";
 			system("pause");
 			continue;
 		}
-		Product* tmpProduct =new Product(*soldProduct);
-		(*tmpProduct) -= ((*soldProduct).getStock() - stoi(tmpQuantity));
+		Product* tmpProduct =new Product(*ProductInStock);
+		(*tmpProduct) -= ((*ProductInStock).getStock() - stoi(tmpQuantity));
+		
 		soldProducts.addProduct(*tmpProduct);
 
-		*soldProduct -= stoi(tmpQuantity);
+		*ProductInStock -= stoi(tmpQuantity);
 
 		cout << "More product ?\nPress y - Yes \nPress any else key - No\n";
 		
@@ -140,7 +142,7 @@ void Employee::sellProduct()
 		cin.ignore(INT_MAX, '\n');
 	} while (ch == 'y');
 
-	listSale.LoadDateSaleList("Data\Sale\\" + to_string(this->getID()) + ".txt");
+	listSale.LoadDateSaleList("Data\\Sale\\" + to_string(this->getID()) + ".txt");
 	listSale.LoadDataSaleList();
 	Date* today=new Date;
 	Sale* todaySale = nullptr;
