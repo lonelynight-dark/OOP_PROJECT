@@ -122,7 +122,7 @@ void Employee::sellProduct()
 		
 
 		Product* ProductInStock = stock.searchProduct(stoi(tmpID));
-		if (ProductInStock == nullptr)
+		if (ProductInStock == nullptr||ProductInStock->getStock()<stoi(tmpQuantity))
 		{
 			cout << "Product:ID " << tmpID << " are out of Stock\n";
 			system("pause");
