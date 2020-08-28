@@ -76,7 +76,8 @@ Product* Employee::searchProductByName(string _name)
 void Employee::viewTradeHistory()
 {
 	cout << "**********TRADE HISTORY**********\n\n";
-	listSale.LoadDateSaleList("ID_1.txt");
+
+	listSale.LoadDateSaleList("Data\Sale\\" +to_string(this->getID()) + ".txt");
 	listSale.LoadDataSaleList();
 	listSale.OutputSaleList();
 }
@@ -139,7 +140,7 @@ void Employee::sellProduct()
 		cin.ignore(INT_MAX, '\n');
 	} while (ch == 'y');
 
-	listSale.LoadDateSaleList("Data\Sale\ID_1.txt");
+	listSale.LoadDateSaleList("Data\Sale\\" + to_string(this->getID()) + ".txt");
 	listSale.LoadDataSaleList();
 	Date* today=new Date;
 	Sale* todaySale = nullptr;
