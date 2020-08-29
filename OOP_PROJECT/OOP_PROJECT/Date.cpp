@@ -142,6 +142,7 @@ Date& Date::stoDate(std::string str, const char* deli)
 			throw ErrorDate::WRONG_DATE_FORMAT;
 		}
 	}
+	if (i != 3) throw ErrorDate::WRONG_DATE_FORMAT; // Not enough data
 	if ((year <= 0)
 		|| (month <= 0 || month > 12)
 		|| (day <= 0   || day > Date::getDaysInMonth(month, year)))
