@@ -26,6 +26,9 @@ class Employee :public Staff,public ListProduct
 		// Enter product to stock..
 		void EnterProductInfo();//check
 
+			// delete product to stock..
+		void DeleteProduct(int _id);//check
+
 		//export to text file(comming soon)
 		void exportInvoice(ListProduct soldProduct);
 
@@ -38,7 +41,7 @@ class Employee :public Staff,public ListProduct
 		
 		void viewTradeHistory(); 
 
-		//(haven't managed trade history yet)
+		
 		void sellProduct(); 
 
 	///	overide from class Staff
@@ -52,6 +55,9 @@ class Employee :public Staff,public ListProduct
 
 		//check expired product
 		void displayExpiredProduct();
+
+		//check empty product
+		void displayEmptyProduct();
 		
 };
 
