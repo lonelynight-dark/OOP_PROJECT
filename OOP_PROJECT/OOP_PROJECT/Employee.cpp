@@ -162,8 +162,8 @@ void Employee::sellProduct()
 	}
 	todaySale->AddAtttributeSale(soldProducts);
 	listSale.AddSaleData(todaySale);
+	listSale.SaveDateSaleList(this->getID(), ".\\Data\\Sale\\");
 	listSale.SaveDataSaleList(this->getID(), ".\\Data\\Sale\\");
-
 	ofstream fout("Stock.txt");
 	stock.saveList(fout);
 
