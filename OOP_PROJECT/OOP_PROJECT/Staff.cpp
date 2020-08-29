@@ -21,39 +21,39 @@ bool isAllNumber(string s) {
 }
 void Staff::input() {
 	do {
-		cout << "ID: "; cin >> ID;
+		cout << "ID            : "; cin >> ID;
 	} while (ID < 0);
 	cin.ignore(100,'\n');
 	do {
-		cout << "Name: "; getline(cin, name);
+		cout << "Name          : "; getline(cin, name);
 	} while (name == "");
+	Date now(0);
+	do {
+		cout << "Date of Birth : "; cin >> yob;
+	} while (yob > now);
 	string s;
 	do {
-		cout << "Gender(Male/Female): "; getline(cin, s);
+		cout << "Gender        : "; getline(cin, s);
 		gender = (s == "Male");
 	} while (s != "Male" && s != "Female");
 	do {
-		cout << "PhoneNumber: "; getline(cin, phoneNumber);
-	} while (!isAllNumber(phoneNumber));
-	do {
-		cout << "Address: "; getline(cin, address);
+		cout << "Address       : "; getline(cin, address);
 	} while (address == "");
-	Date now(0);
 	do {
-		cout << "Year of Birth: "; cin >> yob;
-	} while (yob > now);
+		cout << "Phone Number  : "; getline(cin, phoneNumber);
+	} while (!isAllNumber(phoneNumber));
 	/*do {
 		cout << "Absent day: "; cin >> absentDay;
 	} while (absentDay < 0);*/
 }
 void Staff::output() {
-	cout << "ID: " << ID << endl;
-	cout << "Name: " << name << endl;
-	cout << "Gender: " << ((gender) ? "Male" : "Female") << endl;
-	cout << "PhoneNumber: " << phoneNumber << endl;
-	cout << "Address: " <<  address << endl;
-	cout << "Year of Birth: " << yob << endl;
-	cout << "Absent day: " << absentDay << endl;
+	cout << "ID           : " << ID << endl;
+	cout << "Name         : " << name << endl;
+	cout << "DOB          : " << yob << endl;
+	cout << "Gender       : " << ((gender) ? "Male" : "Female") << endl;
+	cout << "Address      : " <<  address << endl;
+	cout << "Phone Number : " << phoneNumber << endl;
+	cout << "Absent day   : " << absentDay << endl;
 }
 
 void Staff::load(ifstream& fin)

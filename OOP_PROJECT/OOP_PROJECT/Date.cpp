@@ -127,7 +127,7 @@ Date& Date::stoDate(std::string str, const char* deli)
 	std::string::size_type prev = str.find_first_not_of(deli);
 	std::string::size_type found = str.find_first_of(deli, prev); 
 	unsigned short i = 0;
-	while (i < 3 && found != std::string::npos)
+	while ((i < 3 && found != std::string::npos) || (i == 2 && found == std::string::npos))
 	{
 		try {
 			if (i == 0) day   = stoi(str.substr(prev, found));

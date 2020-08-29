@@ -144,13 +144,13 @@ void ListProduct::outputList()
 		cout << ">> Product List is Empty...." << endl;
 		return;
 	}
-		cout << "********************************\n";
+		cout << "*********************************\n";
 	for (int i = 0; i < n; ++i)
 	{
 		cout << "INFORMATION OF PRODUCT " << i + 1 << ":" << endl;
 		cout << "---------------------------\n";
 		listProduct[i]->output();
-		cout << "********************************\n";
+		cout << "*********************************\n";
 	}
 	cout << "\n>> END OF LIST." << endl;
 }
@@ -181,7 +181,7 @@ void ListProduct::inputList()
 	Product p;
 	cout << "NUMBER OF PRODUCTS : ";
 	cin >> n;
-		cout << "********************************\n";
+		cout << "*********************************\n";
 	for (int i = 0; i < n; ++i)
 	{
 		cout << "INFORMATION OF PRODUCT " << i + 1 << ":" << endl;
@@ -195,7 +195,7 @@ void ListProduct::inputList()
 			cout << ">> Please input another product..." << endl;
 			i--;
  		}
-		cout << "********************************\n";
+		cout << "*********************************\n";
 		cout << "\n>> FINISHED." << endl;
 	}
 }

@@ -1,21 +1,21 @@
 #include "Interface.h"
+#include <memory>
 using namespace std;
 int main() {
-	Company* company = new Company();
+	unique_ptr<Company> company(new Company());
 	std::string pathAccount = "Data/Account/";
 	std::string space = "                            ";
 	int nCommand = 5;
 	Interface i;
 	while (true)
 	{
-
 		i.ShowTitle(space);
 		cout << "             Leave Empty Username And Press Enter To Get Out Of Program\n\n";
 		string username, password;
 		cout << "                 Username > ";
 		getline(cin, username);
 		if (username == "")
-			return 0;
+			break;
 		cout << "                 Password > ";
 		password = i.InputPassword();
 		int resultLogin = i.Login(pathAccount, username, password, *company, space);
@@ -42,6 +42,6 @@ int main() {
 
 	}
 	// write something here...
-	delete company;
+	//company->saveAll();
 	return 0;
 }

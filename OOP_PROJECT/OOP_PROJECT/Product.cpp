@@ -87,5 +87,5 @@ void Product::output()
 	cout << "Name  : " << name << endl;
 	cout << "Price : " << price << " VND" << endl;
 	cout << "Stock : " << stock << endl;
-	cout << "MFG   : " << MFG << " -EXP: " << EXP << endl;
+	cout << "MFG   : " << MFG << "| EXP: " << EXP << endl;
 }

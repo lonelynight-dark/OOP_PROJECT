@@ -17,6 +17,9 @@ public:
 	Company();
 	~Company();
 
+	void loadAll();
+	void saveAll();
+
 	void load(ifstream&);
 	void save(ofstream&);
 	//void output();
