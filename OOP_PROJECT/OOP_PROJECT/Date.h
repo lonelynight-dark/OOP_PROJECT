@@ -5,8 +5,12 @@
 #define _DATE_H_
 #include <fstream>
 #include <iostream>
+#include <string>
 
-struct Date
+enum class ErrorDate {
+	WRONG_DATE_FORMAT = -9999
+};
+class Date
 {
 public:
 	Date(); // default date is 1/1/1900
@@ -42,11 +46,8 @@ public:
 	Date& operator+=(const int& n);
 	Date& operator-=(const int& n);
 
-	// type-cast operator
-	explicit operator int() const;
-	explicit operator long() const;
 	int timeInterval(const Date& dt) const;
-
+	Date& stoDate(std::string str, const char* deli);
 
 	// input - output operator
 	friend std::ostream& operator<<(std::ostream& outDev, const Date& dt);

@@ -135,14 +135,24 @@ double ListProduct::totalPrice()
 
 void ListProduct::outputList()
 {
+	cout << "--------------------------------\n";
+	cout << "           PRODUCT LIST         " << endl;
+	cout << "--------------------------------\n";
 	int n = listProduct.size();
-	cout << "Number of type of products: " << n << endl;
-	cout << endl;
+	if (n == 0)
+	{
+		cout << ">> Product List is Empty...." << endl;
+		return;
+	}
+		cout << "********************************\n";
 	for (int i = 0; i < n; ++i)
 	{
-		cout << "Product " << i + 1 << " :" << endl;
+		cout << "INFORMATION OF PRODUCT " << i + 1 << ":" << endl;
+		cout << "---------------------------\n";
 		listProduct[i]->output();
+		cout << "********************************\n";
 	}
+	cout << "\n>> END OF LIST." << endl;
 }
 
 void ListProduct::loadList(ifstream& fin)
@@ -157,27 +167,36 @@ void ListProduct::loadList(ifstream& fin)
 			this->addProduct(p);
 		}
 		catch (ErrorCode) {
-			cout << "ID (" << p.getID() << ") existed..." << endl;
+			cout << ">> Warning! ID (" << p.getID() << ") existed..." << endl;
 		}
 	}
 }
 
 void ListProduct::inputList()
 {
+	cout << "--------------------------------\n";
+	cout << "           PRODUCT LIST         " << endl;
+	cout << "--------------------------------\n";
 	int n;
 	Product p;
-	cout << "Number of type of products: ";
+	cout << "NUMBER OF PRODUCTS : ";
 	cin >> n;
+		cout << "********************************\n";
 	for (int i = 0; i < n; ++i)
 	{
-		cout << "Product " << i + 1 << " :" << endl;
+		cout << "INFORMATION OF PRODUCT " << i + 1 << ":" << endl;
+		cout << "------------------------------" << endl;
 		p.input();
 		try {
 			this->addProduct(p);
 		}
 		catch (ErrorCode) {
-			cout << "ID (" << p.getID() << ") existed..." << endl;
-		}
+			cout << ">> Warning! ID (" << p.getID() << ") existed..." << endl;
+			cout << ">> Please input another product..." << endl;
+			i--;
+ 		}
+		cout << "********************************\n";
+		cout << "\n>> FINISHED." << endl;
 	}
 }
 
@@ -195,7 +214,7 @@ void ListProduct::concat(const ListProduct& list)
 			addProduct(*product);
 		}
 		catch (ErrorCode) {
-			cout << "ID (" << product->getID() << ") existed..." << endl;
+			cout << ">> Warning! ID (" << product->getID() << ") existed..." << endl;
 		}
 	}
 }

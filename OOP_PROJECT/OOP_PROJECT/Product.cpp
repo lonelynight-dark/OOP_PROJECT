@@ -54,22 +54,22 @@ void Product::load(ifstream& fin) {
 void Product::input()
 {
 	do {
-		cout << "ID:    "; cin >> ID;
+		cout << "ID    : "; cin >> ID;
 	} while (ID < 0);
 	cin.ignore(100, '\n');
 	do {
-		cout << "Name:  ";  getline(cin, name);
+		cout << "Name  : ";  getline(cin, name);
 	} while (name == "");
 	do {
-		cout << "Price: "; cin >> price;
-	} while (price < 0);
-	do {
-		cout << "Stock: "; cin >> stock;
+		cout << "Stock : "; cin >> stock;
 	} while (stock < 0);
-	cout << "MFG:   "; cin >> MFG;
 	do {
-		cout << "EXP:   "; cin >> EXP;
-		if (EXP < MFG) cout << ">> Error: EXP cannot be before the MFG...!" << endl;
+		cout << "Price(VND) : "; cin >> price;
+	} while (price < 0);
+		cout << "Manufacturing Date : "; cin >> MFG;
+	do {
+		cout << "Expired Date       : "; cin >> EXP;
+		if (EXP < MFG) cout << ">> Error: EXP cannot be less than MFG...!" << endl;
 	} while (EXP < MFG);
 }
 void Product::save(ofstream& fout) {
@@ -82,10 +82,10 @@ void Product::save(ofstream& fout) {
 }
 void Product::output()
 {
-	cout << "ID:    " << ID << endl;
-	cout << "Name:  " << name << endl;
-	cout << "Price: " << price << endl;
-	cout << "Stock: " << stock << endl;
-	cout << "MFG:   " << MFG << endl;
-	cout << "EXP:   " << EXP << endl;
+	cout << fixed << setprecision(2); 
+	cout << "ID    : " << ID << endl;
+	cout << "Name  : " << name << endl;
+	cout << "Price : " << price << " VND" << endl;
+	cout << "Stock : " << stock << endl;
+	cout << "MFG   : " << MFG << " -EXP: " << EXP << endl;
 }

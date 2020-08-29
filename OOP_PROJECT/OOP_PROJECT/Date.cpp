@@ -122,15 +122,33 @@ int Date::timeInterval(const Date& dt) const {
 	return diff;
 }
 
-// type-cast operator
-Date::operator int() const {
-	Date dtNow(0); // get current date
-	Date startDt(dtNow.year); // make the date as the first date of the current year
-	return startDt.timeInterval(*this);
-}
-Date::operator long() const {
-	Date startDt(1);  // create a date as 1/1/1
-	return startDt.timeInterval(*this);
+Date& Date::stoDate(std::string str, const char* deli)
+{
+	std::string::size_type prev = str.find_first_not_of(deli);
+	std::string::size_type found = str.find_first_of(deli, prev); 
+	unsigned short i = 0;
+	while (i < 3 && found != std::string::npos)
+	{
+		try {
+			if (i == 0) day   = stoi(str.substr(prev, found));
+			if (i == 1) month = stoi(str.substr(prev, found));
+			if (i == 2) year  = stoi(str.substr(prev, found));
+			prev = str.find_first_not_of(deli, found);
+			found = str.find_first_of(deli, prev);
+			++i;
+		}
+		catch (...)
+		{
+			throw ErrorDate::WRONG_DATE_FORMAT;
+		}
+	}
+	if ((year <= 0)
+		|| (month <= 0 || month > 12)
+		|| (day <= 0   || day > Date::getDaysInMonth(month, year)))
+	{
+		throw ErrorDate::WRONG_DATE_FORMAT;
+	}
+	return *this;
 }
 
 // input - output operator
@@ -139,10 +157,18 @@ std::ostream& operator<<(std::ostream& outDev, const Date& dt) {
 	return outDev;
 }
 std::istream& operator>>(std::istream& inDev, Date& dt) {
-	inDev >> dt.day >> dt.month >> dt.year;
-	if (dt.year <= 0)   dt.year = 1900;
-	if (dt.month <= 0 || dt.month > 12) dt.month = 1;
-	if (dt.day <= 0 || dt.day > Date::getDaysInMonth(dt.month, dt.year)) dt.day = 1;
+	std::string str;
+	do {
+		getline(inDev, str);
+	} while (str.empty());
+	try {
+		dt.stoDate(str, "/ ");
+	}
+	catch (ErrorDate)
+	{
+		std::cout << "\n>> Error: WRONG DATE FORMAT..." << std::endl;
+		std::cout << "Choose another date: "; std::cin >> dt;
+	}
 	return inDev;
 }
 
