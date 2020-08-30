@@ -250,7 +250,7 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 				}
 
 
-				cout << "Continue to insert ?\n y/n > ";
+				cout << "Continue to delete ?\n y/n > ";
 				cin >> ch;
 			} while (ch == 'y');
 		}

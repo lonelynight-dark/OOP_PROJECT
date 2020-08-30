@@ -47,6 +47,8 @@ void Employee::EnterProductInfo()
 void Employee::DeleteProduct(int _id)
 {
 	stock.deleteProduct(_id);
+	ofstream fout("Stock.txt");
+	stock.saveList(fout);
 }
 
 void Employee::exportInvoice(ListProduct soldProduct)
