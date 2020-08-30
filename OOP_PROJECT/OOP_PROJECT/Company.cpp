@@ -46,7 +46,6 @@ Company::Company()
 		fin.close();
 	}
 }
-
 Company::~Company()
 {
 	string s =source_Staff + "Manager.txt";
