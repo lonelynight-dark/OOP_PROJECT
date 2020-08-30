@@ -8,16 +8,12 @@ class ListSale final
 {
 private:
 	vector<Sale*> SaleList;
-	vector<Date*> saleDate;
+	vector<Date> saleDate;
 public:
-	ListSale()
-	{
-	}
+	ListSale(){}
 	~ListSale() {
 		for (Sale* sale : SaleList)
 			delete sale;
-		for (Date* date : saleDate)
-			delete date;
 	}
 	// Single sale
 	Sale* FindSale(const Date&);
@@ -32,12 +28,14 @@ public:
 	// Another method
 	bool AddSaleDate(Date*);
 	bool AddSaleData(Sale*);
-	bool LoadDataSaleList();
+	bool LoadDataSaleList(const int&, const string&);
 	bool LoadDateSaleList(const string&);
-	bool SaveDataSaleList();
+	bool SaveDataSaleList(const int&, const string&);
+	bool SaveDateSaleList(const int&, const string&);
 	void OutputSaleList();
 	Date stoDate(const string&, const char*);
-	string Datetostr(Date);
+	string Datetostr1(Date);
+	string Datetostr2(Date);
 };
 
 #endif // !_LISTSALE_H_

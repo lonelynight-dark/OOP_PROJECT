@@ -6,7 +6,7 @@ void Company::output()
 {
 	int n = listManager.size();
 	cout << "Number of staff: " << n << endl;
-	for (int i = 0; i < n; ++i) 
+	for (int i = 0; i < n; ++i)
 	{
 		cout << "------------------" << endl;
 		cout << "Staff " << i + 1 << ":\n";
@@ -24,10 +24,27 @@ void Company::output(int ID)
 
 Company::Company()
 {
+	loadAll();
+}
+
+Company::~Company()
+{
+	saveAll();
+	for (Manager* staff : listManager) delete staff;
+}
+
+Company Company::INSTANCE;
+Company* Company::getInstance()
+{
+	return &INSTANCE;
+}
+
+void Company::loadAll()
+{
 	string s;
 	ifstream fin;
 
-	s = source_Staff +"Manager.txt";
+	s = source_Staff + "Manager.txt";
 	fin.open(s);
 	if (fin.is_open()) cout << "Ready..." << endl;
 	else {
@@ -46,14 +63,24 @@ Company::Company()
 		fin.close();
 	}
 }
-Company::~Company()
+
+void Company::saveAll()
 {
-	string s =source_Staff + "Manager.txt";
+	string s = source_Staff + "Manager.txt";
 	ofstream fout;
 	fout.open(s);
 	save(fout);
 	fout.close();
-	for (Manager* staff : listManager) delete staff;
+
+	int n = listManager.size();
+	for (int i = 0; i < n; ++i) {
+		cout << "Employee Saving ..." << endl;
+		s = source_Staff + to_string(listManager[i]->getID()) + "_Staff.txt";
+		fout.open(s);
+		listManager[i]->saveStaff(fout);
+		fout.close();
+	}
+	fout.close();
 }
 
 
@@ -75,6 +102,7 @@ void Company::save(ofstream& fout)
 	fout << n << endl;
 
 	for (int i = 0; i < n; ++i) {
+		cout << "Manager saving..." << endl;
 		listManager[i]->save(fout);
 	}
 }
@@ -198,7 +226,7 @@ Staff* Company::search(string username)
 	int ID = 0; string TYPE;
 	try {
 		ID = stoi(username.substr(1));
-		
+
 		if (username[0] == 'M')
 		{
 			TYPE = "Manager";

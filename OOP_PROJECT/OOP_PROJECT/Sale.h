@@ -13,22 +13,22 @@ public:
 	Sale(Date a) { saleDate = a; }
 	~Sale(){}
 
-	// Calculate Summary of Product
+	// Calculate Money of chosen Product
 	double Summary(const int&);
 
-	// Calculate Total Revenue
+	// Calculate Sum all Revenue
 	double CalculateRevenue();
 
 	// Number of product
-	int numProduct();
-	int numProduct(const int&);
+	int numProduct(); // Total Product
+	int numProduct(const int&); // Num of chosen Product
 
 	// Another method
-	bool LoadSale(const string&);
+	bool LoadSale(const string&, const string&);
 	void OutputSale();
 	int month_sale_date();
 	int year_sale_date();
-	bool SaveSale(const string&);
+	void SaveSale(ofstream&);
 	bool AddAtttributeSale(Product*, int);
 	void AddAtttributeSale(ListProduct products);
 private:

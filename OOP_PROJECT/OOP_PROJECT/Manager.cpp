@@ -24,6 +24,8 @@ void Manager::addStaff()
 	Employee* newEmployee = new Employee;
 	newEmployee->input();
 	List.push_back(newEmployee);
+	nEmp += 1;
+	cout << "Employee added\n";
 }
 
 void Manager::deleteStaff()
@@ -40,6 +42,8 @@ void Manager::deleteStaff()
 			if (opt == 1) {
 				delete List[i];
 				List.erase(List.begin() + i);
+				nEmp -= 1;
+				cout << "Employee deleted\n";
 			}
 			found = true;
 		}
@@ -64,6 +68,15 @@ void Manager::editStaff()
 			found = true;
 		}
 	}
+}
+
+double Manager::viewSalary()
+{
+	double s = Staff::getAbsentDays();
+	s *= 1000000;
+	s = 5000000 - s;
+	return ((s > 0) ? s : 0);
+	//double s = 5000000 - Staff::getAbsentDays() * 1000000;
 }
 
 double Manager::calculateRevenueByMonth(const int month, const int year)
@@ -100,20 +113,22 @@ void Manager::edit()
 
 void Manager::viewProd()
 {
-	prodList.outputList();
+	List[0]->viewAllProducts();
 }
 
 void Manager::viewEmp()
 {
-	for (int i = 0; i < nEmp; i++) List[i]->output();
+	for (int i = 0; i < nEmp; i++) {
+		List[i]->output();
+		cout << endl;
+	}
 }
 
 void Manager::viewEmpSalary()
 {
 	for (Staff* s : List) {
-		cout << "ID: " << s->getID() << endl;
-		cout << "Name: " << s->getName() << endl;
-		cout << "Salary: " << s->viewSalary() << endl << endl;
+		s->viewSalary(); 
+		cout << endl;
 	}
 }
 
