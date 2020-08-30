@@ -2,7 +2,7 @@
 #include <memory>
 using namespace std;
 int main() {
-	unique_ptr<Company> company(new Company());
+	Company* company = Company::getInstance();
 	std::string pathAccount = "Data/Account/";
 	std::string space = "                            ";
 	int nCommand = 5;
@@ -42,6 +42,5 @@ int main() {
 
 	}
 	// write something here...
-	//company->saveAll();
 	return 0;
 }

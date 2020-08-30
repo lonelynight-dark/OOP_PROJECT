@@ -10,12 +10,19 @@ using namespace std;
 
 class Company final
 {
-	string name;
-	string address;
+private:
+	//string name;
+	//string address;
 	vector<Manager*> listManager;
-public:
+	static Company INSTANCE;
+	
 	Company();
 	~Company();
+public:
+	Company(const Company&) = delete;
+	Company& operator=(const Company&) = delete;
+
+	static Company* getInstance();
 
 	void loadAll();
 	void saveAll();

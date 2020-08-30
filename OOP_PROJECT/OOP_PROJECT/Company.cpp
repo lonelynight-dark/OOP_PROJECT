@@ -33,6 +33,12 @@ Company::~Company()
 	for (Manager* staff : listManager) delete staff;
 }
 
+Company Company::INSTANCE;
+Company* Company::getInstance()
+{
+	return &INSTANCE;
+}
+
 void Company::loadAll()
 {
 	string s;
