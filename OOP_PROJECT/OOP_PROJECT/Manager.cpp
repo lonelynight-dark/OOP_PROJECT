@@ -25,6 +25,7 @@ void Manager::addStaff()
 	newEmployee->input();
 	List.push_back(newEmployee);
 	nEmp += 1;
+	cout << "Employee added\n";
 }
 
 void Manager::deleteStaff()
@@ -42,6 +43,7 @@ void Manager::deleteStaff()
 				delete List[i];
 				List.erase(List.begin() + i);
 				nEmp -= 1;
+				cout << "Employee deleted\n";
 			}
 			found = true;
 		}
