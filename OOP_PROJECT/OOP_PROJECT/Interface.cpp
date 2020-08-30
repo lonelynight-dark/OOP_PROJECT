@@ -82,8 +82,8 @@ void Interface::ImportFromFile(std::string path, std::string fileName) {
 	}
 	filein.close();
 }
-int Interface::Login(string path, string userName, string password, Company& com, string space) {
-	string fileName[] = { "Employee.txt" , "Manager.txt" };
+int Interface::Login(string path, string userName, string password, string space) {
+	string fileName[] = { "Employee.txt" , "Manager.txt", "Admin.txt" };
 	if (userName[0] == 'E' || userName[0] == 'M')
 		ImportFromFile(path, fileName[userName[0] == 'M']);
 	else return 0;
@@ -92,15 +92,15 @@ int Interface::Login(string path, string userName, string password, Company& com
 	for (int i = 0; i < n; i++) {
 		if (acc[i]->isCorrect(userName, password)) {
 			log = 1;
-			ShowStaffMenu(com, space, userName, path, i);
+			ShowStaffMenu(space, userName, path, i);
 			break;
 		}
 	}
 	return log;
 }
 
-void Interface::ShowStaffMenu(Company& company, string space, string username, string path, int index) {
-	Staff* s = company.search(username);
+void Interface::ShowStaffMenu(string space, string username, string path, int index) {
+	Staff* s = Company::getInstance()->search(username);
 	if (s == nullptr) {
 		std::cout << space << "Staff is not exist\nPress any key to try again";
 		_getch();
