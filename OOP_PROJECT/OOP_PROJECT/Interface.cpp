@@ -356,11 +356,17 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 			cout << "Revenue in " << month << " of " << year << ": " << man.calculateRevenueByMonth(month, year) << endl;
 			break;
 		}
-		case 6:
+		case 6: {
 			int year;
+			double p = 0;
 			cout << "Year: "; cin >> year;
-			cout << "Revenue in " << year << ": " << man.calculateRevenueByMonth(year) << endl;
+			for (int i = 1; i < 13; i++) {
+				p += man.calculateRevenueByMonth(i, year);
+				cout << i << " / " << year << " revenue: " << p << endl;
+			}
+			cout << "Revenue in " << year << ": " << p << endl;
 			break;
+		}
 		case 7:
 			man.viewEmp();
 			break;
