@@ -24,6 +24,8 @@ void Manager::addStaff()
 	Employee* newEmployee = new Employee;
 	newEmployee->input();
 	List.push_back(newEmployee);
+	nEmp += 1;
+	cout << "Employee added\n";
 }
 
 void Manager::deleteStaff()
@@ -40,6 +42,8 @@ void Manager::deleteStaff()
 			if (opt == 1) {
 				delete List[i];
 				List.erase(List.begin() + i);
+				nEmp -= 1;
+				cout << "Employee deleted\n";
 			}
 			found = true;
 		}
@@ -114,7 +118,10 @@ void Manager::viewProd()
 
 void Manager::viewEmp()
 {
-	for (int i = 0; i < nEmp; i++) List[i]->output();
+	for (int i = 0; i < nEmp; i++) {
+		List[i]->output();
+		cout << endl;
+	}
 }
 
 void Manager::viewEmpSalary()

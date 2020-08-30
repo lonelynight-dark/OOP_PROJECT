@@ -270,7 +270,8 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 				cin >> id;
 				if(emp.searchProductById(id)!=nullptr)
 				emp.searchProductById(id)->output();
-				else cout << "Not found!\n";
+				else 
+					cout << "Not found!\n";
 			}
 			else
 			{
@@ -301,7 +302,7 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		{
 			std::cout << "Bad choice\nPress any key to try again";
 		}
-			_getch();
+		_getch();
 	}
 }
 void Interface::ShowManagerMenu(Manager& man, string space) {
