@@ -31,13 +31,16 @@ bool ListSale::LoadDateSaleList(const string& source)
 	if (!fin.is_open()) return false;
 	Date date;
 	string strDate;
-
+	bool flag = true;
 	while (getline(fin, strDate))
 	{
 		try
 		{
 			date = ListSale::stoDate(strDate, " ");
-			saleDate.push_back(date);
+			for (Date tmp : saleDate)
+				if (tmp == date)
+					flag = false;
+			if(flag) saleDate.push_back(date);
 		}
 		catch (int)
 		{
@@ -64,10 +67,12 @@ bool ListSale::AddSaleData(Sale* sale)
 	SaleList.push_back(sale);
 	return true;
 }
+int ListSale::countObj = 0;
 bool ListSale::LoadDataSaleList(const int& ID, const string& path)
 {
 	Sale* tmp;
 	string strFile = "";
+	bool flag = true;
 
 	for(Date date : saleDate)
 	{
@@ -75,9 +80,24 @@ bool ListSale::LoadDataSaleList(const int& ID, const string& path)
 		tmp = new Sale;
 		strFile = to_string(ID) + "_" + to_string(date.getDay()) + "-" + to_string(date.getMonth()) + "-" + to_string(date.getYear()) + ".txt";
 		if (tmp->LoadSale(strFile, path) == false) return false;
-		SaleList.push_back(tmp);
+		if (countObj != 0)
+		{
+			for (int i = 0; i < saleDate.size(); i++)
+			{
+				if (tmp->getDate() == saleDate[i])
+				{
+					delete SaleList[i];
+					SaleList[i] = tmp;
+					flag = false;
+				}
+			}
+			if (flag)
+				SaleList.push_back(tmp);
+		}
+		else SaleList.push_back(tmp);
 	}
 
+	++countObj;
 	tmp = nullptr;
 	return true;
 }

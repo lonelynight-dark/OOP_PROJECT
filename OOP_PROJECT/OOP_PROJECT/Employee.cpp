@@ -106,11 +106,15 @@ void Employee::sellProduct()
 		
 		if (!is_number(tmpID))
 		{
+			
 			do
 			{
+				
 				cout << "ID must be a number!\n";
+				cout << "Please enter again:";
 				getline(cin, tmpID);
-			} while (is_number(tmpID));
+				
+			} while (!is_number(tmpID));
 		}
 
 		cout << "Quantity:";
@@ -118,12 +122,16 @@ void Employee::sellProduct()
 		getline(cin, tmpQuantity);
 		if (!is_number(tmpQuantity))
 		{
+			
 			do
 			{
+				
 				cout << "Quantity must be a number!\n";
+				cout << "Please enter again:";
 				getline(cin, tmpQuantity);
+				
 			} 
-			while (is_number(tmpQuantity));
+			while (!is_number(tmpQuantity));
 		}
 		
 
@@ -162,7 +170,7 @@ void Employee::sellProduct()
 		listSale.AddSaleDate(today);
 		todaySale = new Sale(*today);
 	}
-	todaySale->AddAtttributeSale(soldProducts);
+	todaySale->AddAtttributeSale(soldProducts);///soldProdcut is ListProduct obj
 	listSale.AddSaleData(todaySale);
 	listSale.SaveDateSaleList(this->getID(), ".\\Data\\Sale\\");
 	listSale.SaveDataSaleList(this->getID(), ".\\Data\\Sale\\");
