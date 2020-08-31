@@ -113,7 +113,19 @@ void Manager::edit()
 
 void Manager::viewProd()
 {
-	List[0]->viewAllProducts();
+	for (int i = 0; i < nEmp; i++) {
+		cout << i + 1 << ". " << List[i]->getID() << endl;
+	}
+	int choice;
+	cout << "Choose an ID (1 - " << nEmp << "): "; cin >> choice;
+	for (Employee* e : List) {
+		if (choice == 1) {
+			e->viewAllProducts();
+			break;
+		}
+		else choice -= 1;
+	}
+	cout << endl;
 }
 
 void Manager::viewEmp()
