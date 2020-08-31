@@ -123,10 +123,14 @@ void Interface::ShowStaffMenu(string space, string username, string path, int in
 				Employee* e = (Employee*)s;
 				ShowEmployeeMenu(*e, space);
 			}
-			else {
+			else if (s->getType() == "Manager") {
 				Manager* m = (Manager*)s;
 				ShowManagerMenu(*m, space);
 			}
+			else {
+				ShowAdminMenu(*(Admin*)s, space);
+			}
+
 		}
 		else if (choice == 2) {
 			system("CLS");
@@ -143,8 +147,12 @@ void Interface::ShowStaffMenu(string space, string username, string path, int in
 				outfile.open(path + "Employee.txt");
 				ExportToFile(outfile);
 			}
-			else {
+			else if (s->getType() == "Manager") {
 				outfile.open(path + "Manager.txt");
+				ExportToFile(outfile);
+			}
+			else {
+				outfile.open(path + "Admin.txt");
 				ExportToFile(outfile);
 			}
 			outfile.close();
@@ -393,9 +401,16 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 	string u, p;
 	ofstream out;
 	string command[] = {
-		"Add Account"
+		"Add Manager",
+		"Delete Manager",
+		"Edit Manager",
+		"Search Manager",
+		"View All Manager"
 	};
 	int nCommand = 1;
+	Company* c = Company::getInstance();
+	// call function of company to 
+	// 
 	string filename[] = { "Employee.txt", "Manager.txt" };
 	while (true)
 	{

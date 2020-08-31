@@ -4,6 +4,7 @@
 #include "ListProduct.h"
 #include "Staff.h"
 #include "Manager.h"
+#include "Admin.h"
 #include <string>
 #include <vector>
 using namespace std;
@@ -11,24 +12,23 @@ using namespace std;
 class Company final
 {
 private:
-	//string name;
-	//string address;
 	vector<Manager*> listManager;
 	static Company INSTANCE;
-	
+	static Admin admin;
 	Company();
 	~Company();
+
+	void loadAll();
+	void saveAll();
 public:
 	Company(const Company&) = delete;
 	Company& operator=(const Company&) = delete;
 
 	static Company* getInstance();
 
-	void loadAll();
-	void saveAll();
-
 	void load(ifstream&);
 	void save(ofstream&);
+
 	//void output();
 	void output(int ID);
 	//void input();
