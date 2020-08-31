@@ -95,3 +95,8 @@ void Sale::AddAtttributeSale(ListProduct products)
 {
 	listSoldProduct.concat(products);
 }
+
+Date Sale::getDate()
+{
+	return saleDate;
+}

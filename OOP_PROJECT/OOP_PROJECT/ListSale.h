@@ -9,6 +9,7 @@ class ListSale final
 private:
 	vector<Sale*> SaleList;
 	vector<Date> saleDate;
+	static int countObj;
 public:
 	ListSale(){}
 	~ListSale() {

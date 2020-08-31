@@ -31,6 +31,7 @@ public:
 	void SaveSale(ofstream&);
 	bool AddAtttributeSale(Product*, int);
 	void AddAtttributeSale(ListProduct products);
+	Date getDate();
 private:
 	void OutputDate();
 	bool stoDate(const string&, const char*);
