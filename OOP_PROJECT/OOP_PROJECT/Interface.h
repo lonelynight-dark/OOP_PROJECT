@@ -7,6 +7,7 @@
 //#include "Manager.h"
 #include "Account.h"
 #include "Company.h"
+#include "Admin.h"
 class Interface
 {
 private:
@@ -21,6 +22,7 @@ public:
 	void ShowStaffMenu(string space, string username, string path, int index);
 	void ShowEmployeeMenu(Employee& emp, string space);
 	void ShowManagerMenu(Manager& man, string space);
+	void ShowAdminMenu(Admin& ad, string space);
 	void ExportToFile(ofstream& out);
 };
 

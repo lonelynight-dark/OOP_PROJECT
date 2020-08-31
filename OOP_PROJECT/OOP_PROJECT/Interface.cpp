@@ -86,7 +86,9 @@ int Interface::Login(string path, string userName, string password, string space
 	string fileName[] = { "Employee.txt" , "Manager.txt", "Admin.txt" };
 	if (userName[0] == 'E' || userName[0] == 'M')
 		ImportFromFile(path, fileName[userName[0] == 'M']);
-	else return 0;
+	else {
+		ImportFromFile(path, fileName[2]);
+	}
 	int n = acc.size();
 	int log = 0;
 	for (int i = 0; i < n; i++) {
@@ -378,6 +380,71 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 		char k;
 		cout << "\nPress any key to continue!";
 		k = _getch();
+	}
+}
+
+void Interface::ShowAdminMenu(Admin& ad, string space) {
+	string u, p;
+	ofstream out;
+	string command[] = {
+		"Add Account"
+	};
+	int nCommand = 1;
+	string filename[] = { "Employee.txt", "Manager.txt" };
+	while (true)
+	{
+		system("CLS");
+		ShowTitle(space);
+		std::cout << space << "        Admin Window\n";
+		std::cout << "================================================================================\n";
+		std::cout << "0. Return\n";
+		for (int i = 0; i < nCommand; i++)
+		{
+			std::cout << i + 1 << ". " << command[i] << endl;
+		}
+
+		std::cout << "----------------------------------------\n";
+
+		int choice;
+		std::cout << "Input choice: ";
+		std::cin >> choice;
+
+		switch (choice) {
+		case 0:
+			return;
+		case 1:
+			cin.ignore();
+			cout << "Enter username: "; getline(cin, u);
+			cout << "Enter password: "; getline(cin, p);
+			//check if exist
+			for (int i = 0; i < acc.size(); ++i) {
+				if (acc[i]->isCorrectUser(u)) {
+					cout << "Username has already existed !" << endl;
+					cout << "Press any key to choose again!" << endl;
+					_getch();
+					break;
+				}
+			}
+			acc.push_back(new Account(u, p));
+			if (u[0] == 'E') {
+				out.open("Data/Account/Employee.txt", ios::app);
+				ad.AddAccount(out, u, p);
+			}
+			else if (u[0] == 'M') {
+				out.open("Data/Account/Manager.txt", ios::app);
+				ad.AddAccount(out, u, p);
+			}
+			else {
+				std::cout << "Invalid Username !" << endl;
+				cout << "Press any key to choose again!" << endl;
+				_getch();
+			}
+			break;
+		default:
+			std::cout << "Bad choice !" << endl;
+			cout << "Press any key to choose again!" << endl;
+			_getch();
+		}
 	}
 }
 
