@@ -2,10 +2,8 @@
 #include <memory>
 using namespace std;
 int main() {
-	Company* company = Company::getInstance();
 	std::string pathAccount = "Data/Account/";
 	std::string space = "                            ";
-	int nCommand = 5;
 	Interface i;
 	while (true)
 	{
@@ -18,7 +16,7 @@ int main() {
 			break;
 		cout << "                 Password > ";
 		password = i.InputPassword();
-		int resultLogin = i.Login(pathAccount, username, password, *company, space);
+		int resultLogin = i.Login(pathAccount, username, password, space);
 		if (resultLogin == 0) {
 			cout << "Wrong username or password\nDo you want to try again?(Y/N) ";
 			while (true)
