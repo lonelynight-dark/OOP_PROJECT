@@ -2,12 +2,12 @@
 Employee::Employee() :Staff()
 {
 
-	ifstream fin("Stock.txt");
+	ifstream fin(".\\Data\\Product\\.\\Data\\Product\\Stock.txt");
 	stock.loadList(fin);
 }
 Employee::Employee(int _ID, string _name, bool _gender, string _phone, string _email, Date _yob, int _nDays):Staff( _ID,  _name,  _gender,  _phone,  _email,  _yob,  _nDays)
 {
-	ifstream fin("Stock.txt");
+	ifstream fin(".\\Data\\Product\\Stock.txt");
 	stock.loadList(fin);
 }
 double Employee::viewSalary()
@@ -24,7 +24,7 @@ double Employee::viewSalary()
 
 void Employee::viewAllProducts()
 {
-	/*ifstream fin("Stock.txt");*/
+	/*ifstream fin(".\\Data\\Product\\Stock.txt");*/
 	/*stock.loadList(fin);*/
 	stock.outputList();
 }
@@ -39,7 +39,7 @@ void Employee::EnterProductInfo()
 
 	stock.concat(tmpList);
 
-	ofstream fout("Stock.txt");
+	ofstream fout(".\\Data\\Product\\Stock.txt");
 	stock.saveList(fout);
 	
 }
@@ -47,7 +47,7 @@ void Employee::EnterProductInfo()
 void Employee::DeleteProduct(int _id)
 {
 	stock.deleteProduct(_id);
-	ofstream fout("Stock.txt");
+	ofstream fout(".\\Data\\Product\\Stock.txt");
 	stock.saveList(fout);
 }
 
@@ -174,7 +174,7 @@ void Employee::sellProduct()
 	listSale.AddSaleData(todaySale);
 	listSale.SaveDateSaleList(this->getID(), ".\\Data\\Sale\\");
 	listSale.SaveDataSaleList(this->getID(), ".\\Data\\Sale\\");
-	ofstream fout("Stock.txt");
+	ofstream fout(".\\Data\\Product\\Stock.txt");
 	stock.saveList(fout);
 
 	
