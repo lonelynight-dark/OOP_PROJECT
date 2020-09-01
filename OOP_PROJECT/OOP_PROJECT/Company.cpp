@@ -1,24 +1,26 @@
 #include "Company.h"
 
 const string source_Staff = "Data\\Staff\\";
-
+Admin Company::admin;
 void Company::output()
 {
 	int n = listManager.size();
-	cout << "Number of staff: " << n << endl;
-	for (int i = 0; i < n; ++i)
+	cout << "------------------" << endl;
+	cout << "      COMPANY" << endl;
+	cout << "------------------" << endl;
+	cout << "xxxxxxxxxxxxxxxxxxxxxx" << endl;
+	for (int i = 0; i < n; ++i) 
 	{
-		cout << "------------------" << endl;
 		cout << "Staff " << i + 1 << ":\n";
 		cout << "------------------" << endl;
 		listManager[i]->output();
-		cout << "------------------\n" << endl;
+		cout << "xxxxxxxxxxxxxxxxxxxxxx" << endl;
 	}
 }
 
 void Company::output(int ID)
 {
-	Staff* staff = search("M" + to_string(ID));
+	Staff* staff = search(ID,"Manager");
 	staff->output();
 }
 
@@ -43,7 +45,12 @@ void Company::loadAll()
 {
 	string s;
 	ifstream fin;
-
+	// get Admin information
+	s = source_Staff + "Admin.txt";
+	fin.open(s);
+	admin.load(fin);
+	fin.close();
+	// get Manager information
 	s = source_Staff + "Manager.txt";
 	fin.open(s);
 	if (fin.is_open()) cout << "Ready..." << endl;
@@ -52,9 +59,9 @@ void Company::loadAll()
 		exit(-100);
 	}
 	load(fin);
-	int n = listManager.size();
 	fin.close();
-
+	// get Staff information
+	int n = listManager.size();
 	for (int i = 0; i < n; ++i) {
 		cout << "Employee Loading ..." << endl;
 		s = source_Staff + to_string(listManager[i]->getID()) + "_Staff.txt";
@@ -223,6 +230,10 @@ Staff* Company::search(int ID, string TYPE)
 
 Staff* Company::search(string username)
 {
+	if (username == "admin")
+	{
+		return &admin;
+	}
 	int ID = 0; string TYPE;
 	try {
 		ID = stoi(username.substr(1));
