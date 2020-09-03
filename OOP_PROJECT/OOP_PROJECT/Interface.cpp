@@ -402,6 +402,7 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 	string u, p;
 	ofstream out;
 	Staff* man;
+	int ID;
 	bool isExist = false;
 	string command[] = {
 		"Add Manager",
@@ -454,6 +455,17 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 				ad.AddAccount(out, u, "1");
 				acc.push_back(new Account(u, "1"));
 			break;
+		case 2:
+				out.open("Data/Account/Manager.txt");
+				ID = Company::getInstance()->deleteManager();
+				for (int i = 0; i < acc.size(); ++i) {
+					if (acc[i]->isCorrectUser("M" + to_string(ID))) {
+						acc.erase(acc.begin() + i);
+						ExportToFile(out);
+						break;
+					}
+				}
+				break;
 		default:
 			std::cout << "Bad choice !" << endl;
 			cout << "Press any key to choose again!" << endl;
