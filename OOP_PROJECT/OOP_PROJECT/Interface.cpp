@@ -60,7 +60,7 @@ void Interface::ShowMenu(std::string space)
 		"Change Password",
 		"Logout"
 	};
-	int nCommand = 4;
+	int nCommand = sizeof(command) / sizeof(command[0]);
 	for (int i = 0; i < nCommand; i++)
 	{
 		std::cout << space << i + 1 << ". " << command[i] << std::endl;
@@ -176,7 +176,7 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 		"View trade history",
 		"Sell product"
 	};
-	int nCommand = 9; // idk
+	int nCommand = sizeof(command) / sizeof(command[0]);
 	while (true)
 	{
 		system("CLS");
@@ -329,7 +329,7 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 		"View employee's salary",		//8
 		"View product"					//9
 	};
-	int nCommand = 9;
+	int nCommand = sizeof(command) / sizeof(command[0]);
 	while (true)
 	{
 		system("CLS");
@@ -411,7 +411,7 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 		"Search Manager",
 		"View All Manager"
 	};
-	int nCommand = 1;
+	int nCommand = sizeof(command) / sizeof(command[0]);
 	Company* c = Company::getInstance();
 	// call function of company to 
 	// 
@@ -433,27 +433,51 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 		int choice;
 		std::cout << "Input choice: ";
 		std::cin >> choice;
-
+		enum adminMenu {
+			EXIT = 0,
+			ADD,
+			DELETE,
+			EDIT,
+			SEARCH,
+			VIEW
+		};
+		int ID;
 		switch (choice) {
-		case 0:
+		case EXIT:
 			return;
-		case 1:
-				out.open("Data/Account/Manager.txt", ios::app);
-				man = Company::getInstance()->addManager(); //  
-				u = "M" + to_string(man->getID());
-				isExist = false;
-				for (int i = 0; i < acc.size(); ++i) {
-					if (acc[i]->isCorrectUser(u)) {
-						cout << "User existed !" << endl;
-						cout << "Press any key to choose again" << endl;
-						_getch();
-						isExist = true;
-						break;
-					}
+		case ADD:
+			out.open("Data/Account/Manager.txt", ios::app);
+			man = Company::getInstance()->addManager(); //  
+			u = "M" + to_string(man->getID());
+			isExist = false;
+			for (int i = 0; i < acc.size(); ++i) {
+				if (acc[i]->isCorrectUser(u)) {
+					cout << "User existed !" << endl;
+					cout << "Press any key to choose again" << endl;
+					_getch();
+					isExist = true;
+					break;
 				}
-				if (isExist) break;
-				ad.AddAccount(out, u, "1");
-				acc.push_back(new Account(u, "1"));
+			}
+			if (isExist) break;
+			ad.AddAccount(out, u, "1");
+			acc.push_back(new Account(u, "1"));
+			break;
+		case DELETE:
+			out.open("Data/Account/Manager.txt", ios::app);
+			ID = c->deleteManager(); 
+			u = "M" + to_string(ID);
+			if (ID != -1)
+				// delete account;
+			break;
+		case EDIT:
+			c->editManager();
+		case SEARCH:
+			cout << "ID to search: "; cin >> ID;
+			c->output(ID);
+			break;
+		case VIEW:
+			c->output();
 			break;
 		case 2:
 				out.open("Data/Account/Manager.txt");
@@ -469,8 +493,8 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 		default:
 			std::cout << "Bad choice !" << endl;
 			cout << "Press any key to choose again!" << endl;
-			_getch();
 		}
+		_getch();
 	}
 }
 
@@ -489,5 +513,4 @@ void Interface::AddAccount(string path, string filename, string username) {
 		}
 	}
 	acc.push_back(new Account(username, "1"));
-	
 }
