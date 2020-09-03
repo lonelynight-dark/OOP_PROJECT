@@ -416,6 +416,10 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 	// call function of company to 
 	// 
 	string filename[] = { "Employee.txt", "Manager.txt" };
+	ifstream fin;
+	fin.open("data/Account/Manager.txt");
+	ad.ImportFromFile(fin);
+	fin.close();
 	while (true)
 	{
 		system("CLS");
@@ -446,32 +450,35 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 		case EXIT:
 			return;
 		case ADD:
-			out.open("Data/Account/Manager.txt", ios::app);
-			man = Company::getInstance()->addManager(); //  
-			u = "M" + to_string(man->getID());
-			isExist = false;
-			for (int i = 0; i < acc.size(); ++i) {
-				if (acc[i]->isCorrectUser(u)) {
-					cout << "User existed !" << endl;
-					cout << "Press any key to choose again" << endl;
-					_getch();
-					isExist = true;
-					break;
-				}
+			out.open("data/Account/Manager.txt", ios::app);
+			man = c->addManager();  
+			if (man == nullptr)
+			{
+				cout << "User existed !" << endl;
+				cout << "Press any key to choose again" << endl;
 			}
-			if (isExist) break;
-			ad.AddAccount(out, u, "1");
-			acc.push_back(new Account(u, "1"));
+			else
+			{
+				u = "M" + to_string(man->getID());
+				ad.AddAccount(out, u, "1");
+				cout << "Add manager OK...!";
+			}
+			out.close();
 			break;
 		case DELETE:
-			out.open("Data/Account/Manager.txt", ios::app);
+			out.open("data/Account/Manager.txt");
 			ID = c->deleteManager(); 
-			u = "M" + to_string(ID);
 			if (ID != -1)
-				// delete account;
+			{
+				u = "M" + to_string(ID);
+				ad.DeleteAccount(out, u);
+			}
+			out.close();
 			break;
 		case EDIT:
 			c->editManager();
+			cout << "Edit OK...";
+			break;
 		case SEARCH:
 			cout << "ID to search: "; cin >> ID;
 			c->output(ID);
@@ -479,17 +486,6 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 		case VIEW:
 			c->output();
 			break;
-		case 2:
-				out.open("Data/Account/Manager.txt");
-				ID = Company::getInstance()->deleteManager();
-				for (int i = 0; i < acc.size(); ++i) {
-					if (acc[i]->isCorrectUser("M" + to_string(ID))) {
-						acc.erase(acc.begin() + i);
-						ExportToFile(out);
-						break;
-					}
-				}
-				break;
 		default:
 			std::cout << "Bad choice !" << endl;
 			cout << "Press any key to choose again!" << endl;

@@ -11,7 +11,7 @@ void Company::output()
 	cout << "xxxxxxxxxxxxxxxxxxxxxx" << endl;
 	for (int i = 0; i < n; ++i) 
 	{
-		cout << "Staff " << i + 1 << ":\n";
+		cout << "Manager " << i + 1 << ":\n";
 		cout << "------------------" << endl;
 		listManager[i]->output();
 		cout << "xxxxxxxxxxxxxxxxxxxxxx" << endl;
@@ -21,7 +21,11 @@ void Company::output()
 void Company::output(int ID)
 {
 	Staff* staff = search(ID,"Manager");
-	staff->output();
+	if (staff) staff->output();
+	else
+	{
+		cout << "This ID does not exist..." << endl;
+	}
 }
 
 Company::Company()
@@ -160,7 +164,15 @@ Staff* Company::addManager()
 {
 	Manager* newManager = new Manager;
 	newManager->input();
-	listManager.push_back(newManager);
+	if (search(newManager->getID(), "Manager") == nullptr)
+	{
+		listManager.push_back(newManager);
+	}
+	else
+	{
+		delete newManager;
+		newManager = nullptr;
+	}
 	return newManager;
 }
 
