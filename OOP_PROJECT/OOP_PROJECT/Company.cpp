@@ -181,10 +181,11 @@ int Company::deleteManager()
 				listManager.erase(listManager.begin() + i);
 			}
 			found = true;
+			return ID;
 		}
 	}
 	if (!found) cout << "No manager with that ID!\n";
-	return ID;
+	return -1;
 }
 
 Staff* Company::editManager()
