@@ -131,6 +131,7 @@ void Interface::ShowStaffMenu(string space, string username, string path, int in
 				ShowAdminMenu(*(Admin*)s, space);
 			}
 
+			Company::getInstance()->saveAll();
 		}
 		else if (choice == 2) {
 			system("CLS");
@@ -400,6 +401,8 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 void Interface::ShowAdminMenu(Admin& ad, string space) {
 	string u, p;
 	ofstream out;
+	Staff* man;
+	bool isExist = false;
 	string command[] = {
 		"Add Manager",
 		"Delete Manager",
@@ -434,32 +437,22 @@ void Interface::ShowAdminMenu(Admin& ad, string space) {
 		case 0:
 			return;
 		case 1:
-			cin.ignore();
-			cout << "Enter username: "; getline(cin, u);
-			cout << "Enter password: "; getline(cin, p);
-			//check if exist
-			for (int i = 0; i < acc.size(); ++i) {
-				if (acc[i]->isCorrectUser(u)) {
-					cout << "Username has already existed !" << endl;
-					cout << "Press any key to choose again!" << endl;
-					_getch();
-					break;
-				}
-			}
-			acc.push_back(new Account(u, p));
-			if (u[0] == 'E') {
-				out.open("Data/Account/Employee.txt", ios::app);
-				ad.AddAccount(out, u, p);
-			}
-			else if (u[0] == 'M') {
 				out.open("Data/Account/Manager.txt", ios::app);
-				ad.AddAccount(out, u, p);
-			}
-			else {
-				std::cout << "Invalid Username !" << endl;
-				cout << "Press any key to choose again!" << endl;
-				_getch();
-			}
+				man = Company::getInstance()->addManager(); //  
+				u = "M" + to_string(man->getID());
+				isExist = false;
+				for (int i = 0; i < acc.size(); ++i) {
+					if (acc[i]->isCorrectUser(u)) {
+						cout << "User existed !" << endl;
+						cout << "Press any key to choose again" << endl;
+						_getch();
+						isExist = true;
+						break;
+					}
+				}
+				if (isExist) break;
+				ad.AddAccount(out, u, "1");
+				acc.push_back(new Account(u, "1"));
 			break;
 		default:
 			std::cout << "Bad choice !" << endl;

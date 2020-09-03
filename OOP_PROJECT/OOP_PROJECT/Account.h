@@ -11,6 +11,7 @@ class Account {
 	std::string HashPassword(std::string passWord);
 public:
 	Account(std::string, std::string);
+	Account(std::string, std::string, bool isHashed);
 	bool isCorrect(std::string, std::string);
 	bool isCorrectPass(std::string);
 	bool isCorrectUser(std::string);

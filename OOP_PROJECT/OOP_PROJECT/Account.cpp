@@ -3,7 +3,16 @@
 bool Account::isCorrect(std::string u, std::string p) {
 	return username == u && password == HashPassword(p);
 }
-
+Account::Account(std::string u, std::string p, bool isHashed) {
+	if (!isHashed) {
+		username = u;
+		password = HashPassword(p);
+	}
+	else {
+		username = u;
+		password = p;
+	}
+}
 Account::Account(std::string u, std::string p) {
 	username = u;
 	password = p;

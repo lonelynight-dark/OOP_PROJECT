@@ -19,8 +19,8 @@ private:
 	~Company();
 
 	void loadAll();
-	void saveAll();
 public:
+	void saveAll();
 	Company(const Company&) = delete;
 	Company& operator=(const Company&) = delete;
 
@@ -45,9 +45,9 @@ public:
 	// Output Staff
 	void output();
 	
-	void addManager();
-	void deleteManager();
-	void editManager();
+	Staff* addManager();
+	int deleteManager();
+	Staff* editManager();
 
 	Staff* search(int ID, string TYPE);
 	Staff* search(string username); // might throw ErrorCode::Wrong_format

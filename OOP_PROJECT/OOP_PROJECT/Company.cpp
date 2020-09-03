@@ -156,14 +156,15 @@ int Company::countManagers()
 	return listManager.size();
 }
 
-void Company::addManager()
+Staff* Company::addManager()
 {
 	Manager* newManager = new Manager;
 	newManager->input();
 	listManager.push_back(newManager);
+	return newManager;
 }
 
-void Company::deleteManager()
+int Company::deleteManager()
 {
 	int ID;
 	bool found = false;
@@ -183,9 +184,10 @@ void Company::deleteManager()
 		}
 	}
 	if (!found) cout << "No manager with that ID!\n";
+	return ID;
 }
 
-void Company::editManager()
+Staff* Company::editManager()
 {
 	int ID;
 	bool found = false;
@@ -201,9 +203,11 @@ void Company::editManager()
 				listManager[i]->edit();
 			}
 			found = true;
+			return listManager[i];
 		}
 	}
 	if (!found) cout << "No manager with that ID!\n";
+	return NULL;
 }
 
 Staff* Company::search(int ID, string TYPE)

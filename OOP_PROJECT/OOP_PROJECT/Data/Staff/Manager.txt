@@ -1,4 +1,4 @@
-10
+11
 1000
 Thi Nu Than
 1
@@ -68,4 +68,11 @@ Ty Thi Gia
 0888496066
 5476/56 An Duong Vuong,Phuong 10,Quan Thu Duc,Cao Bang
 16 1 1988
+0
+19127646
+Phong
+1
+0123456789
+127.0.0.1
+20 4 2001
 0
