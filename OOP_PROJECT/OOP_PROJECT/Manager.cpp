@@ -19,13 +19,14 @@ void Manager::saveStaff(ofstream& fo)
 		List[i]->save(fo);
 }
 
-void Manager::addStaff()
+Employee* Manager::addStaff()
 {
 	Employee* newEmployee = new Employee;
 	newEmployee->input();
 	List.push_back(newEmployee);
 	nEmp += 1;
 	cout << "Employee added\n";
+	return newEmployee;
 }
 
 void Manager::deleteStaff()

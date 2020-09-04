@@ -19,7 +19,7 @@ public:
 	void loadStaff(ifstream& fi);
 	void saveStaff(ofstream& fo);
 
-	void addStaff();
+	Employee* addStaff();
 	void deleteStaff();
 	void editStaff();
 	double viewSalary();
