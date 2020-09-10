@@ -31,6 +31,7 @@ public:
 	int getID();
 	string getName();
 	int getAbsentDays();
+	void absent(); // increase the absentDays + 1
 	// input & output
 	virtual void input();
 	virtual void output();
