@@ -145,11 +145,28 @@ void Manager::viewEmpSalary()
 	}
 }
 
+void Manager::checkAttendance()
+{
+	for (Employee* e : List)
+		cout << e->getID() << endl;
+	int N;
+	cout << "Absent employeees: ";
+	cin >> N;
+	for (int i = 0; i < N; i++) {
+		cout << "Enter ID: ";
+		int id;
+		cin >> id;
+		if (search(id) != NULL){
+			(search(id))->absent();
+		}
+		cout << "Attendance checked\n";
+	}
+}
+
 Staff* Manager::search(int ID)
 {
-	Staff* em = nullptr;
 	for (int i = 0; i < nEmp; i++)
 		if (List[i]->getID() == ID)
 			return List[i];
-	return em;
+	return NULL;
 }
