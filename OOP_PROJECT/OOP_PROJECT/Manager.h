@@ -36,6 +36,8 @@ public:
 	void viewEmp();
 	void viewEmpSalary();
 
+	void checkAttendance();
+
 	Staff* search(int ID);
 private:
 	std::vector<Employee*> List;

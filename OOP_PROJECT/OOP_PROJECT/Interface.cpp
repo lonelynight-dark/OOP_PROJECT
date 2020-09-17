@@ -329,7 +329,8 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 		"Watch revenue by year",		//6
 		"View employee",				//7
 		"View employee's salary",		//8
-		"View product"					//9
+		"View product",					//9
+		"Check attendance"				//10
 	};
 	int nCommand = sizeof(command) / sizeof(command[0]);
 	while (true)
@@ -399,6 +400,9 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 			break;
 		case 9: 
 			man.viewProd();
+			break;
+		case 10:
+			man.checkAttendance();
 			break;
 		default:
 		{

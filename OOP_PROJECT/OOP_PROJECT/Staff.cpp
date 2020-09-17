@@ -120,6 +120,11 @@ int Staff::getAbsentDays()
 	return absentDay;
 }
 
+void Staff::absent()
+{
+	absentDay++;
+}
+
 ostream& operator<<(ostream& out ,const Staff& staff) 
 {
 	out << "ID: " << staff.ID << endl;
