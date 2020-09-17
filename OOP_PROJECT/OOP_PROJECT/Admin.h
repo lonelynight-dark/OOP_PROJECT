@@ -12,6 +12,7 @@ public:
 	void ExportToFile(ofstream& out);
 	void AddAccount(ofstream& out, string u, string p);
 	Account* search(string);
+	bool isExisted(Account* a);
 	void DeleteAccount(ofstream& out, string);
 	double viewSalary() { return 0.0; }
 	string getType() { return "Admin"; }

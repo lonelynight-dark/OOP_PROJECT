@@ -122,3 +122,7 @@ void Account::savetoFile(std::ofstream& out) {
 bool Account::isCorrectUser(std::string u) {
 	return (u == username);
 }
+
+bool Account::isAccount(const Account& acc) {
+	return username == acc.username;
+}

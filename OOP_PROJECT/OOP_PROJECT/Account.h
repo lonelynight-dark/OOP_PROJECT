@@ -13,6 +13,7 @@ public:
 	Account(std::string, std::string);
 	Account(std::string, std::string, bool isHashed);
 	bool isCorrect(std::string, std::string);
+	bool isAccount(const Account&);
 	bool isCorrectPass(std::string);
 	bool isCorrectUser(std::string);
 	void ChangePassword(std::string space);

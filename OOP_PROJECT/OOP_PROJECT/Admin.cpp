@@ -53,3 +53,12 @@ void Admin::ExportToFile(ofstream& out)
 		acc[i]->savetoFile(out);
 	}
 }
+
+bool Admin::isExisted(Account* a) {
+	for (Account* b : acc) {
+		if (b->isAccount(*a)) {
+			return true;
+		}
+	}
+	return false;
+}

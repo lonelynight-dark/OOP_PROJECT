@@ -317,6 +317,8 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 	}
 }
 void Interface::ShowManagerMenu(Manager& man, string space) {
+	ofstream fout("data/Account/Employee.txt", ios::app);
+	Employee* emp;
 	string command[] =
 	{
 		"Add Staff",					//1
@@ -352,7 +354,18 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 		case 0:
 			return;
 		case 1:
-			man.addStaff(); break;
+			emp = man.addStaff(); 
+			if (emp == nullptr) {
+				cout << "Exited !" << endl;
+			}
+			else {
+				Account* a = new Account("E" + to_string(emp->getID()), "1");
+				a->savetoFile(fout);
+				fout.close();
+				delete a;
+				cout << "Added successfully !" << endl;
+			}
+			break;
 		case 2:
 			man.deleteStaff(); break;
 		case 3: 
