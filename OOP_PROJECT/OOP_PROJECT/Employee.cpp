@@ -1,14 +1,16 @@
 #include "Employee.h"
 Employee::Employee() :Staff()
 {
-
-	ifstream fin(".\\Data\\Product\\.\\Data\\Product\\Stock.txt");
+	ifstream fin(".\\Data\\Product\\Stock.txt");
 	stock.loadList(fin);
 }
 Employee::Employee(int _ID, string _name, bool _gender, string _phone, string _email, Date _yob, int _nDays):Staff( _ID,  _name,  _gender,  _phone,  _email,  _yob,  _nDays)
 {
 	ifstream fin(".\\Data\\Product\\Stock.txt");
 	stock.loadList(fin);
+
+	listSale.LoadDateSaleList(".\\Data\\Sale\\" + to_string(this->getID()) + ".txt");
+	listSale.LoadDataSaleList(this->getID(), ".\\Data\\Sale\\");
 }
 double Employee::viewSalary()
 {
@@ -19,7 +21,6 @@ double Employee::viewSalary()
 	cout << std::setprecision(0) << std::showpoint << std::fixed;
 	cout << "Salary:" << (s < 0 ? 0 : s) << endl;
 	return (s<0?0:s);
-	
 }
 
 void Employee::viewAllProducts()
@@ -204,4 +205,11 @@ void Employee::displayEmptyProduct()
 {
 	ListProduct listEmptyProduct = stock.getListOfZeroStock();
 	listEmptyProduct.outputList();
+}
+
+void Employee::load(ifstream& fin)
+{
+	Staff::load(fin);
+	listSale.LoadDateSaleList(".\\Data\\Sale\\" + to_string(this->getID()) + ".txt");
+	listSale.LoadDataSaleList(this->getID(), ".\\Data\\Sale\\");
 }

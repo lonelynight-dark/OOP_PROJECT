@@ -383,13 +383,14 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 		}
 		case 6: {
 			int year;
-			double p = 0;
+			double p = 0; double sum = 0.0;
 			cout << "Year: "; cin >> year;
 			for (int i = 1; i < 13; i++) {
-				p += man.calculateRevenueByMonth(i, year);
+				p = man.calculateRevenueByMonth(i, year);
+				sum += p;
 				cout << i << " / " << year << " revenue: " << p << endl;
 			}
-			cout << "Revenue in " << year << ": " << p << endl;
+			cout << "Revenue in " << year << ": " << sum << endl;
 			break;
 		}
 		case 7:

@@ -26,7 +26,6 @@ public:
 	virtual ~Staff() {};
 	// view
 	virtual double viewSalary() = 0;
-	void viewAllProducts() {} ;
 	// getter
 	int getID();
 	string getName();
