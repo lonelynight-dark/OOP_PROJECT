@@ -59,6 +59,7 @@ class Employee :public Staff,public ListProduct
 		//check empty product
 		void displayEmptyProduct();
 		
+		void load(ifstream&); 
 };
 
 #endif
