@@ -24,6 +24,7 @@ public:
 	void ShowManagerMenu(Manager& man, string space);
 	void ShowAdminMenu(Admin& ad, string space);
 	void ExportToFile(ofstream& out);
+	~Interface() { for (auto& a : acc) delete a; }
 };
 
 #endif // !_INTERFACE_H_
