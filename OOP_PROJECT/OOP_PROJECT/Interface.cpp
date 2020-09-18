@@ -317,8 +317,6 @@ void Interface::ShowEmployeeMenu(Employee& emp, string space) {
 	}
 }
 void Interface::ShowManagerMenu(Manager& man, string space) {
-	ofstream fout("data/Account/Employee.txt", ios::app);
-	Employee* emp;
 	string command[] =
 	{
 		"Add Staff",					//1
@@ -351,67 +349,87 @@ void Interface::ShowManagerMenu(Manager& man, string space) {
 		std::cout << "Input choice: ";
 		std::cin >> choice;
 
-		switch (choice) {
-		case 0:
+		if (choice == 0)
 			return;
-		case 1:
-			emp = man.addStaff(); 
+		else if (choice == 1) {
+			Employee* emp;
+			emp = man.addStaff();
 			if (emp == nullptr) {
-				cout << "Exited !" << endl;
+				std::cout << "Exited !" << endl;
 			}
 			else {
-				Account* a = new Account("E" + to_string(emp->getID()), "1");
+				ofstream fout("data/Account/Employee.txt", ios::app);
+				Account* a = new Account("E" + to_string(emp->getID()), "1", false);
 				a->savetoFile(fout);
 				fout.close();
 				delete a;
-				cout << "Added successfully !" << endl;
+				std::cout << "Added successfully !" << endl;
 			}
-			break;
-		case 2:
-			man.deleteStaff(); break;
-		case 3: 
-			man.editStaff(); break;
-		case 4:
-			cout << std::setprecision(0) << std::showpoint << std::fixed;
-			cout << "Salary: " << man.viewSalary() << endl; break;
-		case 5: {
-			int month, year;
-			cout << "Month: "; cin >> month;
-			cout << "Year: "; cin >> year;
-			cout << "Revenue in " << month << " of " << year << ": " << man.calculateRevenueByMonth(month, year) << endl;
-			break;
 		}
-		case 6: {
+		else if (choice == 2) {
+			int ID;
+			ID = man.deleteStaff();
+			if (ID != -1) {
+				string u = "E" + to_string(ID);
+				Admin ad;
+				ifstream infile;
+				infile.open("data/Account/Employee.txt");
+				if (infile.fail()) {
+					std::cout << "Cannot open file" << endl;
+					break;
+				}
+				ad.ImportFromFile(infile);
+				infile.close();
+				ofstream outfile("data/Account/Employee.txt");
+				ad.DeleteAccount(outfile, u);
+				outfile.close();
+				std::cout << "Delete successfully !" << endl;
+			}
+		}
+		else if (choice == 3) {
+			man.editStaff();
+		}
+		else if (choice == 4) {
+			std::cout << std::setprecision(0) << std::showpoint << std::fixed;
+			std::cout << "Salary: " << man.viewSalary() << endl;
+		}
+		else if (choice == 5) {
+			int month, year;
+			std::cout << "Month: "; std::cin >> month;
+			std::cout << "Year: "; std::cin >> year;
+			std::cout << "Revenue in " << month << " of " << year << ": " << man.calculateRevenueByMonth(month, year) << endl;
+
+		}
+		else if (choice == 6) {
 			int year;
 			double p = 0; double sum = 0.0;
-			cout << "Year: "; cin >> year;
+			std::cout << "Year: "; std::cin >> year;
 			for (int i = 1; i < 13; i++) {
 				p = man.calculateRevenueByMonth(i, year);
 				sum += p;
-				cout << i << " / " << year << " revenue: " << p << endl;
+				std::cout << i << " / " << year << " revenue: " << p << endl;
 			}
-			cout << "Revenue in " << year << ": " << sum << endl;
+			std::cout << "Revenue in " << year << ": " << sum << endl;
 			break;
 		}
-		case 7:
+		else if (choice == 7) {
 			man.viewEmp();
-			break;
-		case 8:
+		}
+		else if (choice == 8) {
 			man.viewEmpSalary();
-			break;
-		case 9: 
+		}
+		else if (choice == 9) {
 			man.viewProd();
-			break;
-		case 10:
+		}
+		else if (choice == 10) {
 			man.checkAttendance();
-			break;
-		default:
+		}
+		else
 		{
 			std::cout << "Bad choice";
 		}
-		}
 		char k;
-		cout << "\nPress any key to continue!";
+		std::cout << "\nPress any key to continue!";
 		k = _getch();
 	}
 }

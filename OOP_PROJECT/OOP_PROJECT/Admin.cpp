@@ -31,7 +31,7 @@ void Admin::DeleteAccount(ofstream& out, string u)
 		}
 	}
 
-	if (isFound)
+	//if (isFound)
 		ExportToFile(out);
 }
 

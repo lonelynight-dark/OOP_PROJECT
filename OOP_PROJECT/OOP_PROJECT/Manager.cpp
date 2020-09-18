@@ -29,7 +29,7 @@ Employee* Manager::addStaff()
 	return newEmployee;
 }
 
-void Manager::deleteStaff()
+int Manager::deleteStaff()
 {
 	int ID;
 	bool found = false;
@@ -44,12 +44,13 @@ void Manager::deleteStaff()
 				delete List[i];
 				List.erase(List.begin() + i);
 				nEmp -= 1;
-				cout << "Employee deleted\n";
 			}
 			found = true;
+			return ID;
 		}
 	}
 	if (!found) cout << "No employee with that ID!\n";
+	return -1;
 }
 
 void Manager::editStaff()
